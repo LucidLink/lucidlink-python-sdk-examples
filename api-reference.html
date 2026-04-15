@@ -9,7 +9,7 @@
   <title>API Reference &mdash; LucidLink Python SDK  documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
-      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=f68bcc3c" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=53c318c6" />
 
   
     <link rel="shortcut icon" href="_static/logo.svg"/>
@@ -338,24 +338,6 @@
 <li class="toctree-l3"><a class="reference internal" href="api/lucidlink.stream.html#lucidlink.stream.open_text"><code class="docutils literal notranslate"><span class="pre">open_text()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="api/lucidlink.url_parser.html">url_parser</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl"><code class="docutils literal notranslate"><span class="pre">ParsedUrl</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="api/lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.cache_key"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.cache_key</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api/lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.filespace"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.filespace</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api/lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.path"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.path</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api/lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.to_url"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.to_url()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api/lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.with_path"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.with_path()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api/lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.workspace"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.workspace</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="api/lucidlink.url_parser.html#lucidlink.url_parser.UrlParser"><code class="docutils literal notranslate"><span class="pre">UrlParser</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="api/lucidlink.url_parser.html#lucidlink.url_parser.UrlParser.build_full_path"><code class="docutils literal notranslate"><span class="pre">UrlParser.build_full_path()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api/lucidlink.url_parser.html#lucidlink.url_parser.UrlParser.parse"><code class="docutils literal notranslate"><span class="pre">UrlParser.parse()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api/lucidlink.url_parser.html#lucidlink.url_parser.UrlParser.validate_same_filespace"><code class="docutils literal notranslate"><span class="pre">UrlParser.validate_same_filespace()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
 <li class="toctree-l2"><a class="reference internal" href="api/lucidlink.workspace.html">workspace</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="api/lucidlink.workspace.html#lucidlink.workspace.Workspace"><code class="docutils literal notranslate"><span class="pre">Workspace</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="api/lucidlink.workspace.html#lucidlink.workspace.Workspace.id"><code class="docutils literal notranslate"><span class="pre">Workspace.id</span></code></a></li>
@@ -404,28 +386,28 @@ Provides programmatic access to LucidLink filespaces from Python.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="lucidlink.create_daemon">
 <span class="sig-prename descclassname"><span class="pre">lucidlink.</span></span><span class="sig-name descname"><span class="pre">create_daemon</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sandboxed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">persist_files</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">root_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="api/lucidlink.daemon.html#lucidlink.daemon.Daemon" title="lucidlink.daemon.Daemon"><span class="pre">Daemon</span></a></span></span><a class="reference internal" href="_modules/lucidlink.html#create_daemon"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lucidlink.create_daemon" title="Link to this definition"></a></dt>
-<dd><p>Create a Daemon with simplified storage configuration.</p>
+<dd><p>Create a <code class="docutils literal notranslate"><span class="pre">Daemon</span></code> with simplified storage configuration.</p>
 <p>This is a convenience factory that makes it easier to configure daemon
-storage without needing to manually create StorageConfig objects.</p>
+storage without needing to manually create <code class="docutils literal notranslate"><span class="pre">StorageConfig</span></code> objects.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>config</strong> – Additional daemon configuration options (cache size, etc.)</p></li>
-<li><p><strong>sandboxed</strong> – If True (default), use temp directory that’s always cleaned up.
-If False, use .lucid subfolder in current directory.</p></li>
-<li><p><strong>persist_files</strong> – If False (default), clean up files when daemon stops.
-Only applies when sandboxed=False.
+<li><p><strong>sandboxed</strong> – If <code class="docutils literal notranslate"><span class="pre">True</span></code> (default), use temp directory that’s always cleaned up.
+If <code class="docutils literal notranslate"><span class="pre">False</span></code>, use <code class="docutils literal notranslate"><span class="pre">.lucid</span></code> subfolder in current directory.</p></li>
+<li><p><strong>persist_files</strong> – If <code class="docutils literal notranslate"><span class="pre">False</span></code> (default), clean up files when daemon stops.
+Only applies when <code class="docutils literal notranslate"><span class="pre">sandboxed=False</span></code>.
 Sandboxed mode always cleans up.</p></li>
-<li><p><strong>root_path</strong> – Override root path for files (only when sandboxed=False).
-If None, uses current working directory.</p></li>
+<li><p><strong>root_path</strong> – Override root path for files (only when <code class="docutils literal notranslate"><span class="pre">sandboxed=False</span></code>).
+If <code class="docutils literal notranslate"><span class="pre">None</span></code>, uses current working directory.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Daemon instance with specified storage configuration</p>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">Daemon</span></code> instance with specified storage configuration</p>
 </dd>
 </dl>
-<p>Examples:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sandboxed (default) - files in temp, always cleaned up</span>
+<p class="rubric">Example</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sandboxed (default) - files in temp, always cleaned up</span>
 <span class="n">daemon</span> <span class="o">=</span> <span class="n">lucidlink</span><span class="o">.</span><span class="n">create_daemon</span><span class="p">()</span>
 
 <span class="c1"># Physical with cleanup - files in .lucid/, cleaned up on exit</span>
@@ -708,24 +690,6 @@ If None, uses current working directory.</p></li>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="api/lucidlink.stream.html#lucidlink.stream.open_buffered"><code class="docutils literal notranslate"><span class="pre">open_buffered()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/lucidlink.stream.html#lucidlink.stream.open_text"><code class="docutils literal notranslate"><span class="pre">open_text()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="api/lucidlink.url_parser.html">url_parser</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="api/lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl"><code class="docutils literal notranslate"><span class="pre">ParsedUrl</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.cache_key"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.cache_key</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.filespace"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.filespace</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.path"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.path</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.to_url"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.to_url()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.with_path"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.with_path()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.workspace"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.workspace</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="api/lucidlink.url_parser.html#lucidlink.url_parser.UrlParser"><code class="docutils literal notranslate"><span class="pre">UrlParser</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/lucidlink.url_parser.html#lucidlink.url_parser.UrlParser.build_full_path"><code class="docutils literal notranslate"><span class="pre">UrlParser.build_full_path()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/lucidlink.url_parser.html#lucidlink.url_parser.UrlParser.parse"><code class="docutils literal notranslate"><span class="pre">UrlParser.parse()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/lucidlink.url_parser.html#lucidlink.url_parser.UrlParser.validate_same_filespace"><code class="docutils literal notranslate"><span class="pre">UrlParser.validate_same_filespace()</span></code></a></li>
-</ul>
-</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="api/lucidlink.workspace.html">workspace</a><ul>

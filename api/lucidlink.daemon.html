@@ -9,7 +9,7 @@
   <title>daemon &mdash; LucidLink Python SDK  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
-      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=f68bcc3c" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=53c318c6" />
 
   
     <link rel="shortcut icon" href="../_static/logo.svg"/>
@@ -338,24 +338,6 @@
 <li class="toctree-l3"><a class="reference internal" href="lucidlink.stream.html#lucidlink.stream.open_text"><code class="docutils literal notranslate"><span class="pre">open_text()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="lucidlink.url_parser.html">url_parser</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl"><code class="docutils literal notranslate"><span class="pre">ParsedUrl</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.cache_key"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.cache_key</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.filespace"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.filespace</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.path"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.path</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.to_url"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.to_url()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.with_path"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.with_path()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.workspace"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.workspace</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.UrlParser"><code class="docutils literal notranslate"><span class="pre">UrlParser</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.UrlParser.build_full_path"><code class="docutils literal notranslate"><span class="pre">UrlParser.build_full_path()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.UrlParser.parse"><code class="docutils literal notranslate"><span class="pre">UrlParser.parse()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.UrlParser.validate_same_filespace"><code class="docutils literal notranslate"><span class="pre">UrlParser.validate_same_filespace()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
 <li class="toctree-l2"><a class="reference internal" href="lucidlink.workspace.html">workspace</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="lucidlink.workspace.html#lucidlink.workspace.Workspace"><code class="docutils literal notranslate"><span class="pre">Workspace</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="lucidlink.workspace.html#lucidlink.workspace.Workspace.id"><code class="docutils literal notranslate"><span class="pre">Workspace.id</span></code></a></li>
@@ -408,23 +390,28 @@ Provides context manager support for daemon lifecycle management.</p>
 <p>High-level Python wrapper for the LucidLink daemon.</p>
 <p>The Daemon class manages the lifecycle of the LucidLink daemon process,
 handles authentication, and provides access to workspaces and filespaces.</p>
-<dl>
-<dt>Usage with new context-based API:</dt><dd><p>from lucidlink import Daemon, ServiceAccountCredentials</p>
-<p># Create credentials
-credentials = ServiceAccountCredentials(token=”sa_live:your_key”)</p>
-<p># Start daemon and authenticate
-daemon = Daemon(config)
-daemon.start()
-workspace = daemon.authenticate(credentials)</p>
-<p># List and link to filespace
-filespaces = workspace.list_filespaces()
-filespace = workspace.link_filespace(name=”production-data”)</p>
-<p># Use filesystem
-entries = filespace.fs.read_dir(“/”)</p>
-<p># Cleanup
-daemon.stop()</p>
-</dd>
-</dl>
+<p class="rubric">Example</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">lucidlink</span><span class="w"> </span><span class="kn">import</span> <span class="n">Daemon</span><span class="p">,</span> <span class="n">ServiceAccountCredentials</span>
+
+<span class="c1"># Create credentials</span>
+<span class="n">credentials</span> <span class="o">=</span> <span class="n">ServiceAccountCredentials</span><span class="p">(</span><span class="n">token</span><span class="o">=</span><span class="s2">&quot;sa_live:your_key&quot;</span><span class="p">)</span>
+
+<span class="c1"># Start daemon and authenticate</span>
+<span class="n">daemon</span> <span class="o">=</span> <span class="n">Daemon</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+<span class="n">daemon</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="n">workspace</span> <span class="o">=</span> <span class="n">daemon</span><span class="o">.</span><span class="n">authenticate</span><span class="p">(</span><span class="n">credentials</span><span class="p">)</span>
+
+<span class="c1"># List and link to filespace</span>
+<span class="n">filespaces</span> <span class="o">=</span> <span class="n">workspace</span><span class="o">.</span><span class="n">list_filespaces</span><span class="p">()</span>
+<span class="n">filespace</span> <span class="o">=</span> <span class="n">workspace</span><span class="o">.</span><span class="n">link_filespace</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;production-data&quot;</span><span class="p">)</span>
+
+<span class="c1"># Use filesystem</span>
+<span class="n">entries</span> <span class="o">=</span> <span class="n">filespace</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">read_dir</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+
+<span class="c1"># Cleanup</span>
+<span class="n">daemon</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</pre></div>
+</div>
 <dl class="py method">
 <dt class="sig sig-object py" id="lucidlink.daemon.Daemon.authenticate">
 <span class="sig-name descname"><span class="pre">authenticate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">credentials</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="lucidlink.credentials.html#lucidlink.credentials.ServiceAccountCredentials" title="lucidlink.credentials.ServiceAccountCredentials"><span class="pre">ServiceAccountCredentials</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="lucidlink.workspace.html#lucidlink.workspace.Workspace" title="lucidlink.workspace.Workspace"><span class="pre">Workspace</span></a></span></span><a class="reference internal" href="../_modules/lucidlink/daemon.html#Daemon.authenticate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lucidlink.daemon.Daemon.authenticate" title="Link to this definition"></a></dt>
@@ -446,12 +433,12 @@ daemon.stop()</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">lucidlink</span><span class="w"> </span><span class="kn">import</span> <span class="n">Daemon</span><span class="p">,</span> <span class="n">ServiceAccountCredentials</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">credentials</span> <span class="o">=</span> <span class="n">ServiceAccountCredentials</span><span class="p">(</span><span class="n">token</span><span class="o">=</span><span class="s2">&quot;sa_live:your_key&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">daemon</span> <span class="o">=</span> <span class="n">Daemon</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">daemon</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">workspace</span> <span class="o">=</span> <span class="n">daemon</span><span class="o">.</span><span class="n">authenticate</span><span class="p">(</span><span class="n">credentials</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">workspace</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">lucidlink</span><span class="w"> </span><span class="kn">import</span> <span class="n">Daemon</span><span class="p">,</span> <span class="n">ServiceAccountCredentials</span>
+<span class="n">credentials</span> <span class="o">=</span> <span class="n">ServiceAccountCredentials</span><span class="p">(</span><span class="n">token</span><span class="o">=</span><span class="s2">&quot;sa_live:your_key&quot;</span><span class="p">)</span>
+<span class="n">daemon</span> <span class="o">=</span> <span class="n">Daemon</span><span class="p">()</span>
+<span class="n">daemon</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="n">workspace</span> <span class="o">=</span> <span class="n">daemon</span><span class="o">.</span><span class="n">authenticate</span><span class="p">(</span><span class="n">credentials</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">workspace</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -489,8 +476,8 @@ raise DaemonError.</p>
 <dd><p>Stop the daemon and cleanup resources.</p>
 <p>Automatically unlinks any linked filespaces before stopping.
 Cleans up operational files based on storage configuration:
-- SANDBOXED mode: Always cleans up temp directory
-- PHYSICAL mode: Cleans up if persist_on_exit=False</p>
+- <code class="docutils literal notranslate"><span class="pre">SANDBOXED</span></code> mode: Always cleans up temp directory
+- <code class="docutils literal notranslate"><span class="pre">PHYSICAL</span></code> mode: Cleans up if <code class="docutils literal notranslate"><span class="pre">persist_on_exit=False</span></code></p>
 <p>Safe to call multiple times - subsequent calls are no-ops.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Raises<span class="colon">:</span></dt>

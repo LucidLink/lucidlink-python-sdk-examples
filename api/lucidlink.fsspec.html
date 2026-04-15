@@ -9,7 +9,7 @@
   <title>fsspec &mdash; LucidLink Python SDK  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
-      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=f68bcc3c" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=53c318c6" />
 
   
     <link rel="shortcut icon" href="../_static/logo.svg"/>
@@ -338,24 +338,6 @@
 <li class="toctree-l3"><a class="reference internal" href="lucidlink.stream.html#lucidlink.stream.open_text"><code class="docutils literal notranslate"><span class="pre">open_text()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="lucidlink.url_parser.html">url_parser</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl"><code class="docutils literal notranslate"><span class="pre">ParsedUrl</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.cache_key"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.cache_key</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.filespace"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.filespace</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.path"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.path</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.to_url"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.to_url()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.with_path"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.with_path()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.workspace"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.workspace</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.UrlParser"><code class="docutils literal notranslate"><span class="pre">UrlParser</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.UrlParser.build_full_path"><code class="docutils literal notranslate"><span class="pre">UrlParser.build_full_path()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.UrlParser.parse"><code class="docutils literal notranslate"><span class="pre">UrlParser.parse()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.UrlParser.validate_same_filespace"><code class="docutils literal notranslate"><span class="pre">UrlParser.validate_same_filespace()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
 <li class="toctree-l2"><a class="reference internal" href="lucidlink.workspace.html">workspace</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="lucidlink.workspace.html#lucidlink.workspace.Workspace"><code class="docutils literal notranslate"><span class="pre">Workspace</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="lucidlink.workspace.html#lucidlink.workspace.Workspace.id"><code class="docutils literal notranslate"><span class="pre">Workspace.id</span></code></a></li>
@@ -401,12 +383,14 @@
 <p>fsspec integration for LucidLink filesystem.</p>
 <p>Provides fsspec.AbstractFileSystem implementation that allows standard Python
 data libraries (Pandas, Dask, PyArrow, etc.) to access LucidLink filespaces
-using URL protocols like: lucidlink://workspace/filespace/path/to/file.csv</p>
-<p>Features:
-- Standard file operations: open, read, write, ls, mkdir, rm
-- Native move/rename operations (much faster than copy+delete fallback)
-- Directory operations: mkdir, makedirs, rmdir
-- Sync control: automatic or manual sync to hub</p>
+using URL protocols like <code class="docutils literal notranslate"><span class="pre">lucidlink://workspace/filespace/path/to/file.csv</span></code></p>
+<p><strong>Features:</strong></p>
+<ul class="simple">
+<li><p>Standard file operations: open, read, write, ls, mkdir, rm</p></li>
+<li><p>Native move/rename operations (much faster than copy+delete fallback)</p></li>
+<li><p>Directory operations: mkdir, makedirs, rmdir</p></li>
+<li><p>Sync control: automatic or manual sync to hub</p></li>
+</ul>
 <dl class="py class">
 <dt class="sig sig-object py" id="lucidlink.fsspec.AbstractFileSystem">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">lucidlink.fsspec.</span></span><span class="sig-name descname"><span class="pre">AbstractFileSystem</span></span><a class="reference internal" href="../_modules/lucidlink/fsspec.html#AbstractFileSystem"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lucidlink.fsspec.AbstractFileSystem" title="Link to this definition"></a></dt>
@@ -679,8 +663,8 @@ URL protocols like: lucidlink://workspace/filespace/path/to/file.csv</p>
 <dt class="sig sig-object py" id="lucidlink.fsspec.LucidLinkFileSystem.sync_all">
 <span class="sig-name descname"><span class="pre">sync_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/lucidlink/fsspec.html#LucidLinkFileSystem.sync_all"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lucidlink.fsspec.LucidLinkFileSystem.sync_all" title="Link to this definition"></a></dt>
 <dd><p>Synchronize all pending changes to the hub.</p>
-<p>Calls sync_all() on all connected filespaces to ensure all metadata
-and data changes are propagated to the LucidHub.</p>
+<p>Calls <code class="docutils literal notranslate"><span class="pre">sync_all()</span></code> on all connected filespaces to ensure all metadata
+and data changes are propagated to LucidHub.</p>
 </dd></dl>
 
 </dd></dl>

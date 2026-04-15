@@ -9,7 +9,7 @@
   <title>workspace &mdash; LucidLink Python SDK  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
-      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=f68bcc3c" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=53c318c6" />
 
   
     <link rel="shortcut icon" href="../_static/logo.svg"/>
@@ -21,7 +21,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="url_parser" href="lucidlink.url_parser.html" /> 
+    <link rel="prev" title="stream" href="lucidlink.stream.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -337,24 +337,6 @@
 <li class="toctree-l3"><a class="reference internal" href="lucidlink.stream.html#lucidlink.stream.open_text"><code class="docutils literal notranslate"><span class="pre">open_text()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="lucidlink.url_parser.html">url_parser</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl"><code class="docutils literal notranslate"><span class="pre">ParsedUrl</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.cache_key"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.cache_key</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.filespace"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.filespace</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.path"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.path</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.to_url"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.to_url()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.with_path"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.with_path()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.workspace"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.workspace</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.UrlParser"><code class="docutils literal notranslate"><span class="pre">UrlParser</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.UrlParser.build_full_path"><code class="docutils literal notranslate"><span class="pre">UrlParser.build_full_path()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.UrlParser.parse"><code class="docutils literal notranslate"><span class="pre">UrlParser.parse()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.UrlParser.validate_same_filespace"><code class="docutils literal notranslate"><span class="pre">UrlParser.validate_same_filespace()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">workspace</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#lucidlink.workspace.Workspace"><code class="docutils literal notranslate"><span class="pre">Workspace</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#lucidlink.workspace.Workspace.id"><code class="docutils literal notranslate"><span class="pre">Workspace.id</span></code></a></li>
@@ -404,18 +386,11 @@
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Workspace context after successful authentication.</p>
 <p>Provides access to filespace operations within the authenticated workspace.
-This object is returned by Daemon.authenticate() and carries the authentication
-context needed for filespace operations.</p>
-<dl class="simple">
-<dt>Properties:</dt><dd><p>id: Unique workspace identifier (read-only)
-name: Human-readable workspace name (read-only)</p>
-</dd>
-</dl>
+Returned by <code class="docutils literal notranslate"><span class="pre">Daemon.authenticate()</span></code>.</p>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">credentials</span> <span class="o">=</span> <span class="n">ServiceAccountCredentials</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">workspace</span> <span class="o">=</span> <span class="n">daemon</span><span class="o">.</span><span class="n">authenticate</span><span class="p">(</span><span class="n">credentials</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">workspace</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">workspace</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-<span class="go">&#39;ws-12345&#39; &#39;Production Workspace&#39;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">credentials</span> <span class="o">=</span> <span class="n">ServiceAccountCredentials</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
+<span class="n">workspace</span> <span class="o">=</span> <span class="n">daemon</span><span class="o">.</span><span class="n">authenticate</span><span class="p">(</span><span class="n">credentials</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">workspace</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">workspace</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 </pre></div>
 </div>
 <dl class="py property">
@@ -428,41 +403,46 @@ name: Human-readable workspace name (read-only)</p>
 <dt class="sig sig-object py" id="lucidlink.workspace.Workspace.link_filespace">
 <span class="sig-name descname"><span class="pre">link_filespace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">root_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'/'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sync_mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="lucidlink.filespace_models.html#lucidlink.filespace_models.SyncMode" title="lucidlink.filespace_models.SyncMode"><span class="pre">SyncMode</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">SyncMode.SYNC_ALL</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lucidlink/workspace.html#Workspace.link_filespace"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lucidlink.workspace.Workspace.link_filespace" title="Link to this definition"></a></dt>
 <dd><p>Link to a filespace in this workspace.</p>
-<p>You must provide either ‘name’ OR ‘id’, but not both.</p>
+<p>You must provide either <code class="docutils literal notranslate"><span class="pre">name</span></code> OR <code class="docutils literal notranslate"><span class="pre">id</span></code>, but not both.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> – Filespace name (either name or id required)</p></li>
-<li><p><strong>id</strong> – Filespace ID (either name or id required)</p></li>
-<li><p><strong>root_path</strong> – Mount point path (default: “/”)</p></li>
-<li><p><strong>sync_mode</strong> – Controls automatic sync on close. SYNC_ALL (default)
-calls sync_all() before unlinking. SYNC_NONE skips
-automatic sync — caller must call sync_all() explicitly.</p></li>
+<li><p><strong>name</strong> – Filespace name (either <code class="docutils literal notranslate"><span class="pre">name</span></code> or <code class="docutils literal notranslate"><span class="pre">id</span></code> required)</p></li>
+<li><p><strong>id</strong> – Filespace ID (either <code class="docutils literal notranslate"><span class="pre">name</span></code> or <code class="docutils literal notranslate"><span class="pre">id</span></code> required)</p></li>
+<li><p><strong>root_path</strong> – Mount point path (default: <code class="docutils literal notranslate"><span class="pre">&quot;/&quot;</span></code>)</p></li>
+<li><p><strong>sync_mode</strong> – Controls automatic sync on close. <code class="docutils literal notranslate"><span class="pre">SYNC_ALL</span></code> (default)
+calls <code class="docutils literal notranslate"><span class="pre">sync_all()</span></code> before unlinking. <code class="docutils literal notranslate"><span class="pre">SYNC_NONE</span></code> skips
+automatic sync — caller must call <code class="docutils literal notranslate"><span class="pre">sync_all()</span></code> explicitly.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Filespace object for filesystem operations</p>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">Filespace</span></code> object for filesystem operations</p>
 </dd>
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>ValueError</strong> – If neither name nor id provided, or both provided</p></li>
+<li><p><strong>ValueError</strong> – If neither <code class="docutils literal notranslate"><span class="pre">name</span></code> nor <code class="docutils literal notranslate"><span class="pre">id</span></code> provided, or both provided</p></li>
 <li><p><strong>FileNotFoundError</strong> – If filespace not found</p></li>
 <li><p><strong>PermissionDeniedError</strong> – If service account lacks access</p></li>
 <li><p><strong>RuntimeError</strong> – If daemon not running or not authenticated</p></li>
 </ul>
 </dd>
 </dl>
-<p class="rubric">Examples</p>
-<p>Link by name (user-friendly):
-&gt;&gt;&gt; fs = workspace.link_filespace(name=”production-data”)</p>
-<p>Link by ID (efficient if you have the UUID):
-&gt;&gt;&gt; fs = workspace.link_filespace(id=”fs-uuid-12345”)</p>
-<p>Using as context manager (auto sync + unlink on exit):
-&gt;&gt;&gt; with workspace.link_filespace(name=”data”) as fs:
-…     fs.fs.write_file(“/file.txt”, b”data”)
-… # sync_all() + unlink() called automatically</p>
-<p>Disable auto-sync:
-&gt;&gt;&gt; fs = workspace.link_filespace(name=”data”, sync_mode=SyncMode.SYNC_NONE)</p>
+<p class="rubric">Example</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Link by name (user-friendly)</span>
+<span class="n">fs</span> <span class="o">=</span> <span class="n">workspace</span><span class="o">.</span><span class="n">link_filespace</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;production-data&quot;</span><span class="p">)</span>
+
+<span class="c1"># Link by ID (efficient if you have the UUID)</span>
+<span class="n">fs</span> <span class="o">=</span> <span class="n">workspace</span><span class="o">.</span><span class="n">link_filespace</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s2">&quot;fs-uuid-12345&quot;</span><span class="p">)</span>
+
+<span class="c1"># Using as context manager (auto sync + unlink on exit)</span>
+<span class="k">with</span> <span class="n">workspace</span><span class="o">.</span><span class="n">link_filespace</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;data&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fs</span><span class="p">:</span>
+    <span class="n">fs</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">write_file</span><span class="p">(</span><span class="s2">&quot;/file.txt&quot;</span><span class="p">,</span> <span class="sa">b</span><span class="s2">&quot;data&quot;</span><span class="p">)</span>
+<span class="c1"># sync_all() + unlink() called automatically</span>
+
+<span class="c1"># Disable auto-sync</span>
+<span class="n">fs</span> <span class="o">=</span> <span class="n">workspace</span><span class="o">.</span><span class="n">link_filespace</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="n">sync_mode</span><span class="o">=</span><span class="n">SyncMode</span><span class="o">.</span><span class="n">SYNC_NONE</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -482,9 +462,9 @@ automatic sync — caller must call sync_all() explicitly.</p></li>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">filespaces</span> <span class="o">=</span> <span class="n">workspace</span><span class="o">.</span><span class="n">list_filespaces</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">fs</span> <span class="ow">in</span> <span class="n">filespaces</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">fs</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">filespaces</span> <span class="o">=</span> <span class="n">workspace</span><span class="o">.</span><span class="n">list_filespaces</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">fs</span> <span class="ow">in</span> <span class="n">filespaces</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">fs</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -499,7 +479,7 @@ automatic sync — caller must call sync_all() explicitly.</p></li>
 <dt class="sig sig-object py" id="lucidlink.workspace.Workspace.stop">
 <span class="sig-name descname"><span class="pre">stop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/lucidlink/workspace.html#Workspace.stop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lucidlink.workspace.Workspace.stop" title="Link to this definition"></a></dt>
 <dd><p>Stop workspace — unlinks active filespace if any.</p>
-<p>If sync_mode is SYNC_ALL, calls sync_all() before unlinking.
+<p>If <code class="docutils literal notranslate"><span class="pre">sync_mode</span></code> is <code class="docutils literal notranslate"><span class="pre">SYNC_ALL</span></code>, calls <code class="docutils literal notranslate"><span class="pre">sync_all()</span></code> before unlinking.
 Safe to call multiple times.</p>
 </dd></dl>
 
@@ -511,7 +491,7 @@ Safe to call multiple times.</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="lucidlink.url_parser.html" class="btn btn-neutral float-left" title="url_parser" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="lucidlink.stream.html" class="btn btn-neutral float-left" title="stream" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>

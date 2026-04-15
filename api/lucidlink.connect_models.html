@@ -9,7 +9,7 @@
   <title>connect_models &mdash; LucidLink Python SDK  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
-      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=f68bcc3c" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=53c318c6" />
 
   
     <link rel="shortcut icon" href="../_static/logo.svg"/>
@@ -338,24 +338,6 @@
 <li class="toctree-l3"><a class="reference internal" href="lucidlink.stream.html#lucidlink.stream.open_text"><code class="docutils literal notranslate"><span class="pre">open_text()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="lucidlink.url_parser.html">url_parser</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl"><code class="docutils literal notranslate"><span class="pre">ParsedUrl</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.cache_key"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.cache_key</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.filespace"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.filespace</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.path"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.path</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.to_url"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.to_url()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.with_path"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.with_path()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.workspace"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.workspace</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.UrlParser"><code class="docutils literal notranslate"><span class="pre">UrlParser</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.UrlParser.build_full_path"><code class="docutils literal notranslate"><span class="pre">UrlParser.build_full_path()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.UrlParser.parse"><code class="docutils literal notranslate"><span class="pre">UrlParser.parse()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.UrlParser.validate_same_filespace"><code class="docutils literal notranslate"><span class="pre">UrlParser.validate_same_filespace()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
 <li class="toctree-l2"><a class="reference internal" href="lucidlink.workspace.html">workspace</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="lucidlink.workspace.html#lucidlink.workspace.Workspace"><code class="docutils literal notranslate"><span class="pre">Workspace</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="lucidlink.workspace.html#lucidlink.workspace.Workspace.id"><code class="docutils literal notranslate"><span class="pre">Workspace.id</span></code></a></li>
@@ -410,37 +392,23 @@
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">lucidlink.connect_models.</span></span><span class="sig-name descname"><span class="pre">DataStoreInfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">access_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">secret_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bucket_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">region</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">endpoint</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url_expiration_minutes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_virtual_addressing</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kind</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#lucidlink.connect_models.DataStoreKind" title="lucidlink.connect_models.DataStoreKind"><span class="pre">DataStoreKind</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">DataStoreKind.S3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rekey_state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#lucidlink.connect_models.DataStoreRekeyState" title="lucidlink.connect_models.DataStoreRekeyState"><span class="pre">DataStoreRekeyState</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">DataStoreRekeyState.NO_REKEY</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lucidlink/connect_models.html#DataStoreInfo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lucidlink.connect_models.DataStoreInfo" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Information about a registered data store.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Variables<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> (<em>str</em>) – Data store name</p></li>
-<li><p><strong>access_key</strong> (<em>str</em>) – S3 access key ID</p></li>
-<li><p><strong>secret_key</strong> (<em>str</em>) – S3 secret access key</p></li>
-<li><p><strong>bucket_name</strong> (<em>str</em>) – S3 bucket name</p></li>
-<li><p><strong>region</strong> (<em>str</em>) – AWS region</p></li>
-<li><p><strong>endpoint</strong> (<em>str</em>) – Full S3 endpoint URL (e.g., “<a class="reference external" href="http://127.0.0.1:9090">http://127.0.0.1:9090</a>”), empty if using AWS default</p></li>
-<li><p><strong>url_expiration_minutes</strong> (<em>int</em>) – Presigned URL expiration in minutes</p></li>
-<li><p><strong>use_virtual_addressing</strong> (<em>bool</em>) – Whether virtual-hosted-style addressing is used</p></li>
-<li><p><strong>kind</strong> (<a class="reference internal" href="#lucidlink.connect_models.DataStoreKind" title="lucidlink.connect_models.DataStoreKind"><em>lucidlink.connect_models.DataStoreKind</em></a>) – Data store type (currently always S3)</p></li>
-<li><p><strong>key_id</strong> (<em>str</em>) – Unique key identifier (UUID)</p></li>
-<li><p><strong>rekey_state</strong> (<a class="reference internal" href="#lucidlink.connect_models.DataStoreRekeyState" title="lucidlink.connect_models.DataStoreRekeyState"><em>lucidlink.connect_models.DataStoreRekeyState</em></a>) – Current credential rotation state</p></li>
-</ul>
-</dd>
-</dl>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="lucidlink.connect_models.DataStoreInfo.access_key">
 <span class="sig-name descname"><span class="pre">access_key</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">''</span></span><a class="headerlink" href="#lucidlink.connect_models.DataStoreInfo.access_key" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>S3 access key ID.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="lucidlink.connect_models.DataStoreInfo.bucket_name">
 <span class="sig-name descname"><span class="pre">bucket_name</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">''</span></span><a class="headerlink" href="#lucidlink.connect_models.DataStoreInfo.bucket_name" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>S3 bucket name.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="lucidlink.connect_models.DataStoreInfo.endpoint">
 <span class="sig-name descname"><span class="pre">endpoint</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">''</span></span><a class="headerlink" href="#lucidlink.connect_models.DataStoreInfo.endpoint" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Full S3 endpoint URL (e.g., <code class="docutils literal notranslate"><span class="pre">&quot;http://127.0.0.1:9090&quot;</span></code>), empty if using AWS default.</p>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="lucidlink.connect_models.DataStoreInfo.from_dict">
@@ -450,42 +418,50 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="lucidlink.connect_models.DataStoreInfo.key_id">
 <span class="sig-name descname"><span class="pre">key_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">''</span></span><a class="headerlink" href="#lucidlink.connect_models.DataStoreInfo.key_id" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Unique key identifier (UUID).</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="lucidlink.connect_models.DataStoreInfo.kind">
 <span class="sig-name descname"><span class="pre">kind</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#lucidlink.connect_models.DataStoreKind" title="lucidlink.connect_models.DataStoreKind"><span class="pre">DataStoreKind</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'S3DataStore'</span></span><a class="headerlink" href="#lucidlink.connect_models.DataStoreInfo.kind" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Data store type (currently always S3).</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="lucidlink.connect_models.DataStoreInfo.name">
 <span class="sig-name descname"><span class="pre">name</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#lucidlink.connect_models.DataStoreInfo.name" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Data store name.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="lucidlink.connect_models.DataStoreInfo.region">
 <span class="sig-name descname"><span class="pre">region</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">''</span></span><a class="headerlink" href="#lucidlink.connect_models.DataStoreInfo.region" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>AWS region.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="lucidlink.connect_models.DataStoreInfo.rekey_state">
 <span class="sig-name descname"><span class="pre">rekey_state</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#lucidlink.connect_models.DataStoreRekeyState" title="lucidlink.connect_models.DataStoreRekeyState"><span class="pre">DataStoreRekeyState</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'no_rekey'</span></span><a class="headerlink" href="#lucidlink.connect_models.DataStoreInfo.rekey_state" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Current credential rotation state.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="lucidlink.connect_models.DataStoreInfo.secret_key">
 <span class="sig-name descname"><span class="pre">secret_key</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">''</span></span><a class="headerlink" href="#lucidlink.connect_models.DataStoreInfo.secret_key" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>S3 secret access key.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="lucidlink.connect_models.DataStoreInfo.url_expiration_minutes">
 <span class="sig-name descname"><span class="pre">url_expiration_minutes</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></span><a class="headerlink" href="#lucidlink.connect_models.DataStoreInfo.url_expiration_minutes" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Presigned URL expiration in minutes.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="lucidlink.connect_models.DataStoreInfo.use_virtual_addressing">
 <span class="sig-name descname"><span class="pre">use_virtual_addressing</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></span><a class="headerlink" href="#lucidlink.connect_models.DataStoreInfo.use_virtual_addressing" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Whether virtual-hosted-style addressing is used.</p>
+</dd></dl>
 
 </dd></dl>
 
@@ -493,10 +469,12 @@
 <dt class="sig sig-object py" id="lucidlink.connect_models.DataStoreKind">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">lucidlink.connect_models.</span></span><span class="sig-name descname"><span class="pre">DataStoreKind</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lucidlink/connect_models.html#DataStoreKind"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lucidlink.connect_models.DataStoreKind" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<p>Type of external data store.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="lucidlink.connect_models.DataStoreKind.S3">
 <span class="sig-name descname"><span class="pre">S3</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'S3DataStore'</span></span><a class="headerlink" href="#lucidlink.connect_models.DataStoreKind.S3" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Amazon S3 or S3-compatible object storage.</p>
+</dd></dl>
 
 </dd></dl>
 
@@ -504,15 +482,18 @@
 <dt class="sig sig-object py" id="lucidlink.connect_models.DataStoreRekeyState">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">lucidlink.connect_models.</span></span><span class="sig-name descname"><span class="pre">DataStoreRekeyState</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lucidlink/connect_models.html#DataStoreRekeyState"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lucidlink.connect_models.DataStoreRekeyState" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<p>Credential rotation state for a data store.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="lucidlink.connect_models.DataStoreRekeyState.IN_PROGRESS">
 <span class="sig-name descname"><span class="pre">IN_PROGRESS</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'in_progress'</span></span><a class="headerlink" href="#lucidlink.connect_models.DataStoreRekeyState.IN_PROGRESS" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Credential rotation is currently in progress.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="lucidlink.connect_models.DataStoreRekeyState.NO_REKEY">
 <span class="sig-name descname"><span class="pre">NO_REKEY</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'no_rekey'</span></span><a class="headerlink" href="#lucidlink.connect_models.DataStoreRekeyState.NO_REKEY" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>No credential rotation in progress.</p>
+</dd></dl>
 
 </dd></dl>
 
@@ -521,35 +502,29 @@
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">lucidlink.connect_models.</span></span><span class="sig-name descname"><span class="pre">LinkedFilesResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_paths</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_ids</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">has_more</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cursor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lucidlink/connect_models.html#LinkedFilesResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lucidlink.connect_models.LinkedFilesResult" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Result from listing external files linked to a data store.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Variables<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>file_paths</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – List of file paths</p></li>
-<li><p><strong>file_ids</strong> (<em>List</em><em>[</em><em>int</em><em>]</em>) – List of integer file IDs (parallel to file_paths)</p></li>
-<li><p><strong>has_more</strong> (<em>bool</em>) – Whether more results are available (pagination)</p></li>
-<li><p><strong>cursor</strong> (<em>str</em>) – Opaque pagination token; pass to the next call to continue</p></li>
-</ul>
-</dd>
-</dl>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="lucidlink.connect_models.LinkedFilesResult.cursor">
 <span class="sig-name descname"><span class="pre">cursor</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">''</span></span><a class="headerlink" href="#lucidlink.connect_models.LinkedFilesResult.cursor" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Opaque pagination token; pass to the next call to continue.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="lucidlink.connect_models.LinkedFilesResult.file_ids">
 <span class="sig-name descname"><span class="pre">file_ids</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#lucidlink.connect_models.LinkedFilesResult.file_ids" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>List of integer file IDs (parallel to <code class="docutils literal notranslate"><span class="pre">file_paths</span></code>).</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="lucidlink.connect_models.LinkedFilesResult.file_paths">
 <span class="sig-name descname"><span class="pre">file_paths</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#lucidlink.connect_models.LinkedFilesResult.file_paths" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>List of file paths.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="lucidlink.connect_models.LinkedFilesResult.has_more">
 <span class="sig-name descname"><span class="pre">has_more</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></span><a class="headerlink" href="#lucidlink.connect_models.LinkedFilesResult.has_more" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Whether more results are available (pagination).</p>
+</dd></dl>
 
 </dd></dl>
 
@@ -579,54 +554,48 @@
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">lucidlink.connect_models.</span></span><span class="sig-name descname"><span class="pre">S3DataStoreConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">access_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">secret_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bucket_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">region</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">endpoint</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url_expiration_minutes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10080</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_virtual_addressing</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lucidlink/connect_models.html#S3DataStoreConfig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lucidlink.connect_models.S3DataStoreConfig" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Configuration for an S3-compatible data store.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>access_key</strong> – S3 access key ID</p></li>
-<li><p><strong>secret_key</strong> – S3 secret access key</p></li>
-<li><p><strong>bucket_name</strong> – S3 bucket name</p></li>
-<li><p><strong>region</strong> – AWS region (e.g., “us-east-1”)</p></li>
-<li><p><strong>endpoint</strong> – Custom S3 endpoint URL with scheme, e.g. “<a class="reference external" href="http://127.0.0.1:9090">http://127.0.0.1:9090</a>”.
-Must start with “<a class="reference external" href="http://">http://</a>” or “<a class="reference external" href="https://">https://</a>”. When empty, defaults to HTTPS.</p></li>
-<li><p><strong>url_expiration_minutes</strong> – Presigned URL expiration in minutes (default: 10080 = 7 days)</p></li>
-<li><p><strong>use_virtual_addressing</strong> – Use virtual-hosted-style addressing (default: False)</p></li>
-</ul>
-</dd>
-</dl>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="lucidlink.connect_models.S3DataStoreConfig.access_key">
 <span class="sig-name descname"><span class="pre">access_key</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#lucidlink.connect_models.S3DataStoreConfig.access_key" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>S3 access key ID.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="lucidlink.connect_models.S3DataStoreConfig.bucket_name">
 <span class="sig-name descname"><span class="pre">bucket_name</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#lucidlink.connect_models.S3DataStoreConfig.bucket_name" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>S3 bucket name.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="lucidlink.connect_models.S3DataStoreConfig.endpoint">
 <span class="sig-name descname"><span class="pre">endpoint</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">''</span></span><a class="headerlink" href="#lucidlink.connect_models.S3DataStoreConfig.endpoint" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Custom S3 endpoint URL with scheme, e.g. <code class="docutils literal notranslate"><span class="pre">&quot;http://127.0.0.1:9090&quot;</span></code>.
+Must start with <code class="docutils literal notranslate"><span class="pre">&quot;http://&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;https://&quot;</span></code>. When empty, defaults to HTTPS.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="lucidlink.connect_models.S3DataStoreConfig.region">
 <span class="sig-name descname"><span class="pre">region</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#lucidlink.connect_models.S3DataStoreConfig.region" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>AWS region (e.g., <code class="docutils literal notranslate"><span class="pre">&quot;us-east-1&quot;</span></code>).</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="lucidlink.connect_models.S3DataStoreConfig.secret_key">
 <span class="sig-name descname"><span class="pre">secret_key</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#lucidlink.connect_models.S3DataStoreConfig.secret_key" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>S3 secret access key.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="lucidlink.connect_models.S3DataStoreConfig.url_expiration_minutes">
 <span class="sig-name descname"><span class="pre">url_expiration_minutes</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">10080</span></span><a class="headerlink" href="#lucidlink.connect_models.S3DataStoreConfig.url_expiration_minutes" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Presigned URL expiration in minutes (7 days).</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="lucidlink.connect_models.S3DataStoreConfig.use_virtual_addressing">
 <span class="sig-name descname"><span class="pre">use_virtual_addressing</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></span><a class="headerlink" href="#lucidlink.connect_models.S3DataStoreConfig.use_virtual_addressing" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Use virtual-hosted-style addressing.</p>
+</dd></dl>
 
 </dd></dl>
 

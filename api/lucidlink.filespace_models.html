@@ -9,7 +9,7 @@
   <title>filespace_models &mdash; LucidLink Python SDK  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
-      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=f68bcc3c" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=53c318c6" />
 
   
     <link rel="shortcut icon" href="../_static/logo.svg"/>
@@ -338,24 +338,6 @@
 <li class="toctree-l3"><a class="reference internal" href="lucidlink.stream.html#lucidlink.stream.open_text"><code class="docutils literal notranslate"><span class="pre">open_text()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="lucidlink.url_parser.html">url_parser</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl"><code class="docutils literal notranslate"><span class="pre">ParsedUrl</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.cache_key"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.cache_key</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.filespace"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.filespace</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.path"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.path</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.to_url"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.to_url()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.with_path"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.with_path()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.workspace"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.workspace</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.UrlParser"><code class="docutils literal notranslate"><span class="pre">UrlParser</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.UrlParser.build_full_path"><code class="docutils literal notranslate"><span class="pre">UrlParser.build_full_path()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.UrlParser.parse"><code class="docutils literal notranslate"><span class="pre">UrlParser.parse()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.UrlParser.validate_same_filespace"><code class="docutils literal notranslate"><span class="pre">UrlParser.validate_same_filespace()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
 <li class="toctree-l2"><a class="reference internal" href="lucidlink.workspace.html">workspace</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="lucidlink.workspace.html#lucidlink.workspace.Workspace"><code class="docutils literal notranslate"><span class="pre">Workspace</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="lucidlink.workspace.html#lucidlink.workspace.Workspace.id"><code class="docutils literal notranslate"><span class="pre">Workspace.id</span></code></a></li>
@@ -405,36 +387,30 @@
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">lucidlink.filespace_models.</span></span><span class="sig-name descname"><span class="pre">DaemonStatus</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">is_running</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_authenticated</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_linked</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">root_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lucidlink/filespace_models.html#DaemonStatus"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lucidlink.filespace_models.DaemonStatus" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Daemon status information.</p>
-<p>Returned by Daemon.get_status().</p>
-<dl class="field-list simple">
-<dt class="field-odd">Variables<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>is_running</strong> (<em>bool</em>) – Whether the daemon is currently running</p></li>
-<li><p><strong>is_authenticated</strong> (<em>bool</em>) – Whether the daemon has authenticated to a workspace</p></li>
-<li><p><strong>is_linked</strong> (<em>bool</em>) – Whether the daemon is linked to a filespace</p></li>
-<li><p><strong>root_path</strong> (<em>str</em>) – Root path for daemon operational files</p></li>
-</ul>
-</dd>
-</dl>
+<p>Returned by <code class="docutils literal notranslate"><span class="pre">Daemon.get_status()</span></code>.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="lucidlink.filespace_models.DaemonStatus.is_authenticated">
 <span class="sig-name descname"><span class="pre">is_authenticated</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></span><a class="headerlink" href="#lucidlink.filespace_models.DaemonStatus.is_authenticated" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Whether the daemon has authenticated to a workspace.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="lucidlink.filespace_models.DaemonStatus.is_linked">
 <span class="sig-name descname"><span class="pre">is_linked</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></span><a class="headerlink" href="#lucidlink.filespace_models.DaemonStatus.is_linked" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Whether the daemon is linked to a filespace.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="lucidlink.filespace_models.DaemonStatus.is_running">
 <span class="sig-name descname"><span class="pre">is_running</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></span><a class="headerlink" href="#lucidlink.filespace_models.DaemonStatus.is_running" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Whether the daemon is currently running.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="lucidlink.filespace_models.DaemonStatus.root_path">
 <span class="sig-name descname"><span class="pre">root_path</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#lucidlink.filespace_models.DaemonStatus.root_path" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Root path for daemon operational files.</p>
+</dd></dl>
 
 </dd></dl>
 
@@ -443,30 +419,24 @@
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">lucidlink.filespace_models.</span></span><span class="sig-name descname"><span class="pre">FilespaceInfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">created</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lucidlink/filespace_models.html#FilespaceInfo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lucidlink.filespace_models.FilespaceInfo" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Summary information for a filespace in a workspace listing.</p>
-<p>Returned by Workspace.list_filespaces().</p>
-<dl class="field-list simple">
-<dt class="field-odd">Variables<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>id</strong> (<em>str</em>) – Unique filespace identifier</p></li>
-<li><p><strong>name</strong> (<em>str</em>) – Human-readable filespace name</p></li>
-<li><p><strong>created</strong> (<em>str</em>) – Creation timestamp (ISO 8601)</p></li>
-</ul>
-</dd>
-</dl>
+<p>Returned by <code class="docutils literal notranslate"><span class="pre">Workspace.list_filespaces()</span></code>.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="lucidlink.filespace_models.FilespaceInfo.created">
 <span class="sig-name descname"><span class="pre">created</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#lucidlink.filespace_models.FilespaceInfo.created" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Creation timestamp (ISO 8601).</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="lucidlink.filespace_models.FilespaceInfo.id">
 <span class="sig-name descname"><span class="pre">id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#lucidlink.filespace_models.FilespaceInfo.id" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Unique filespace identifier.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="lucidlink.filespace_models.FilespaceInfo.name">
 <span class="sig-name descname"><span class="pre">name</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#lucidlink.filespace_models.FilespaceInfo.name" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Human-readable filespace name.</p>
+</dd></dl>
 
 </dd></dl>
 
@@ -475,17 +445,17 @@
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">lucidlink.filespace_models.</span></span><span class="sig-name descname"><span class="pre">SyncMode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lucidlink/filespace_models.html#SyncMode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lucidlink.filespace_models.SyncMode" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
 <p>Controls whether changes are automatically synchronized to the hub on close.</p>
-<p>SYNC_ALL: (default) Automatically call sync_all() before unlinking filespaces.
-SYNC_NONE: Do not sync automatically — caller must call sync_all() explicitly.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="lucidlink.filespace_models.SyncMode.SYNC_ALL">
 <span class="sig-name descname"><span class="pre">SYNC_ALL</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'all'</span></span><a class="headerlink" href="#lucidlink.filespace_models.SyncMode.SYNC_ALL" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>(default) Automatically call <code class="docutils literal notranslate"><span class="pre">sync_all()</span></code> before unlinking filespaces.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="lucidlink.filespace_models.SyncMode.SYNC_NONE">
 <span class="sig-name descname"><span class="pre">SYNC_NONE</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'none'</span></span><a class="headerlink" href="#lucidlink.filespace_models.SyncMode.SYNC_NONE" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Do not sync automatically — caller must call <code class="docutils literal notranslate"><span class="pre">sync_all()</span></code> explicitly.</p>
+</dd></dl>
 
 </dd></dl>
 

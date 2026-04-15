@@ -9,7 +9,7 @@
   <title>filespace &mdash; LucidLink Python SDK  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
-      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=f68bcc3c" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=53c318c6" />
 
   
     <link rel="shortcut icon" href="../_static/logo.svg"/>
@@ -338,24 +338,6 @@
 <li class="toctree-l3"><a class="reference internal" href="lucidlink.stream.html#lucidlink.stream.open_text"><code class="docutils literal notranslate"><span class="pre">open_text()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="lucidlink.url_parser.html">url_parser</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl"><code class="docutils literal notranslate"><span class="pre">ParsedUrl</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.cache_key"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.cache_key</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.filespace"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.filespace</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.path"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.path</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.to_url"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.to_url()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.with_path"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.with_path()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.workspace"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.workspace</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.UrlParser"><code class="docutils literal notranslate"><span class="pre">UrlParser</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.UrlParser.build_full_path"><code class="docutils literal notranslate"><span class="pre">UrlParser.build_full_path()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.UrlParser.parse"><code class="docutils literal notranslate"><span class="pre">UrlParser.parse()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.UrlParser.validate_same_filespace"><code class="docutils literal notranslate"><span class="pre">UrlParser.validate_same_filespace()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
 <li class="toctree-l2"><a class="reference internal" href="lucidlink.workspace.html">workspace</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="lucidlink.workspace.html#lucidlink.workspace.Workspace"><code class="docutils literal notranslate"><span class="pre">Workspace</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="lucidlink.workspace.html#lucidlink.workspace.Workspace.id"><code class="docutils literal notranslate"><span class="pre">Workspace.id</span></code></a></li>
@@ -406,50 +388,40 @@ on a linked LucidLink filespace.</p>
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">lucidlink.filespace.</span></span><span class="sig-name descname"><span class="pre">Filespace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">workspace_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">workspace_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">full_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sync_mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="lucidlink.filespace_models.html#lucidlink.filespace_models.SyncMode" title="lucidlink.filespace_models.SyncMode"><span class="pre">SyncMode</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">SyncMode.SYNC_ALL</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lucidlink/filespace.html#Filespace"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lucidlink.filespace.Filespace" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Filespace context after successful link.</p>
-<p>Provides identity, filesystem access via the .fs property, and
-external file operations via the .connect property.</p>
-<dl>
-<dt>Properties:</dt><dd><p>workspace_id: Workspace identifier (read-only)
-workspace_name: Workspace name (read-only)
-id: Unique filespace identifier (read-only)
-name: Short filespace name (first segment before dot) (read-only)
-full_name: Full filespace name (read-only)
-fs: Filesystem operations interface (read-only)
-connect: External file operations interface (read-only)</p>
-</dd>
-<dt>Supports context manager for automatic sync and unlink on exit:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">workspace</span><span class="o">.</span><span class="n">link_filespace</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;data&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fs</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="n">fs</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">write_file</span><span class="p">(</span><span class="s2">&quot;/file.txt&quot;</span><span class="p">,</span> <span class="sa">b</span><span class="s2">&quot;data&quot;</span><span class="p">)</span>
-<span class="gp">... </span><span class="c1"># sync_all() + unlink() called automatically</span>
-</pre></div>
-</div>
-</dd>
-</dl>
+<p>Provides identity, filesystem access via the <code class="docutils literal notranslate"><span class="pre">fs</span></code> property, and
+external file operations via the <code class="docutils literal notranslate"><span class="pre">connect</span></code> property.</p>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">filespace</span> <span class="o">=</span> <span class="n">workspace</span><span class="o">.</span><span class="n">link_filespace</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;production-data&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">entries</span> <span class="o">=</span> <span class="n">filespace</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">read_dir</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">filespace</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">create_dir</span><span class="p">(</span><span class="s2">&quot;/new-folder&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">filespace</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;/file.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;data&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Context manager for automatic sync and unlink on exit</span>
+<span class="k">with</span> <span class="n">workspace</span><span class="o">.</span><span class="n">link_filespace</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;data&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fs</span><span class="p">:</span>
+    <span class="n">fs</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">write_file</span><span class="p">(</span><span class="s2">&quot;/file.txt&quot;</span><span class="p">,</span> <span class="sa">b</span><span class="s2">&quot;data&quot;</span><span class="p">)</span>
+<span class="c1"># sync_all() + unlink() called automatically</span>
+
+<span class="c1"># Manual lifecycle</span>
+<span class="n">filespace</span> <span class="o">=</span> <span class="n">workspace</span><span class="o">.</span><span class="n">link_filespace</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;production-data&quot;</span><span class="p">)</span>
+<span class="n">entries</span> <span class="o">=</span> <span class="n">filespace</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">read_dir</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+<span class="n">filespace</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">create_dir</span><span class="p">(</span><span class="s2">&quot;/new-folder&quot;</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">filespace</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;/file.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;data&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <dl class="py property">
 <dt class="sig sig-object py" id="lucidlink.filespace.Filespace.connect">
 <span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">connect</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="lucidlink.connect.html#lucidlink.connect.ConnectManager" title="lucidlink.connect.ConnectManager"><span class="pre">ConnectManager</span></a></span><a class="headerlink" href="#lucidlink.filespace.Filespace.connect" title="Link to this definition"></a></dt>
-<dd><p>Get the Connect interface for external file operations.</p>
+<dd><p>Get the <code class="docutils literal notranslate"><span class="pre">ConnectManager</span></code> interface for external file operations.</p>
 <p>Provides access to data store management and external file linking.
 External files are read-only S3 objects mapped 1:1 as files in the filespace.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>ConnectManager for data store and external file operations</p>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">ConnectManager</span></code> for data store and external file operations</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>RuntimeError</strong> – If Connect is not available (e.g., filespace version too old)</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">connect</span> <span class="o">=</span> <span class="n">filespace</span><span class="o">.</span><span class="n">connect</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">connect</span><span class="o">.</span><span class="n">add_data_store</span><span class="p">(</span><span class="s2">&quot;my-store&quot;</span><span class="p">,</span> <span class="n">S3DataStoreConfig</span><span class="p">(</span><span class="o">...</span><span class="p">))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">connect</span><span class="o">.</span><span class="n">link_file</span><span class="p">(</span><span class="s2">&quot;/data/file.csv&quot;</span><span class="p">,</span> <span class="s2">&quot;my-store&quot;</span><span class="p">,</span> <span class="s2">&quot;path/to/file.csv&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">connect</span> <span class="o">=</span> <span class="n">filespace</span><span class="o">.</span><span class="n">connect</span>
+<span class="n">connect</span><span class="o">.</span><span class="n">add_data_store</span><span class="p">(</span><span class="s2">&quot;my-store&quot;</span><span class="p">,</span> <span class="n">S3DataStoreConfig</span><span class="p">(</span><span class="o">...</span><span class="p">))</span>
+<span class="n">connect</span><span class="o">.</span><span class="n">link_file</span><span class="p">(</span><span class="s2">&quot;/data/file.csv&quot;</span><span class="p">,</span> <span class="s2">&quot;my-store&quot;</span><span class="p">,</span> <span class="s2">&quot;path/to/file.csv&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -457,16 +429,16 @@ External files are read-only S3 objects mapped 1:1 as files in the filespace.</p
 <dl class="py property">
 <dt class="sig sig-object py" id="lucidlink.filespace.Filespace.fs">
 <span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">fs</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="lucidlink.filesystem.html#lucidlink.filesystem.Filesystem" title="lucidlink.filesystem.Filesystem"><span class="pre">Filesystem</span></a></span><a class="headerlink" href="#lucidlink.filespace.Filespace.fs" title="Link to this definition"></a></dt>
-<dd><p>Get the filesystem interface for file and directory operations.</p>
+<dd><p>Get the <code class="docutils literal notranslate"><span class="pre">Filesystem</span></code> interface for file and directory operations.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Filesystem object providing read_dir, write_file, open,
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">Filesystem</span></code> object providing <code class="docutils literal notranslate"><span class="pre">read_dir</span></code>, <code class="docutils literal notranslate"><span class="pre">write_file</span></code>, <code class="docutils literal notranslate"><span class="pre">open</span></code>,
 and all other filesystem operations.</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">filespace</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">read_dir</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">filespace</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">write_file</span><span class="p">(</span><span class="s2">&quot;/hello.txt&quot;</span><span class="p">,</span> <span class="sa">b</span><span class="s2">&quot;world&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">filespace</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">read_dir</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+<span class="n">filespace</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">write_file</span><span class="p">(</span><span class="s2">&quot;/hello.txt&quot;</span><span class="p">,</span> <span class="sa">b</span><span class="s2">&quot;world&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -494,20 +466,16 @@ and all other filesystem operations.</p>
 <span class="sig-name descname"><span class="pre">sync_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/lucidlink/filespace.html#Filespace.sync_all"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lucidlink.filespace.Filespace.sync_all" title="Link to this definition"></a></dt>
 <dd><p>Synchronize all pending changes to the hub.</p>
 <p>Flushes all pending metadata and data changes to ensure they are
-propagated to the LucidHub and become visible to other clients.
-This is critical in asynchronous distributed systems.</p>
-<p>This covers all subsystems — filesystem operations, connect/external
+propagated to LucidHub and become visible to other clients.</p>
+<p>Covers all subsystems — filesystem operations, Connect/external
 file changes, and any other pending metadata updates.</p>
-<dl class="simple">
-<dt>Usage:</dt><dd><p>Call this method after write operations (create, modify, delete)
+<p>Call this method after write operations (create, modify, delete)
 to guarantee changes are committed before reading them back or
 expecting them to be visible to other clients.</p>
-</dd>
-</dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">filespace</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">write_file</span><span class="p">(</span><span class="s2">&quot;/test.txt&quot;</span><span class="p">,</span> <span class="sa">b</span><span class="s2">&quot;data&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">filespace</span><span class="o">.</span><span class="n">sync_all</span><span class="p">()</span>  <span class="c1"># Ensure write is committed</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Now other clients can see the file</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">filespace</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">write_file</span><span class="p">(</span><span class="s2">&quot;/test.txt&quot;</span><span class="p">,</span> <span class="sa">b</span><span class="s2">&quot;data&quot;</span><span class="p">)</span>
+<span class="n">filespace</span><span class="o">.</span><span class="n">sync_all</span><span class="p">()</span>  <span class="c1"># Ensure write is committed</span>
+<span class="c1"># Now other clients can see the file</span>
 </pre></div>
 </div>
 <dl class="field-list simple">
@@ -521,7 +489,7 @@ expecting them to be visible to other clients.</p>
 <dt class="sig sig-object py" id="lucidlink.filespace.Filespace.unlink">
 <span class="sig-name descname"><span class="pre">unlink</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/lucidlink/filespace.html#Filespace.unlink"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lucidlink.filespace.Filespace.unlink" title="Link to this definition"></a></dt>
 <dd><p>Unlink from this filespace.</p>
-<p>If sync_mode is SYNC_ALL (default), automatically calls sync_all()
+<p>If <code class="docutils literal notranslate"><span class="pre">sync_mode</span></code> is <code class="docutils literal notranslate"><span class="pre">SYNC_ALL</span></code> (default), automatically calls <code class="docutils literal notranslate"><span class="pre">sync_all()</span></code>
 before unlinking to ensure pending changes are propagated to the hub.</p>
 <p>After calling this method, the filespace object becomes invalid and
 cannot be used for filesystem operations.</p>

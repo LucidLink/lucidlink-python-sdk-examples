@@ -53,6 +53,12 @@ a:hover {
     border-color: #ddd;
 }
 
+/* Align Example rubric with Parameters/Returns field list */
+.rst-content dl.py .rubric {
+    font-weight: 700;
+    margin-top: 1em;
+}
+
 /* Navigation active item */
 .wy-menu-vertical li.current > a {
     border-left-color: #B0FB16;

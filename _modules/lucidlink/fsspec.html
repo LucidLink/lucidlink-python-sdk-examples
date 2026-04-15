@@ -8,7 +8,7 @@
   <title>lucidlink.fsspec &mdash; LucidLink Python SDK  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
-      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=f68bcc3c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=53c318c6" />
 
   
     <link rel="shortcut icon" href="../../_static/logo.svg"/>
@@ -335,24 +335,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../../api/lucidlink.stream.html#lucidlink.stream.open_text"><code class="docutils literal notranslate"><span class="pre">open_text()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../api/lucidlink.url_parser.html">url_parser</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../api/lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl"><code class="docutils literal notranslate"><span class="pre">ParsedUrl</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.cache_key"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.cache_key</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.filespace"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.filespace</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.path"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.path</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.to_url"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.to_url()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.with_path"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.with_path()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.workspace"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.workspace</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="../../api/lucidlink.url_parser.html#lucidlink.url_parser.UrlParser"><code class="docutils literal notranslate"><span class="pre">UrlParser</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.url_parser.html#lucidlink.url_parser.UrlParser.build_full_path"><code class="docutils literal notranslate"><span class="pre">UrlParser.build_full_path()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.url_parser.html#lucidlink.url_parser.UrlParser.parse"><code class="docutils literal notranslate"><span class="pre">UrlParser.parse()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.url_parser.html#lucidlink.url_parser.UrlParser.validate_same_filespace"><code class="docutils literal notranslate"><span class="pre">UrlParser.validate_same_filespace()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
 <li class="toctree-l2"><a class="reference internal" href="../../api/lucidlink.workspace.html">workspace</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../api/lucidlink.workspace.html#lucidlink.workspace.Workspace"><code class="docutils literal notranslate"><span class="pre">Workspace</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.workspace.html#lucidlink.workspace.Workspace.id"><code class="docutils literal notranslate"><span class="pre">Workspace.id</span></code></a></li>
@@ -398,9 +380,10 @@
 
 <span class="sd">Provides fsspec.AbstractFileSystem implementation that allows standard Python</span>
 <span class="sd">data libraries (Pandas, Dask, PyArrow, etc.) to access LucidLink filespaces</span>
-<span class="sd">using URL protocols like: lucidlink://workspace/filespace/path/to/file.csv</span>
+<span class="sd">using URL protocols like ``lucidlink://workspace/filespace/path/to/file.csv``</span>
 
-<span class="sd">Features:</span>
+<span class="sd">**Features:**</span>
+
 <span class="sd">- Standard file operations: open, read, write, ls, mkdir, rm</span>
 <span class="sd">- Native move/rename operations (much faster than copy+delete fallback)</span>
 <span class="sd">- Directory operations: mkdir, makedirs, rmdir</span>
@@ -576,10 +559,10 @@
 
 <span class="sd">        Args:</span>
 <span class="sd">            token: Service account token (sa_live:...)</span>
-<span class="sd">            sandboxed: Use temporary directory (True) or persistent .lucid folder (False)</span>
+<span class="sd">            sandboxed: Use temporary directory (``True``) or persistent ``.lucid`` folder (``False``)</span>
 <span class="sd">            persist_files: Keep files after daemon stops (only for physical mode)</span>
 <span class="sd">            root_path: Custom root path for storage (optional)</span>
-<span class="sd">            sync_mode: Sync mode - SYNC_ALL (default) syncs on close, SYNC_NONE skips sync</span>
+<span class="sd">            sync_mode: Sync mode - ``SYNC_ALL`` (default) syncs on close, ``SYNC_NONE`` skips sync</span>
 <span class="sd">            webservice_url: WebService URL override (for testing against local environments)</span>
 <span class="sd">            **kwargs: Additional fsspec parameters</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1083,8 +1066,8 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">sync_all</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Synchronize all pending changes to the hub.</span>
 
-<span class="sd">        Calls sync_all() on all connected filespaces to ensure all metadata</span>
-<span class="sd">        and data changes are propagated to the LucidHub.</span>
+<span class="sd">        Calls ``sync_all()`` on all connected filespaces to ensure all metadata</span>
+<span class="sd">        and data changes are propagated to LucidHub.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">filespace</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
             <span class="k">try</span><span class="p">:</span>

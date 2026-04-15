@@ -2,14 +2,10 @@
 
 ```{eval-rst}
 .. automodule:: lucidlink
-   :members:
-   :show-inheritance:
-   :undoc-members:
+.. autofunction:: lucidlink.create_daemon
 ```
 
 ```{toctree}
-:maxdepth: 4
-
 api/lucidlink.connect
 api/lucidlink.connect_models
 api/lucidlink.credentials
@@ -22,6 +18,5 @@ api/lucidlink.filespace_models
 api/lucidlink.filesystem_models
 api/lucidlink.storage
 api/lucidlink.stream
-api/lucidlink.url_parser
 api/lucidlink.workspace
 ```
