@@ -1,0 +1,29 @@
+API Reference
+=============
+
+.. automodule:: lucidlink
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   lucidlink.connect
+   lucidlink.connect_models
+   lucidlink.connect_validation
+   lucidlink.credentials
+   lucidlink.daemon
+   lucidlink.exceptions
+   lucidlink.filespace
+   lucidlink.filespace_models
+   lucidlink.filesystem
+   lucidlink.filesystem_models
+   lucidlink.fsspec
+   lucidlink.storage
+   lucidlink.stream
+   lucidlink.url_parser
+   lucidlink.workspace

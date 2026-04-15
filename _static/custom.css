@@ -1,0 +1,63 @@
+/* Replace home icon with LucidLink logo */
+.wy-side-nav-search .icon-home::before {
+    content: "";
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    background: url("logo.svg") no-repeat center / contain;
+    vertical-align: middle;
+    margin-right: 6px;
+}
+
+.wy-side-nav-search .fa-home::before {
+    content: none;
+}
+
+/* LucidLink brand colors — neon green palette */
+.wy-side-nav-search {
+    background-color: #1a1a1a;
+}
+
+.wy-side-nav-search a {
+    color: #fff;
+}
+
+.wy-side-nav-search input[type="text"] {
+    border-color: #B0FB16;
+}
+
+.wy-nav-top {
+    background-color: #1a1a1a;
+}
+
+.wy-menu-vertical header,
+.wy-menu-vertical p.caption {
+    color: #B0FB16;
+}
+
+a {
+    color: #5E91CC;
+}
+
+a:hover {
+    color: #B0FB16;
+}
+
+.wy-side-nav-search a:hover {
+    color: #B0FB16;
+}
+
+/* Accent color for inline code */
+.rst-content code.literal {
+    color: #181818;
+    border-color: #ddd;
+}
+
+/* Navigation active item */
+.wy-menu-vertical li.current > a {
+    border-left-color: #B0FB16;
+}
+
+.wy-menu-vertical li.current a:hover {
+    background-color: #e8e8e8;
+}

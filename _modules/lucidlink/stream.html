@@ -1,0 +1,596 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>lucidlink.stream &mdash; LucidLink Python SDK  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            LucidLink Python SDK
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/lucidlink.html">lucidlink package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">LucidLink Python SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+          <li class="breadcrumb-item"><a href="../lucidlink.html">lucidlink</a></li>
+      <li class="breadcrumb-item active">lucidlink.stream</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for lucidlink.stream</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Streaming file interface for LucidLink files.</span>
+
+<span class="sd">Provides io.RawIOBase-compatible file streams for seamless integration with</span>
+<span class="sd">Python&#39;s standard library and third-party libraries (Pandas, LangChain, PyTorch, etc.).</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">io</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Any</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">.file_modes</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">normalize_mode_for_cpp</span><span class="p">,</span>
+    <span class="n">parse_mode</span><span class="p">,</span>
+    <span class="n">validate_lock_type</span><span class="p">,</span>
+    <span class="n">get_buffered_wrapper_type</span><span class="p">,</span>
+    <span class="n">VALID_LOCK_TYPES</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<div class="viewcode-block" id="LucidFileStream">
+<a class="viewcode-back" href="../../api/lucidlink.stream.html#lucidlink.stream.LucidFileStream">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">LucidFileStream</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">RawIOBase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Streaming file access for LucidLink files.</span>
+
+<span class="sd">    Implements Python&#39;s io.RawIOBase interface for efficient, streaming access</span>
+<span class="sd">    to files in LucidLink filespaces. Compatible with standard Python I/O</span>
+<span class="sd">    operations and third-party libraries that expect file-like objects.</span>
+
+<span class="sd">    This class provides:</span>
+<span class="sd">    - Standard file operations: read, write, seek, tell, truncate</span>
+<span class="sd">    - Context manager support (with statement)</span>
+<span class="sd">    - Iterator support (for line in file)</span>
+<span class="sd">    - Optional file locking (on-open locking)</span>
+<span class="sd">    - Compatibility with: Pandas, LangChain, PyTorch, Hugging Face, etc.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        fs_wrapper: PythonFileSystemWrapper instance (from lucidlink_native)</span>
+<span class="sd">        path: File path within the filespace</span>
+<span class="sd">        mode: File open mode (&#39;r&#39;, &#39;rb&#39;, &#39;w&#39;, &#39;wb&#39;, &#39;a&#39;, &#39;ab&#39;, &#39;r+&#39;, &#39;r+b&#39;)</span>
+<span class="sd">        lock_type: Lock type - &quot;&quot; (no lock), &quot;shared&quot; (read), &quot;exclusive&quot; (write)</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; with filespace.fs.open(&quot;/data/file.txt&quot;, &quot;rb&quot;) as f:</span>
+<span class="sd">        ...     data = f.read()</span>
+
+<span class="sd">        &gt;&gt;&gt; with filespace.fs.open(&quot;/data/output.csv&quot;, &quot;wb&quot;) as f:</span>
+<span class="sd">        ...     f.write(b&quot;column1,column2\\n&quot;)</span>
+<span class="sd">        ...     f.write(b&quot;value1,value2\\n&quot;)</span>
+
+<span class="sd">        &gt;&gt;&gt; # With exclusive locking for SQLite-style access</span>
+<span class="sd">        &gt;&gt;&gt; with filespace.fs.open(&quot;/data/db.sqlite&quot;, &quot;r+b&quot;, lock_type=&quot;exclusive&quot;) as f:</span>
+<span class="sd">        ...     data = f.read()</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fs_wrapper</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;rb&quot;</span><span class="p">,</span> <span class="n">lock_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize a streaming file handle.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            fs_wrapper: PythonFileSystemWrapper from lucidlink_native module</span>
+<span class="sd">            path: Path to file within filespace</span>
+<span class="sd">            mode: File open mode (default: &#39;rb&#39;)</span>
+<span class="sd">            lock_type: Lock type - &quot;&quot; (no lock), &quot;shared&quot; (read), &quot;exclusive&quot; (write).</span>
+<span class="sd">                       Lock is held for lifetime of file handle and released on close.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fs</span> <span class="o">=</span> <span class="n">fs_wrapper</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_path</span> <span class="o">=</span> <span class="n">path</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_mode</span> <span class="o">=</span> <span class="n">mode</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_lock_type</span> <span class="o">=</span> <span class="n">lock_type</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pos</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_closed</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_bytes_written</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># Track if we&#39;ve written anything</span>
+
+        <span class="c1"># Validate mode and lock_type using shared utilities</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_parsed_mode</span> <span class="o">=</span> <span class="n">parse_mode</span><span class="p">(</span><span class="n">mode</span><span class="p">)</span>
+        <span class="n">validate_lock_type</span><span class="p">(</span><span class="n">lock_type</span><span class="p">)</span>
+
+        <span class="c1"># Open immediately when:</span>
+        <span class="c1"># - Write mode: needed because io.BufferedWriter may not call __enter__</span>
+        <span class="c1"># - Lock requested: lock is acquired on open, so must open now</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parsed_mode</span><span class="o">.</span><span class="n">is_write</span> <span class="ow">or</span> <span class="n">lock_type</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_open_handle</span><span class="p">()</span>
+
+<div class="viewcode-block" id="LucidFileStream.readable">
+<a class="viewcode-back" href="../../api/lucidlink.stream.html#lucidlink.stream.LucidFileStream.readable">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">readable</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return whether the stream supports reading.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            True if stream was opened for reading</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parsed_mode</span><span class="o">.</span><span class="n">readable</span></div>
+
+
+<div class="viewcode-block" id="LucidFileStream.writable">
+<a class="viewcode-back" href="../../api/lucidlink.stream.html#lucidlink.stream.LucidFileStream.writable">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">writable</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return whether the stream supports writing.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            True if stream was opened for writing</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parsed_mode</span><span class="o">.</span><span class="n">writable</span></div>
+
+
+<div class="viewcode-block" id="LucidFileStream.seekable">
+<a class="viewcode-back" href="../../api/lucidlink.stream.html#lucidlink.stream.LucidFileStream.seekable">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">seekable</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return whether the stream supports random access.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            True (LucidLink files always support seeking)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+
+<div class="viewcode-block" id="LucidFileStream.read">
+<a class="viewcode-back" href="../../api/lucidlink.stream.html#lucidlink.stream.LucidFileStream.read">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Read up to size bytes from the stream.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            size: Number of bytes to read, or -1 to read entire file</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Bytes read from file</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: If stream is closed</span>
+<span class="sd">            io.UnsupportedOperation: If stream not opened for reading</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_closed</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;I/O operation on closed file&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">readable</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="n">io</span><span class="o">.</span><span class="n">UnsupportedOperation</span><span class="p">(</span><span class="s2">&quot;not readable&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Ensure handle is open</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_open_handle</span><span class="p">()</span>
+
+        <span class="c1"># Handle read entire file</span>
+        <span class="k">if</span> <span class="n">size</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">file_size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_size</span><span class="p">()</span>
+            <span class="n">size</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">file_size</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pos</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">size</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="sa">b</span><span class="s2">&quot;&quot;</span>
+
+        <span class="c1"># Read from current position</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fs</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pos</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pos</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="LucidFileStream.readinto">
+<a class="viewcode-back" href="../../api/lucidlink.stream.html#lucidlink.stream.LucidFileStream.readinto">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">readinto</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">bytearray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Read bytes into a pre-allocated buffer.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            b: Buffer to read into</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Number of bytes read, or None if EOF</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="n">b</span><span class="p">[:</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="k">return</span> <span class="n">n</span></div>
+
+
+<div class="viewcode-block" id="LucidFileStream.write">
+<a class="viewcode-back" href="../../api/lucidlink.stream.html#lucidlink.stream.LucidFileStream.write">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Write bytes to the stream.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            b: Bytes to write</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Number of bytes written</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: If stream is closed</span>
+<span class="sd">            io.UnsupportedOperation: If stream not opened for writing</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_closed</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;I/O operation on closed file&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">writable</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="n">io</span><span class="o">.</span><span class="n">UnsupportedOperation</span><span class="p">(</span><span class="s2">&quot;not writable&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Ensure handle is open</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_open_handle</span><span class="p">()</span>
+
+        <span class="c1"># Write at current position</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">b</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pos</span><span class="p">)</span>
+        <span class="n">bytes_written</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pos</span> <span class="o">+=</span> <span class="n">bytes_written</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_bytes_written</span> <span class="o">+=</span> <span class="n">bytes_written</span>
+
+        <span class="c1"># Update cached size if we extended the file</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_size</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pos</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_size</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pos</span>
+
+        <span class="k">return</span> <span class="n">bytes_written</span></div>
+
+
+<div class="viewcode-block" id="LucidFileStream.seek">
+<a class="viewcode-back" href="../../api/lucidlink.stream.html#lucidlink.stream.LucidFileStream.seek">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">seek</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">offset</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">whence</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Change stream position.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            offset: Offset in bytes</span>
+<span class="sd">            whence: Reference point (0=start, 1=current, 2=end)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            New absolute position</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">whence</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># SEEK_SET - absolute position</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_pos</span> <span class="o">=</span> <span class="n">offset</span>
+        <span class="k">elif</span> <span class="n">whence</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>  <span class="c1"># SEEK_CUR - relative to current position</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_pos</span> <span class="o">+=</span> <span class="n">offset</span>
+        <span class="k">elif</span> <span class="n">whence</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>  <span class="c1"># SEEK_END - relative to end of file</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_size</span><span class="p">()</span> <span class="o">+</span> <span class="n">offset</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid whence: </span><span class="si">{</span><span class="n">whence</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Clamp position to valid range [0, filesize]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pos</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pos</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pos</span></div>
+
+
+<div class="viewcode-block" id="LucidFileStream.tell">
+<a class="viewcode-back" href="../../api/lucidlink.stream.html#lucidlink.stream.LucidFileStream.tell">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">tell</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return current stream position.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Current position in bytes</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pos</span></div>
+
+
+<div class="viewcode-block" id="LucidFileStream.truncate">
+<a class="viewcode-back" href="../../api/lucidlink.stream.html#lucidlink.stream.LucidFileStream.truncate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">truncate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Resize the stream to the given size.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            size: New size in bytes, or current position if None</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            New size</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: If stream is closed</span>
+<span class="sd">            io.UnsupportedOperation: If stream not opened for writing</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_closed</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;I/O operation on closed file&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">writable</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="n">io</span><span class="o">.</span><span class="n">UnsupportedOperation</span><span class="p">(</span><span class="s2">&quot;not writable&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Ensure handle is open</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_open_handle</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">size</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pos</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fs</span><span class="o">.</span><span class="n">set_end_of_file_by_handle</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+
+        <span class="c1"># Update cached size</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_size</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_size</span> <span class="o">=</span> <span class="n">size</span>
+
+        <span class="k">return</span> <span class="n">size</span></div>
+
+
+<div class="viewcode-block" id="LucidFileStream.close">
+<a class="viewcode-back" href="../../api/lucidlink.stream.html#lucidlink.stream.LucidFileStream.close">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Close the stream and release resources.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_closed</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_fs</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">)</span>
+                <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                    <span class="c1"># Ignore errors during close</span>
+                    <span class="k">pass</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_closed</span> <span class="o">=</span> <span class="kc">True</span></div>
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">closed</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return whether the stream is closed.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            True if stream is closed</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_closed</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the file path.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Path to file within filespace</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_path</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the file mode.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Mode string used to open the file</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mode</span>
+
+<div class="viewcode-block" id="LucidFileStream.fileno">
+<a class="viewcode-back" href="../../api/lucidlink.stream.html#lucidlink.stream.LucidFileStream.fileno">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fileno</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return underlying file descriptor.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            io.UnsupportedOperation: LucidLink files don&#39;t have OS file descriptors</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="n">io</span><span class="o">.</span><span class="n">UnsupportedOperation</span><span class="p">(</span><span class="s2">&quot;fileno not supported&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="LucidFileStream.isatty">
+<a class="viewcode-back" href="../../api/lucidlink.stream.html#lucidlink.stream.LucidFileStream.isatty">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">isatty</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return whether this is an interactive stream.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            False (LucidLink files are never TTY devices)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_size</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get file size (cached).</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            File size in bytes</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_size</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">entry</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fs</span><span class="o">.</span><span class="n">get_entry</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_path</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_size</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;size&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="c1"># If we can&#39;t get size, assume 0</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_size</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_size</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_open_handle</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Open the file handle if not already open.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">cpp_mode</span> <span class="o">=</span> <span class="n">normalize_mode_for_cpp</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_mode</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fs</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_path</span><span class="p">,</span> <span class="n">cpp_mode</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lock_type</span><span class="p">)</span>
+
+            <span class="c1"># For write mode (not append), create the file and truncate to 0,</span>
+            <span class="c1"># matching Python&#39;s open(&quot;w&quot;/&quot;wb&quot;) behavior</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parsed_mode</span><span class="o">.</span><span class="n">is_write</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parsed_mode</span><span class="o">.</span><span class="n">is_append</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_fs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_fs</span><span class="o">.</span><span class="n">set_end_of_file_by_handle</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_size</span> <span class="o">=</span> <span class="mi">0</span>
+
+            <span class="c1"># For append mode, seek to end</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parsed_mode</span><span class="o">.</span><span class="n">is_append</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_size</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;LucidFileStream&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Enter context manager - open file handle.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Self</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_open_handle</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Exit context manager - close file handle.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;LucidFileStream&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return iterator for reading lines.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Self</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__next__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Read next line from file.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Next line as bytes</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            StopIteration: If EOF reached</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">line</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">StopIteration</span>
+        <span class="k">return</span> <span class="n">line</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return string representation.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            String describing this stream</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;closed&quot;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_closed</span> <span class="k">else</span> <span class="s2">&quot;open&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;LucidFileStream path=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_path</span><span class="si">!r}</span><span class="s2"> mode=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_mode</span><span class="si">!r}</span><span class="s2"> </span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="s2">&gt;&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="open_buffered">
+<a class="viewcode-back" href="../../api/lucidlink.stream.html#lucidlink.stream.open_buffered">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">open_buffered</span><span class="p">(</span><span class="n">fs_wrapper</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;rb&quot;</span><span class="p">,</span>
+                  <span class="n">buffer_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">DEFAULT_BUFFER_SIZE</span><span class="p">,</span>
+                  <span class="n">lock_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">io</span><span class="o">.</span><span class="n">BufferedIOBase</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Open a file with buffering for improved performance.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        fs_wrapper: PythonFileSystemWrapper from lucidlink_native module</span>
+<span class="sd">        path: Path to file within filespace</span>
+<span class="sd">        mode: File open mode (default: &#39;rb&#39;)</span>
+<span class="sd">        buffer_size: Buffer size in bytes (default: 8192)</span>
+<span class="sd">        lock_type: Lock type - &quot;&quot; (no lock), &quot;shared&quot; (read), &quot;exclusive&quot; (write)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        BufferedReader, BufferedWriter, or BufferedRandom wrapping LucidFileStream</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; with open_buffered(fs, &quot;/data/large.csv&quot;, &quot;rb&quot;) as f:</span>
+<span class="sd">        ...     for line in f:</span>
+<span class="sd">        ...         process(line)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">raw</span> <span class="o">=</span> <span class="n">LucidFileStream</span><span class="p">(</span><span class="n">fs_wrapper</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">lock_type</span><span class="p">)</span>
+    <span class="n">wrapper_type</span> <span class="o">=</span> <span class="n">get_buffered_wrapper_type</span><span class="p">(</span><span class="n">mode</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">wrapper_type</span> <span class="o">==</span> <span class="s2">&quot;random&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">io</span><span class="o">.</span><span class="n">BufferedRandom</span><span class="p">(</span><span class="n">raw</span><span class="p">,</span> <span class="n">buffer_size</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">wrapper_type</span> <span class="o">==</span> <span class="s2">&quot;writer&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">io</span><span class="o">.</span><span class="n">BufferedWriter</span><span class="p">(</span><span class="n">raw</span><span class="p">,</span> <span class="n">buffer_size</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">io</span><span class="o">.</span><span class="n">BufferedReader</span><span class="p">(</span><span class="n">raw</span><span class="p">,</span> <span class="n">buffer_size</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="open_text">
+<a class="viewcode-back" href="../../api/lucidlink.stream.html#lucidlink.stream.open_text">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">open_text</span><span class="p">(</span><span class="n">fs_wrapper</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span>
+              <span class="n">encoding</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;utf-8&quot;</span><span class="p">,</span> <span class="n">errors</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;strict&quot;</span><span class="p">,</span>
+              <span class="n">newline</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+              <span class="n">lock_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">io</span><span class="o">.</span><span class="n">TextIOWrapper</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Open a file in text mode.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        fs_wrapper: PythonFileSystemWrapper from lucidlink_native module</span>
+<span class="sd">        path: Path to file within filespace</span>
+<span class="sd">        mode: File open mode (default: &#39;r&#39;)</span>
+<span class="sd">        encoding: Text encoding (default: &#39;utf-8&#39;)</span>
+<span class="sd">        errors: Error handling strategy (default: &#39;strict&#39;)</span>
+<span class="sd">        newline: Newline handling (None, &#39;&#39;, &#39;\\n&#39;, &#39;\\r&#39;, &#39;\\r\\n&#39;)</span>
+<span class="sd">        lock_type: Lock type - &quot;&quot; (no lock), &quot;shared&quot; (read), &quot;exclusive&quot; (write)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        TextIOWrapper for text-mode access</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; with open_text(fs, &quot;/data/report.txt&quot;, &quot;r&quot;) as f:</span>
+<span class="sd">        ...     for line in f:</span>
+<span class="sd">        ...         print(line.strip())</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Ensure binary mode</span>
+    <span class="k">if</span> <span class="s1">&#39;b&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">mode</span><span class="p">:</span>
+        <span class="n">mode</span> <span class="o">=</span> <span class="n">mode</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;ab&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Create buffered stream</span>
+    <span class="n">buffered</span> <span class="o">=</span> <span class="n">open_buffered</span><span class="p">(</span><span class="n">fs_wrapper</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">lock_type</span><span class="o">=</span><span class="n">lock_type</span><span class="p">)</span>
+
+    <span class="c1"># Wrap in TextIOWrapper</span>
+    <span class="k">return</span> <span class="n">io</span><span class="o">.</span><span class="n">TextIOWrapper</span><span class="p">(</span><span class="n">buffered</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="n">encoding</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="n">errors</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="n">newline</span><span class="p">)</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, LucidLink.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

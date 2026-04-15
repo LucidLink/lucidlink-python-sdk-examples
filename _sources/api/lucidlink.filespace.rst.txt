@@ -1,0 +1,7 @@
+filespace
+=========
+
+.. automodule:: lucidlink.filespace
+   :members:
+   :show-inheritance:
+   :undoc-members:

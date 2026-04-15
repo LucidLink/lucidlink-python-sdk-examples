@@ -1,0 +1,227 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>lucidlink.connect_models &mdash; LucidLink Python SDK  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            LucidLink Python SDK
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/lucidlink.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">LucidLink Python SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+          <li class="breadcrumb-item"><a href="../lucidlink.html">lucidlink</a></li>
+      <li class="breadcrumb-item active">lucidlink.connect_models</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for lucidlink.connect_models</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Data models for LucidLink Connect (external files).&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">enum</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span>
+
+
+<div class="viewcode-block" id="DataStoreKind">
+<a class="viewcode-back" href="../../api/lucidlink.connect_models.html#lucidlink.connect_models.DataStoreKind">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">DataStoreKind</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">enum</span><span class="o">.</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">S3</span> <span class="o">=</span> <span class="s2">&quot;S3DataStore&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="DataStoreRekeyState">
+<a class="viewcode-back" href="../../api/lucidlink.connect_models.html#lucidlink.connect_models.DataStoreRekeyState">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">DataStoreRekeyState</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">enum</span><span class="o">.</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">NO_REKEY</span> <span class="o">=</span> <span class="s2">&quot;no_rekey&quot;</span>
+    <span class="n">IN_PROGRESS</span> <span class="o">=</span> <span class="s2">&quot;in_progress&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="S3Credentials">
+<a class="viewcode-back" href="../../api/lucidlink.connect_models.html#lucidlink.connect_models.S3Credentials">[docs]</a>
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">S3Credentials</span><span class="p">:</span>
+    <span class="n">access_key</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">secret_key</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">kind</span><span class="p">:</span> <span class="n">DataStoreKind</span> <span class="o">=</span> <span class="n">DataStoreKind</span><span class="o">.</span><span class="n">S3</span></div>
+
+
+
+<span class="n">DataStoreCredentials</span> <span class="o">=</span> <span class="n">S3Credentials</span>
+
+
+<div class="viewcode-block" id="S3DataStoreConfig">
+<a class="viewcode-back" href="../../api/lucidlink.connect_models.html#lucidlink.connect_models.S3DataStoreConfig">[docs]</a>
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">S3DataStoreConfig</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Configuration for an S3-compatible data store.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        access_key: S3 access key ID</span>
+<span class="sd">        secret_key: S3 secret access key</span>
+<span class="sd">        bucket_name: S3 bucket name</span>
+<span class="sd">        region: AWS region (e.g., &quot;us-east-1&quot;)</span>
+<span class="sd">        endpoint: Custom S3 endpoint URL with scheme, e.g. &quot;http://127.0.0.1:9090&quot;.</span>
+<span class="sd">            Must start with &quot;http://&quot; or &quot;https://&quot;. When empty, defaults to HTTPS.</span>
+<span class="sd">        url_expiration_minutes: Presigned URL expiration in minutes (default: 10080 = 7 days)</span>
+<span class="sd">        use_virtual_addressing: Use virtual-hosted-style addressing (default: False)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">access_key</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">secret_key</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">bucket_name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">region</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">endpoint</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">url_expiration_minutes</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10080</span>  <span class="c1"># 7 days</span>
+    <span class="n">use_virtual_addressing</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span></div>
+
+
+
+<div class="viewcode-block" id="DataStoreInfo">
+<a class="viewcode-back" href="../../api/lucidlink.connect_models.html#lucidlink.connect_models.DataStoreInfo">[docs]</a>
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">DataStoreInfo</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Information about a registered data store.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        name: Data store name</span>
+<span class="sd">        access_key: S3 access key ID</span>
+<span class="sd">        secret_key: S3 secret access key</span>
+<span class="sd">        bucket_name: S3 bucket name</span>
+<span class="sd">        region: AWS region</span>
+<span class="sd">        endpoint: Full S3 endpoint URL (e.g., &quot;http://127.0.0.1:9090&quot;), empty if using AWS default</span>
+<span class="sd">        url_expiration_minutes: Presigned URL expiration in minutes</span>
+<span class="sd">        use_virtual_addressing: Whether virtual-hosted-style addressing is used</span>
+<span class="sd">        kind: Data store type (currently always S3)</span>
+<span class="sd">        key_id: Unique key identifier (UUID)</span>
+<span class="sd">        rekey_state: Current credential rotation state</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">access_key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">secret_key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">bucket_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">region</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">endpoint</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">url_expiration_minutes</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">use_virtual_addressing</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">kind</span><span class="p">:</span> <span class="n">DataStoreKind</span> <span class="o">=</span> <span class="n">DataStoreKind</span><span class="o">.</span><span class="n">S3</span>
+    <span class="n">key_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">rekey_state</span><span class="p">:</span> <span class="n">DataStoreRekeyState</span> <span class="o">=</span> <span class="n">DataStoreRekeyState</span><span class="o">.</span><span class="n">NO_REKEY</span>
+
+<div class="viewcode-block" id="DataStoreInfo.from_dict">
+<a class="viewcode-back" href="../../api/lucidlink.connect_models.html#lucidlink.connect_models.DataStoreInfo.from_dict">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">store</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;DataStoreInfo&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
+            <span class="o">**</span><span class="p">{</span>
+                <span class="o">**</span><span class="n">store</span><span class="p">,</span>
+                <span class="s2">&quot;kind&quot;</span><span class="p">:</span> <span class="n">DataStoreKind</span><span class="p">(</span><span class="n">store</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;kind&quot;</span><span class="p">,</span> <span class="s2">&quot;S3DataStore&quot;</span><span class="p">)),</span>
+                <span class="s2">&quot;rekey_state&quot;</span><span class="p">:</span> <span class="n">DataStoreRekeyState</span><span class="p">(</span><span class="n">store</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;rekey_state&quot;</span><span class="p">,</span> <span class="s2">&quot;no_rekey&quot;</span><span class="p">)),</span>
+            <span class="p">}</span>
+        <span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="LinkedFilesResult">
+<a class="viewcode-back" href="../../api/lucidlink.connect_models.html#lucidlink.connect_models.LinkedFilesResult">[docs]</a>
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">LinkedFilesResult</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Result from listing external files linked to a data store.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        file_paths: List of file paths</span>
+<span class="sd">        file_ids: List of integer file IDs (parallel to file_paths)</span>
+<span class="sd">        has_more: Whether more results are available (pagination)</span>
+<span class="sd">        cursor: Opaque pagination token; pass to the next call to continue</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">file_paths</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
+    <span class="n">file_ids</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
+    <span class="n">has_more</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">cursor</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, LucidLink.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,7 @@
+connect\_models
+===============
+
+.. automodule:: lucidlink.connect_models
+   :members:
+   :show-inheritance:
+   :undoc-members:

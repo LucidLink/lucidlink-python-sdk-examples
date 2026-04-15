@@ -1,0 +1,728 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>stream &mdash; LucidLink Python SDK  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=f68bcc3c" />
+
+  
+    <link rel="shortcut icon" href="../_static/logo.svg"/>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="url_parser" href="lucidlink.url_parser.html" />
+    <link rel="prev" title="storage" href="lucidlink.storage.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #1a1a1a" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            LucidLink Python SDK
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quick Start</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#installation">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../quickstart.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../quickstart.html#install">Install</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#basic-usage">Basic Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#file-operations">File Operations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../quickstart.html#streaming-file-access">Streaming File Access</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../quickstart.html#fsspec-integration">fsspec Integration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../quickstart.html#filesystem-operations">Filesystem Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../quickstart.html#file-locking">File Locking</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#lucidlink-connect">LucidLink Connect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#workspace-operations">Workspace Operations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../quickstart.html#discovering-filespaces">Discovering Filespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../quickstart.html#context-managers">Context Managers</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#configuration">Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../quickstart.html#syncing-changes">Syncing Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../quickstart.html#storage-modes">Storage Modes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../quickstart.html#sandboxed-mode-default">Sandboxed Mode (Default)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quickstart.html#physical-mode">Physical Mode</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../quickstart.html#error-handling">Error Handling</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api-reference.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../api-reference.html#lucidlink.create_daemon"><code class="docutils literal notranslate"><span class="pre">create_daemon()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="lucidlink.connect.html">connect</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="lucidlink.connect.html#lucidlink.connect.ConnectManager"><code class="docutils literal notranslate"><span class="pre">ConnectManager</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.connect.html#lucidlink.connect.ConnectManager.add_data_store"><code class="docutils literal notranslate"><span class="pre">ConnectManager.add_data_store()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.connect.html#lucidlink.connect.ConnectManager.are_data_stores_available"><code class="docutils literal notranslate"><span class="pre">ConnectManager.are_data_stores_available()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.connect.html#lucidlink.connect.ConnectManager.count_external_files"><code class="docutils literal notranslate"><span class="pre">ConnectManager.count_external_files()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.connect.html#lucidlink.connect.ConnectManager.get_data_store"><code class="docutils literal notranslate"><span class="pre">ConnectManager.get_data_store()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.connect.html#lucidlink.connect.ConnectManager.link_file"><code class="docutils literal notranslate"><span class="pre">ConnectManager.link_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.connect.html#lucidlink.connect.ConnectManager.list_data_stores"><code class="docutils literal notranslate"><span class="pre">ConnectManager.list_data_stores()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.connect.html#lucidlink.connect.ConnectManager.list_external_files"><code class="docutils literal notranslate"><span class="pre">ConnectManager.list_external_files()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.connect.html#lucidlink.connect.ConnectManager.rekey_data_store"><code class="docutils literal notranslate"><span class="pre">ConnectManager.rekey_data_store()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.connect.html#lucidlink.connect.ConnectManager.remove_data_store"><code class="docutils literal notranslate"><span class="pre">ConnectManager.remove_data_store()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.connect.html#lucidlink.connect.ConnectManager.unlink_file"><code class="docutils literal notranslate"><span class="pre">ConnectManager.unlink_file()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="lucidlink.connect_models.html">connect_models</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="lucidlink.connect_models.html#lucidlink.connect_models.DataStoreCredentials"><code class="docutils literal notranslate"><span class="pre">DataStoreCredentials</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="lucidlink.connect_models.html#lucidlink.connect_models.DataStoreInfo"><code class="docutils literal notranslate"><span class="pre">DataStoreInfo</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.connect_models.html#lucidlink.connect_models.DataStoreInfo.access_key"><code class="docutils literal notranslate"><span class="pre">DataStoreInfo.access_key</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.connect_models.html#lucidlink.connect_models.DataStoreInfo.bucket_name"><code class="docutils literal notranslate"><span class="pre">DataStoreInfo.bucket_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.connect_models.html#lucidlink.connect_models.DataStoreInfo.endpoint"><code class="docutils literal notranslate"><span class="pre">DataStoreInfo.endpoint</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.connect_models.html#lucidlink.connect_models.DataStoreInfo.from_dict"><code class="docutils literal notranslate"><span class="pre">DataStoreInfo.from_dict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.connect_models.html#lucidlink.connect_models.DataStoreInfo.key_id"><code class="docutils literal notranslate"><span class="pre">DataStoreInfo.key_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.connect_models.html#lucidlink.connect_models.DataStoreInfo.kind"><code class="docutils literal notranslate"><span class="pre">DataStoreInfo.kind</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.connect_models.html#lucidlink.connect_models.DataStoreInfo.name"><code class="docutils literal notranslate"><span class="pre">DataStoreInfo.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.connect_models.html#lucidlink.connect_models.DataStoreInfo.region"><code class="docutils literal notranslate"><span class="pre">DataStoreInfo.region</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.connect_models.html#lucidlink.connect_models.DataStoreInfo.rekey_state"><code class="docutils literal notranslate"><span class="pre">DataStoreInfo.rekey_state</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.connect_models.html#lucidlink.connect_models.DataStoreInfo.secret_key"><code class="docutils literal notranslate"><span class="pre">DataStoreInfo.secret_key</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.connect_models.html#lucidlink.connect_models.DataStoreInfo.url_expiration_minutes"><code class="docutils literal notranslate"><span class="pre">DataStoreInfo.url_expiration_minutes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.connect_models.html#lucidlink.connect_models.DataStoreInfo.use_virtual_addressing"><code class="docutils literal notranslate"><span class="pre">DataStoreInfo.use_virtual_addressing</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="lucidlink.connect_models.html#lucidlink.connect_models.DataStoreKind"><code class="docutils literal notranslate"><span class="pre">DataStoreKind</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.connect_models.html#lucidlink.connect_models.DataStoreKind.S3"><code class="docutils literal notranslate"><span class="pre">DataStoreKind.S3</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="lucidlink.connect_models.html#lucidlink.connect_models.DataStoreRekeyState"><code class="docutils literal notranslate"><span class="pre">DataStoreRekeyState</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.connect_models.html#lucidlink.connect_models.DataStoreRekeyState.IN_PROGRESS"><code class="docutils literal notranslate"><span class="pre">DataStoreRekeyState.IN_PROGRESS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.connect_models.html#lucidlink.connect_models.DataStoreRekeyState.NO_REKEY"><code class="docutils literal notranslate"><span class="pre">DataStoreRekeyState.NO_REKEY</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="lucidlink.connect_models.html#lucidlink.connect_models.LinkedFilesResult"><code class="docutils literal notranslate"><span class="pre">LinkedFilesResult</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.connect_models.html#lucidlink.connect_models.LinkedFilesResult.cursor"><code class="docutils literal notranslate"><span class="pre">LinkedFilesResult.cursor</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.connect_models.html#lucidlink.connect_models.LinkedFilesResult.file_ids"><code class="docutils literal notranslate"><span class="pre">LinkedFilesResult.file_ids</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.connect_models.html#lucidlink.connect_models.LinkedFilesResult.file_paths"><code class="docutils literal notranslate"><span class="pre">LinkedFilesResult.file_paths</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.connect_models.html#lucidlink.connect_models.LinkedFilesResult.has_more"><code class="docutils literal notranslate"><span class="pre">LinkedFilesResult.has_more</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="lucidlink.connect_models.html#lucidlink.connect_models.S3Credentials"><code class="docutils literal notranslate"><span class="pre">S3Credentials</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.connect_models.html#lucidlink.connect_models.S3Credentials.access_key"><code class="docutils literal notranslate"><span class="pre">S3Credentials.access_key</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.connect_models.html#lucidlink.connect_models.S3Credentials.kind"><code class="docutils literal notranslate"><span class="pre">S3Credentials.kind</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.connect_models.html#lucidlink.connect_models.S3Credentials.secret_key"><code class="docutils literal notranslate"><span class="pre">S3Credentials.secret_key</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="lucidlink.connect_models.html#lucidlink.connect_models.S3DataStoreConfig"><code class="docutils literal notranslate"><span class="pre">S3DataStoreConfig</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.connect_models.html#lucidlink.connect_models.S3DataStoreConfig.access_key"><code class="docutils literal notranslate"><span class="pre">S3DataStoreConfig.access_key</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.connect_models.html#lucidlink.connect_models.S3DataStoreConfig.bucket_name"><code class="docutils literal notranslate"><span class="pre">S3DataStoreConfig.bucket_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.connect_models.html#lucidlink.connect_models.S3DataStoreConfig.endpoint"><code class="docutils literal notranslate"><span class="pre">S3DataStoreConfig.endpoint</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.connect_models.html#lucidlink.connect_models.S3DataStoreConfig.region"><code class="docutils literal notranslate"><span class="pre">S3DataStoreConfig.region</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.connect_models.html#lucidlink.connect_models.S3DataStoreConfig.secret_key"><code class="docutils literal notranslate"><span class="pre">S3DataStoreConfig.secret_key</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.connect_models.html#lucidlink.connect_models.S3DataStoreConfig.url_expiration_minutes"><code class="docutils literal notranslate"><span class="pre">S3DataStoreConfig.url_expiration_minutes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.connect_models.html#lucidlink.connect_models.S3DataStoreConfig.use_virtual_addressing"><code class="docutils literal notranslate"><span class="pre">S3DataStoreConfig.use_virtual_addressing</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="lucidlink.credentials.html">credentials</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="lucidlink.credentials.html#lucidlink.credentials.ServiceAccountCredentials"><code class="docutils literal notranslate"><span class="pre">ServiceAccountCredentials</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="lucidlink.daemon.html">daemon</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="lucidlink.daemon.html#lucidlink.daemon.Daemon"><code class="docutils literal notranslate"><span class="pre">Daemon</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.daemon.html#lucidlink.daemon.Daemon.authenticate"><code class="docutils literal notranslate"><span class="pre">Daemon.authenticate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.daemon.html#lucidlink.daemon.Daemon.is_running"><code class="docutils literal notranslate"><span class="pre">Daemon.is_running()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.daemon.html#lucidlink.daemon.Daemon.start"><code class="docutils literal notranslate"><span class="pre">Daemon.start()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.daemon.html#lucidlink.daemon.Daemon.stop"><code class="docutils literal notranslate"><span class="pre">Daemon.stop()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="lucidlink.exceptions.html">exceptions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="lucidlink.exceptions.html#lucidlink.exceptions.AuthenticationError"><code class="docutils literal notranslate"><span class="pre">AuthenticationError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="lucidlink.exceptions.html#lucidlink.exceptions.ConfigurationError"><code class="docutils literal notranslate"><span class="pre">ConfigurationError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="lucidlink.exceptions.html#lucidlink.exceptions.DaemonError"><code class="docutils literal notranslate"><span class="pre">DaemonError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="lucidlink.exceptions.html#lucidlink.exceptions.FilespaceError"><code class="docutils literal notranslate"><span class="pre">FilespaceError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="lucidlink.exceptions.html#lucidlink.exceptions.LucidLinkError"><code class="docutils literal notranslate"><span class="pre">LucidLinkError</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="lucidlink.filespace.html">filespace</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="lucidlink.filespace.html#lucidlink.filespace.Filespace"><code class="docutils literal notranslate"><span class="pre">Filespace</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filespace.html#lucidlink.filespace.Filespace.connect"><code class="docutils literal notranslate"><span class="pre">Filespace.connect</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filespace.html#lucidlink.filespace.Filespace.fs"><code class="docutils literal notranslate"><span class="pre">Filespace.fs</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filespace.html#lucidlink.filespace.Filespace.full_name"><code class="docutils literal notranslate"><span class="pre">Filespace.full_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filespace.html#lucidlink.filespace.Filespace.id"><code class="docutils literal notranslate"><span class="pre">Filespace.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filespace.html#lucidlink.filespace.Filespace.name"><code class="docutils literal notranslate"><span class="pre">Filespace.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filespace.html#lucidlink.filespace.Filespace.sync_all"><code class="docutils literal notranslate"><span class="pre">Filespace.sync_all()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filespace.html#lucidlink.filespace.Filespace.unlink"><code class="docutils literal notranslate"><span class="pre">Filespace.unlink()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filespace.html#lucidlink.filespace.Filespace.workspace_id"><code class="docutils literal notranslate"><span class="pre">Filespace.workspace_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filespace.html#lucidlink.filespace.Filespace.workspace_name"><code class="docutils literal notranslate"><span class="pre">Filespace.workspace_name</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="lucidlink.filesystem.html">filesystem</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="lucidlink.filesystem.html#lucidlink.filesystem.FileHandle"><code class="docutils literal notranslate"><span class="pre">FileHandle</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filesystem.html#lucidlink.filesystem.FileHandle.close"><code class="docutils literal notranslate"><span class="pre">FileHandle.close()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filesystem.html#lucidlink.filesystem.FileHandle.closed"><code class="docutils literal notranslate"><span class="pre">FileHandle.closed</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filesystem.html#lucidlink.filesystem.FileHandle.mode"><code class="docutils literal notranslate"><span class="pre">FileHandle.mode</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filesystem.html#lucidlink.filesystem.FileHandle.path"><code class="docutils literal notranslate"><span class="pre">FileHandle.path</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filesystem.html#lucidlink.filesystem.FileHandle.read"><code class="docutils literal notranslate"><span class="pre">FileHandle.read()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filesystem.html#lucidlink.filesystem.FileHandle.write"><code class="docutils literal notranslate"><span class="pre">FileHandle.write()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="lucidlink.filesystem.html#lucidlink.filesystem.Filesystem"><code class="docutils literal notranslate"><span class="pre">Filesystem</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.create"><code class="docutils literal notranslate"><span class="pre">Filesystem.create()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.create_dir"><code class="docutils literal notranslate"><span class="pre">Filesystem.create_dir()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.delete"><code class="docutils literal notranslate"><span class="pre">Filesystem.delete()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.delete_dir"><code class="docutils literal notranslate"><span class="pre">Filesystem.delete_dir()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.dir_exists"><code class="docutils literal notranslate"><span class="pre">Filesystem.dir_exists()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.file_exists"><code class="docutils literal notranslate"><span class="pre">Filesystem.file_exists()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.get_entry"><code class="docutils literal notranslate"><span class="pre">Filesystem.get_entry()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.get_size"><code class="docutils literal notranslate"><span class="pre">Filesystem.get_size()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.get_statistics"><code class="docutils literal notranslate"><span class="pre">Filesystem.get_statistics()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.list_dir"><code class="docutils literal notranslate"><span class="pre">Filesystem.list_dir()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.lock_byte_range"><code class="docutils literal notranslate"><span class="pre">Filesystem.lock_byte_range()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.move"><code class="docutils literal notranslate"><span class="pre">Filesystem.move()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.open"><code class="docutils literal notranslate"><span class="pre">Filesystem.open()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.open_legacy"><code class="docutils literal notranslate"><span class="pre">Filesystem.open_legacy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.read_dir"><code class="docutils literal notranslate"><span class="pre">Filesystem.read_dir()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.read_file"><code class="docutils literal notranslate"><span class="pre">Filesystem.read_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.truncate"><code class="docutils literal notranslate"><span class="pre">Filesystem.truncate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.unlock_all_byte_ranges"><code class="docutils literal notranslate"><span class="pre">Filesystem.unlock_all_byte_ranges()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.unlock_byte_range"><code class="docutils literal notranslate"><span class="pre">Filesystem.unlock_byte_range()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.write_file"><code class="docutils literal notranslate"><span class="pre">Filesystem.write_file()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="lucidlink.fsspec.html">fsspec</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="lucidlink.fsspec.html#lucidlink.fsspec.AbstractFileSystem"><code class="docutils literal notranslate"><span class="pre">AbstractFileSystem</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="lucidlink.fsspec.html#lucidlink.fsspec.LucidLinkFileSystem"><code class="docutils literal notranslate"><span class="pre">LucidLinkFileSystem</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.fsspec.html#lucidlink.fsspec.LucidLinkFileSystem.cat"><code class="docutils literal notranslate"><span class="pre">LucidLinkFileSystem.cat()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.fsspec.html#lucidlink.fsspec.LucidLinkFileSystem.cat_file"><code class="docutils literal notranslate"><span class="pre">LucidLinkFileSystem.cat_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.fsspec.html#lucidlink.fsspec.LucidLinkFileSystem.close"><code class="docutils literal notranslate"><span class="pre">LucidLinkFileSystem.close()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.fsspec.html#lucidlink.fsspec.LucidLinkFileSystem.exists"><code class="docutils literal notranslate"><span class="pre">LucidLinkFileSystem.exists()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.fsspec.html#lucidlink.fsspec.LucidLinkFileSystem.get"><code class="docutils literal notranslate"><span class="pre">LucidLinkFileSystem.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.fsspec.html#lucidlink.fsspec.LucidLinkFileSystem.info"><code class="docutils literal notranslate"><span class="pre">LucidLinkFileSystem.info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.fsspec.html#lucidlink.fsspec.LucidLinkFileSystem.isdir"><code class="docutils literal notranslate"><span class="pre">LucidLinkFileSystem.isdir()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.fsspec.html#lucidlink.fsspec.LucidLinkFileSystem.isfile"><code class="docutils literal notranslate"><span class="pre">LucidLinkFileSystem.isfile()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.fsspec.html#lucidlink.fsspec.LucidLinkFileSystem.ls"><code class="docutils literal notranslate"><span class="pre">LucidLinkFileSystem.ls()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.fsspec.html#lucidlink.fsspec.LucidLinkFileSystem.makedirs"><code class="docutils literal notranslate"><span class="pre">LucidLinkFileSystem.makedirs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.fsspec.html#lucidlink.fsspec.LucidLinkFileSystem.mkdir"><code class="docutils literal notranslate"><span class="pre">LucidLinkFileSystem.mkdir()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.fsspec.html#lucidlink.fsspec.LucidLinkFileSystem.mv"><code class="docutils literal notranslate"><span class="pre">LucidLinkFileSystem.mv()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.fsspec.html#lucidlink.fsspec.LucidLinkFileSystem.options"><code class="docutils literal notranslate"><span class="pre">LucidLinkFileSystem.options</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.fsspec.html#lucidlink.fsspec.LucidLinkFileSystem.protocol"><code class="docutils literal notranslate"><span class="pre">LucidLinkFileSystem.protocol</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.fsspec.html#lucidlink.fsspec.LucidLinkFileSystem.put"><code class="docutils literal notranslate"><span class="pre">LucidLinkFileSystem.put()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.fsspec.html#lucidlink.fsspec.LucidLinkFileSystem.rename"><code class="docutils literal notranslate"><span class="pre">LucidLinkFileSystem.rename()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.fsspec.html#lucidlink.fsspec.LucidLinkFileSystem.rm"><code class="docutils literal notranslate"><span class="pre">LucidLinkFileSystem.rm()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.fsspec.html#lucidlink.fsspec.LucidLinkFileSystem.rmdir"><code class="docutils literal notranslate"><span class="pre">LucidLinkFileSystem.rmdir()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.fsspec.html#lucidlink.fsspec.LucidLinkFileSystem.sync_all"><code class="docutils literal notranslate"><span class="pre">LucidLinkFileSystem.sync_all()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="lucidlink.filespace_models.html">filespace_models</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="lucidlink.filespace_models.html#lucidlink.filespace_models.DaemonStatus"><code class="docutils literal notranslate"><span class="pre">DaemonStatus</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filespace_models.html#lucidlink.filespace_models.DaemonStatus.is_authenticated"><code class="docutils literal notranslate"><span class="pre">DaemonStatus.is_authenticated</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filespace_models.html#lucidlink.filespace_models.DaemonStatus.is_linked"><code class="docutils literal notranslate"><span class="pre">DaemonStatus.is_linked</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filespace_models.html#lucidlink.filespace_models.DaemonStatus.is_running"><code class="docutils literal notranslate"><span class="pre">DaemonStatus.is_running</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filespace_models.html#lucidlink.filespace_models.DaemonStatus.root_path"><code class="docutils literal notranslate"><span class="pre">DaemonStatus.root_path</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="lucidlink.filespace_models.html#lucidlink.filespace_models.FilespaceInfo"><code class="docutils literal notranslate"><span class="pre">FilespaceInfo</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filespace_models.html#lucidlink.filespace_models.FilespaceInfo.created"><code class="docutils literal notranslate"><span class="pre">FilespaceInfo.created</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filespace_models.html#lucidlink.filespace_models.FilespaceInfo.id"><code class="docutils literal notranslate"><span class="pre">FilespaceInfo.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filespace_models.html#lucidlink.filespace_models.FilespaceInfo.name"><code class="docutils literal notranslate"><span class="pre">FilespaceInfo.name</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="lucidlink.filespace_models.html#lucidlink.filespace_models.SyncMode"><code class="docutils literal notranslate"><span class="pre">SyncMode</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filespace_models.html#lucidlink.filespace_models.SyncMode.SYNC_ALL"><code class="docutils literal notranslate"><span class="pre">SyncMode.SYNC_ALL</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filespace_models.html#lucidlink.filespace_models.SyncMode.SYNC_NONE"><code class="docutils literal notranslate"><span class="pre">SyncMode.SYNC_NONE</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="lucidlink.filesystem_models.html">filesystem_models</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="lucidlink.filesystem_models.html#lucidlink.filesystem_models.DirEntry"><code class="docutils literal notranslate"><span class="pre">DirEntry</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filesystem_models.html#lucidlink.filesystem_models.DirEntry.ctime"><code class="docutils literal notranslate"><span class="pre">DirEntry.ctime</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filesystem_models.html#lucidlink.filesystem_models.DirEntry.file_id"><code class="docutils literal notranslate"><span class="pre">DirEntry.file_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filesystem_models.html#lucidlink.filesystem_models.DirEntry.file_id_external"><code class="docutils literal notranslate"><span class="pre">DirEntry.file_id_external</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filesystem_models.html#lucidlink.filesystem_models.DirEntry.is_dir"><code class="docutils literal notranslate"><span class="pre">DirEntry.is_dir()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filesystem_models.html#lucidlink.filesystem_models.DirEntry.is_file"><code class="docutils literal notranslate"><span class="pre">DirEntry.is_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filesystem_models.html#lucidlink.filesystem_models.DirEntry.is_link"><code class="docutils literal notranslate"><span class="pre">DirEntry.is_link()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filesystem_models.html#lucidlink.filesystem_models.DirEntry.mtime"><code class="docutils literal notranslate"><span class="pre">DirEntry.mtime</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filesystem_models.html#lucidlink.filesystem_models.DirEntry.name"><code class="docutils literal notranslate"><span class="pre">DirEntry.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filesystem_models.html#lucidlink.filesystem_models.DirEntry.size"><code class="docutils literal notranslate"><span class="pre">DirEntry.size</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filesystem_models.html#lucidlink.filesystem_models.DirEntry.type"><code class="docutils literal notranslate"><span class="pre">DirEntry.type</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="lucidlink.filesystem_models.html#lucidlink.filesystem_models.FilespaceSize"><code class="docutils literal notranslate"><span class="pre">FilespaceSize</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filesystem_models.html#lucidlink.filesystem_models.FilespaceSize.data"><code class="docutils literal notranslate"><span class="pre">FilespaceSize.data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filesystem_models.html#lucidlink.filesystem_models.FilespaceSize.entries"><code class="docutils literal notranslate"><span class="pre">FilespaceSize.entries</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filesystem_models.html#lucidlink.filesystem_models.FilespaceSize.external_files_count"><code class="docutils literal notranslate"><span class="pre">FilespaceSize.external_files_count</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filesystem_models.html#lucidlink.filesystem_models.FilespaceSize.external_files_size"><code class="docutils literal notranslate"><span class="pre">FilespaceSize.external_files_size</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filesystem_models.html#lucidlink.filesystem_models.FilespaceSize.storage"><code class="docutils literal notranslate"><span class="pre">FilespaceSize.storage</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="lucidlink.filesystem_models.html#lucidlink.filesystem_models.FilespaceStatistics"><code class="docutils literal notranslate"><span class="pre">FilespaceStatistics</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filesystem_models.html#lucidlink.filesystem_models.FilespaceStatistics.data_size"><code class="docutils literal notranslate"><span class="pre">FilespaceStatistics.data_size</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filesystem_models.html#lucidlink.filesystem_models.FilespaceStatistics.directory_count"><code class="docutils literal notranslate"><span class="pre">FilespaceStatistics.directory_count</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filesystem_models.html#lucidlink.filesystem_models.FilespaceStatistics.entries_size"><code class="docutils literal notranslate"><span class="pre">FilespaceStatistics.entries_size</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filesystem_models.html#lucidlink.filesystem_models.FilespaceStatistics.external_files_count"><code class="docutils literal notranslate"><span class="pre">FilespaceStatistics.external_files_count</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filesystem_models.html#lucidlink.filesystem_models.FilespaceStatistics.external_files_size"><code class="docutils literal notranslate"><span class="pre">FilespaceStatistics.external_files_size</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filesystem_models.html#lucidlink.filesystem_models.FilespaceStatistics.file_count"><code class="docutils literal notranslate"><span class="pre">FilespaceStatistics.file_count</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filesystem_models.html#lucidlink.filesystem_models.FilespaceStatistics.storage_size"><code class="docutils literal notranslate"><span class="pre">FilespaceStatistics.storage_size</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filesystem_models.html#lucidlink.filesystem_models.FilespaceStatistics.symlink_count"><code class="docutils literal notranslate"><span class="pre">FilespaceStatistics.symlink_count</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="lucidlink.storage.html">storage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="lucidlink.storage.html#important-directory-structure">IMPORTANT: Directory Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lucidlink.storage.html#lucidlink.storage.StorageConfig"><code class="docutils literal notranslate"><span class="pre">StorageConfig</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.storage.html#lucidlink.storage.StorageConfig.get_root_path"><code class="docutils literal notranslate"><span class="pre">StorageConfig.get_root_path()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.storage.html#lucidlink.storage.StorageConfig.should_cleanup"><code class="docutils literal notranslate"><span class="pre">StorageConfig.should_cleanup()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="lucidlink.storage.html#lucidlink.storage.StorageMode"><code class="docutils literal notranslate"><span class="pre">StorageMode</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.storage.html#lucidlink.storage.StorageMode.PHYSICAL"><code class="docutils literal notranslate"><span class="pre">StorageMode.PHYSICAL</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.storage.html#lucidlink.storage.StorageMode.SANDBOXED"><code class="docutils literal notranslate"><span class="pre">StorageMode.SANDBOXED</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">stream</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#lucidlink.stream.LucidFileStream"><code class="docutils literal notranslate"><span class="pre">LucidFileStream</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#lucidlink.stream.LucidFileStream.close"><code class="docutils literal notranslate"><span class="pre">LucidFileStream.close()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lucidlink.stream.LucidFileStream.closed"><code class="docutils literal notranslate"><span class="pre">LucidFileStream.closed</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lucidlink.stream.LucidFileStream.fileno"><code class="docutils literal notranslate"><span class="pre">LucidFileStream.fileno()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lucidlink.stream.LucidFileStream.isatty"><code class="docutils literal notranslate"><span class="pre">LucidFileStream.isatty()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lucidlink.stream.LucidFileStream.mode"><code class="docutils literal notranslate"><span class="pre">LucidFileStream.mode</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lucidlink.stream.LucidFileStream.name"><code class="docutils literal notranslate"><span class="pre">LucidFileStream.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lucidlink.stream.LucidFileStream.read"><code class="docutils literal notranslate"><span class="pre">LucidFileStream.read()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lucidlink.stream.LucidFileStream.readable"><code class="docutils literal notranslate"><span class="pre">LucidFileStream.readable()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lucidlink.stream.LucidFileStream.readinto"><code class="docutils literal notranslate"><span class="pre">LucidFileStream.readinto()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lucidlink.stream.LucidFileStream.seek"><code class="docutils literal notranslate"><span class="pre">LucidFileStream.seek()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lucidlink.stream.LucidFileStream.seekable"><code class="docutils literal notranslate"><span class="pre">LucidFileStream.seekable()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lucidlink.stream.LucidFileStream.tell"><code class="docutils literal notranslate"><span class="pre">LucidFileStream.tell()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lucidlink.stream.LucidFileStream.truncate"><code class="docutils literal notranslate"><span class="pre">LucidFileStream.truncate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lucidlink.stream.LucidFileStream.writable"><code class="docutils literal notranslate"><span class="pre">LucidFileStream.writable()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lucidlink.stream.LucidFileStream.write"><code class="docutils literal notranslate"><span class="pre">LucidFileStream.write()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#lucidlink.stream.open_buffered"><code class="docutils literal notranslate"><span class="pre">open_buffered()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#lucidlink.stream.open_text"><code class="docutils literal notranslate"><span class="pre">open_text()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="lucidlink.url_parser.html">url_parser</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl"><code class="docutils literal notranslate"><span class="pre">ParsedUrl</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.cache_key"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.cache_key</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.filespace"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.filespace</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.path"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.path</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.to_url"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.to_url()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.with_path"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.with_path()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.workspace"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.workspace</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.UrlParser"><code class="docutils literal notranslate"><span class="pre">UrlParser</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.UrlParser.build_full_path"><code class="docutils literal notranslate"><span class="pre">UrlParser.build_full_path()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.UrlParser.parse"><code class="docutils literal notranslate"><span class="pre">UrlParser.parse()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.url_parser.html#lucidlink.url_parser.UrlParser.validate_same_filespace"><code class="docutils literal notranslate"><span class="pre">UrlParser.validate_same_filespace()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="lucidlink.workspace.html">workspace</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="lucidlink.workspace.html#lucidlink.workspace.Workspace"><code class="docutils literal notranslate"><span class="pre">Workspace</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.workspace.html#lucidlink.workspace.Workspace.id"><code class="docutils literal notranslate"><span class="pre">Workspace.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.workspace.html#lucidlink.workspace.Workspace.link_filespace"><code class="docutils literal notranslate"><span class="pre">Workspace.link_filespace()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.workspace.html#lucidlink.workspace.Workspace.list_filespaces"><code class="docutils literal notranslate"><span class="pre">Workspace.list_filespaces()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.workspace.html#lucidlink.workspace.Workspace.name"><code class="docutils literal notranslate"><span class="pre">Workspace.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.workspace.html#lucidlink.workspace.Workspace.stop"><code class="docutils literal notranslate"><span class="pre">Workspace.stop()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #1a1a1a" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">LucidLink Python SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../api-reference.html">API Reference</a></li>
+      <li class="breadcrumb-item active">stream</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/api/lucidlink.stream.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-lucidlink.stream">
+<span id="stream"></span><h1>stream<a class="headerlink" href="#module-lucidlink.stream" title="Link to this heading"></a></h1>
+<p>Streaming file interface for LucidLink files.</p>
+<p>Provides io.RawIOBase-compatible file streams for seamless integration with
+Python’s standard library and third-party libraries (Pandas, LangChain, PyTorch, etc.).</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="lucidlink.stream.LucidFileStream">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">lucidlink.stream.</span></span><span class="sig-name descname"><span class="pre">LucidFileStream</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fs_wrapper</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'rb'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lock_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lucidlink/stream.html#LucidFileStream"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lucidlink.stream.LucidFileStream" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">RawIOBase</span></code></p>
+<p>Streaming file access for LucidLink files.</p>
+<p>Implements Python’s io.RawIOBase interface for efficient, streaming access
+to files in LucidLink filespaces. Compatible with standard Python I/O
+operations and third-party libraries that expect file-like objects.</p>
+<p>This class provides:
+- Standard file operations: read, write, seek, tell, truncate
+- Context manager support (with statement)
+- Iterator support (for line in file)
+- Optional file locking (on-open locking)
+- Compatibility with: Pandas, LangChain, PyTorch, Hugging Face, etc.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fs_wrapper</strong> – PythonFileSystemWrapper instance (from lucidlink_native)</p></li>
+<li><p><strong>path</strong> – File path within the filespace</p></li>
+<li><p><strong>mode</strong> – File open mode (‘r’, ‘rb’, ‘w’, ‘wb’, ‘a’, ‘ab’, ‘r+’, ‘r+b’)</p></li>
+<li><p><strong>lock_type</strong> – Lock type - “” (no lock), “shared” (read), “exclusive” (write)</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">filespace</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;/data/file.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">filespace</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;/data/output.csv&quot;</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;column1,column2</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;value1,value2</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># With exclusive locking for SQLite-style access</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">filespace</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;/data/db.sqlite&quot;</span><span class="p">,</span> <span class="s2">&quot;r+b&quot;</span><span class="p">,</span> <span class="n">lock_type</span><span class="o">=</span><span class="s2">&quot;exclusive&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="lucidlink.stream.LucidFileStream.close">
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/lucidlink/stream.html#LucidFileStream.close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lucidlink.stream.LucidFileStream.close" title="Link to this definition"></a></dt>
+<dd><p>Close the stream and release resources.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lucidlink.stream.LucidFileStream.closed">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">closed</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></span><a class="headerlink" href="#lucidlink.stream.LucidFileStream.closed" title="Link to this definition"></a></dt>
+<dd><p>Return whether the stream is closed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if stream is closed</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lucidlink.stream.LucidFileStream.fileno">
+<span class="sig-name descname"><span class="pre">fileno</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="../_modules/lucidlink/stream.html#LucidFileStream.fileno"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lucidlink.stream.LucidFileStream.fileno" title="Link to this definition"></a></dt>
+<dd><p>Return underlying file descriptor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>io.UnsupportedOperation</strong> – LucidLink files don’t have OS file descriptors</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lucidlink.stream.LucidFileStream.isatty">
+<span class="sig-name descname"><span class="pre">isatty</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/lucidlink/stream.html#LucidFileStream.isatty"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lucidlink.stream.LucidFileStream.isatty" title="Link to this definition"></a></dt>
+<dd><p>Return whether this is an interactive stream.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>False (LucidLink files are never TTY devices)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lucidlink.stream.LucidFileStream.mode">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">mode</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#lucidlink.stream.LucidFileStream.mode" title="Link to this definition"></a></dt>
+<dd><p>Return the file mode.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Mode string used to open the file</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lucidlink.stream.LucidFileStream.name">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">name</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#lucidlink.stream.LucidFileStream.name" title="Link to this definition"></a></dt>
+<dd><p>Return the file path.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Path to file within filespace</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lucidlink.stream.LucidFileStream.read">
+<span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bytes</span></span></span><a class="reference internal" href="../_modules/lucidlink/stream.html#LucidFileStream.read"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lucidlink.stream.LucidFileStream.read" title="Link to this definition"></a></dt>
+<dd><p>Read up to size bytes from the stream.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>size</strong> – Number of bytes to read, or -1 to read entire file</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Bytes read from file</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ValueError</strong> – If stream is closed</p></li>
+<li><p><strong>io.UnsupportedOperation</strong> – If stream not opened for reading</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lucidlink.stream.LucidFileStream.readable">
+<span class="sig-name descname"><span class="pre">readable</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/lucidlink/stream.html#LucidFileStream.readable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lucidlink.stream.LucidFileStream.readable" title="Link to this definition"></a></dt>
+<dd><p>Return whether the stream supports reading.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if stream was opened for reading</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lucidlink.stream.LucidFileStream.readinto">
+<span class="sig-name descname"><span class="pre">readinto</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytearray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/lucidlink/stream.html#LucidFileStream.readinto"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lucidlink.stream.LucidFileStream.readinto" title="Link to this definition"></a></dt>
+<dd><p>Read bytes into a pre-allocated buffer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>b</strong> – Buffer to read into</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Number of bytes read, or None if EOF</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lucidlink.stream.LucidFileStream.seek">
+<span class="sig-name descname"><span class="pre">seek</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">whence</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="../_modules/lucidlink/stream.html#LucidFileStream.seek"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lucidlink.stream.LucidFileStream.seek" title="Link to this definition"></a></dt>
+<dd><p>Change stream position.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>offset</strong> – Offset in bytes</p></li>
+<li><p><strong>whence</strong> – Reference point (0=start, 1=current, 2=end)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>New absolute position</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lucidlink.stream.LucidFileStream.seekable">
+<span class="sig-name descname"><span class="pre">seekable</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/lucidlink/stream.html#LucidFileStream.seekable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lucidlink.stream.LucidFileStream.seekable" title="Link to this definition"></a></dt>
+<dd><p>Return whether the stream supports random access.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True (LucidLink files always support seeking)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lucidlink.stream.LucidFileStream.tell">
+<span class="sig-name descname"><span class="pre">tell</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="../_modules/lucidlink/stream.html#LucidFileStream.tell"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lucidlink.stream.LucidFileStream.tell" title="Link to this definition"></a></dt>
+<dd><p>Return current stream position.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Current position in bytes</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lucidlink.stream.LucidFileStream.truncate">
+<span class="sig-name descname"><span class="pre">truncate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="../_modules/lucidlink/stream.html#LucidFileStream.truncate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lucidlink.stream.LucidFileStream.truncate" title="Link to this definition"></a></dt>
+<dd><p>Resize the stream to the given size.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>size</strong> – New size in bytes, or current position if None</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>New size</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ValueError</strong> – If stream is closed</p></li>
+<li><p><strong>io.UnsupportedOperation</strong> – If stream not opened for writing</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lucidlink.stream.LucidFileStream.writable">
+<span class="sig-name descname"><span class="pre">writable</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/lucidlink/stream.html#LucidFileStream.writable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lucidlink.stream.LucidFileStream.writable" title="Link to this definition"></a></dt>
+<dd><p>Return whether the stream supports writing.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if stream was opened for writing</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lucidlink.stream.LucidFileStream.write">
+<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="../_modules/lucidlink/stream.html#LucidFileStream.write"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lucidlink.stream.LucidFileStream.write" title="Link to this definition"></a></dt>
+<dd><p>Write bytes to the stream.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>b</strong> – Bytes to write</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Number of bytes written</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ValueError</strong> – If stream is closed</p></li>
+<li><p><strong>io.UnsupportedOperation</strong> – If stream not opened for writing</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="lucidlink.stream.open_buffered">
+<span class="sig-prename descclassname"><span class="pre">lucidlink.stream.</span></span><span class="sig-name descname"><span class="pre">open_buffered</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fs_wrapper</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'rb'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">buffer_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">131072</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lock_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">BufferedIOBase</span></span></span><a class="reference internal" href="../_modules/lucidlink/stream.html#open_buffered"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lucidlink.stream.open_buffered" title="Link to this definition"></a></dt>
+<dd><p>Open a file with buffering for improved performance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fs_wrapper</strong> – PythonFileSystemWrapper from lucidlink_native module</p></li>
+<li><p><strong>path</strong> – Path to file within filespace</p></li>
+<li><p><strong>mode</strong> – File open mode (default: ‘rb’)</p></li>
+<li><p><strong>buffer_size</strong> – Buffer size in bytes (default: 8192)</p></li>
+<li><p><strong>lock_type</strong> – Lock type - “” (no lock), “shared” (read), “exclusive” (write)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>BufferedReader, BufferedWriter, or BufferedRandom wrapping LucidFileStream</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">open_buffered</span><span class="p">(</span><span class="n">fs</span><span class="p">,</span> <span class="s2">&quot;/data/large.csv&quot;</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="n">process</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="lucidlink.stream.open_text">
+<span class="sig-prename descclassname"><span class="pre">lucidlink.stream.</span></span><span class="sig-name descname"><span class="pre">open_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fs_wrapper</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'r'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'utf-8'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">errors</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'strict'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">newline</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lock_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">TextIOWrapper</span></span></span><a class="reference internal" href="../_modules/lucidlink/stream.html#open_text"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lucidlink.stream.open_text" title="Link to this definition"></a></dt>
+<dd><p>Open a file in text mode.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fs_wrapper</strong> – PythonFileSystemWrapper from lucidlink_native module</p></li>
+<li><p><strong>path</strong> – Path to file within filespace</p></li>
+<li><p><strong>mode</strong> – File open mode (default: ‘r’)</p></li>
+<li><p><strong>encoding</strong> – Text encoding (default: ‘utf-8’)</p></li>
+<li><p><strong>errors</strong> – Error handling strategy (default: ‘strict’)</p></li>
+<li><p><strong>newline</strong> – Newline handling (None, ‘’, ‘n’, ‘r’, ‘rn’)</p></li>
+<li><p><strong>lock_type</strong> – Lock type - “” (no lock), “shared” (read), “exclusive” (write)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>TextIOWrapper for text-mode access</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">open_text</span><span class="p">(</span><span class="n">fs</span><span class="p">,</span> <span class="s2">&quot;/data/report.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="lucidlink.storage.html" class="btn btn-neutral float-left" title="storage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="lucidlink.url_parser.html" class="btn btn-neutral float-right" title="url_parser" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, LucidLink.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

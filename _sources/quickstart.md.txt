@@ -1,0 +1,377 @@
+# Quick Start
+
+For complete, runnable examples see the
+[lucidlink-python-examples](https://github.com/LucidLink/lucidlink-python-examples) repository.
+
+## Installation
+
+### Prerequisites
+
+- Python 3.10 or later
+- [Service account token](https://support.lucidlink.com/hc/en-us/articles/40222074543757-Getting-Started-with-Service-Accounts-API-Authentication)
+
+### Install
+
+```bash
+pip install lucidlink
+```
+
+## Basic Usage
+
+```python
+import lucidlink
+
+# Create and start daemon
+daemon = lucidlink.create_daemon()
+daemon.start()
+
+# Authenticate with service account
+credentials = lucidlink.ServiceAccountCredentials(
+    token="sa_live:your_token_here"
+)
+workspace = daemon.authenticate(credentials)
+
+# Link to a filespace
+filespace = workspace.link_filespace(name="production-data")
+
+# Read directory
+entries = filespace.fs.read_dir("/")
+for entry in entries:
+    print(f"{entry.name}: {entry.size} bytes")
+
+# Write a file
+with filespace.fs.open("/example.txt", "wb") as f:
+    f.write(b"Hello from LucidLink!")
+
+# Read a file
+with filespace.fs.open("/example.txt", "rb") as f:
+    content = f.read()
+    print(content)
+
+# Cleanup — unlink() automatically syncs pending changes to the hub
+filespace.unlink()
+daemon.stop()
+```
+
+## File Operations
+
+### Streaming File Access
+
+The library provides full `io.RawIOBase` compatibility for streaming.
+
+```python
+# Binary streaming (read)
+with filespace.fs.open("/large_file.dat", "rb", buffering=8192) as f:
+    for chunk in iter(lambda: f.read(4096), b""):
+        process(chunk)
+
+# Text streaming with encoding (read)
+with filespace.fs.open("/document.txt", "rt", encoding="utf-8") as f:
+    for line in f:
+        print(line.strip())
+
+# Byte range reads
+with filespace.fs.open("/data.bin", "rb") as f:
+    f.seek(1000)
+    data = f.read(100)  # Read 100 bytes from offset 1000
+
+# Streaming writes
+data = b"x" * 1024 * 1024
+with filespace.fs.open("/output.dat", "wb") as f:
+    for i in range(10):
+        f.write(data)
+```
+
+### fsspec Integration
+
+Access LucidLink files using the [fsspec](https://filesystem-spec.readthedocs.io/) interface:
+
+```python
+from lucidlink.fsspec import LucidLinkFileSystem
+
+fs = LucidLinkFileSystem(token='sa_live:your_token_here', sandboxed=True)
+
+# List directory
+entries = fs.ls('lucidlink://workspace/filespace/', detail=True)
+
+# Download / upload files
+fs.get('lucidlink://workspace/filespace/file.txt', 'local_file.txt')
+fs.put('local_file.txt', 'lucidlink://workspace/filespace/uploaded.txt')
+
+# Move/rename (native operation, much faster than copy+delete)
+fs.mv('lucidlink://workspace/filespace/old.txt',
+      'lucidlink://workspace/filespace/new.txt')
+
+# Directory operations
+fs.mkdir('lucidlink://workspace/filespace/new_dir')
+fs.rmdir('lucidlink://workspace/filespace/empty_dir')
+
+fs.close()
+```
+
+With Pandas:
+
+```python
+import pandas as pd
+
+# Read CSV directly from LucidLink
+df = pd.read_csv(
+    'lucidlink://workspace/filespace/data.csv',
+    storage_options={'token': 'sa_live:your_token_here'}
+)
+
+# Write Parquet to LucidLink
+df.to_parquet(
+    'lucidlink://workspace/filespace/output.parquet',
+    storage_options={'token': 'sa_live:your_token_here'}
+)
+```
+
+With Dask:
+
+```python
+import dask.dataframe as dd
+
+# Read partitioned dataset
+ddf = dd.read_parquet(
+    'lucidlink://workspace/filespace/dataset/*.parquet',
+    storage_options={'token': 'sa_live:your_token_here'}
+)
+
+# Process with distributed computation
+result = ddf.groupby('category').agg({'value': 'sum'}).compute()
+```
+
+### Filesystem Operations
+
+The `filespace.fs` object provides convenience methods for common filesystem operations.
+
+```python
+# One-shot file I/O
+filespace.fs.write_file("/hello.txt", b"Hello, world!")
+
+content = filespace.fs.read_file("/hello.txt")
+print(content)  # b"Hello, world!"
+
+# Directory operations
+filespace.fs.create_dir("/projects/2024")
+
+# List directory (names only)
+names = filespace.fs.list_dir("/projects")
+print(names)  # ["2024"]
+
+# Read directory (full metadata)
+entries = filespace.fs.read_dir("/projects")
+for entry in entries:
+    print(f"{entry.name}: {entry.size} bytes")
+
+# Delete files and directories
+filespace.fs.delete("/hello.txt")
+filespace.fs.delete_dir("/projects/2024")
+filespace.fs.delete_dir("/projects", recursive=True)
+
+# Move/rename
+filespace.fs.move("/old_name.txt", "/new_name.txt")
+
+# Check existence
+if filespace.fs.file_exists("/config.json"):
+    data = filespace.fs.read_file("/config.json")
+
+if filespace.fs.dir_exists("/backups"):
+    entries = filespace.fs.list_dir("/backups")
+
+# File/directory metadata
+info = filespace.fs.get_entry("/report.pdf")
+print(f"Size: {info.size}, Type: {info.type}")
+print(f"Modified: {info.mtime}")
+```
+
+### File Locking
+
+Use the `lock_type` parameter on `open()` to coordinate file access across clients.
+Locks are managed by LucidHub and enforced across all connected clients.
+
+```python
+# Shared lock — allows concurrent readers
+with filespace.fs.open("/data.csv", "rb", lock_type="shared") as f:
+    data = f.read()
+
+# Exclusive lock — single writer, blocks other readers and writers
+with filespace.fs.open("/db.sqlite", "r+b", lock_type="exclusive") as f:
+    content = f.read()
+    f.seek(0)
+    f.write(updated_content)
+```
+
+## LucidLink Connect
+
+Attach existing S3 objects to a filespace as read-only files at arbitrary paths:
+
+```python
+from lucidlink import S3DataStoreConfig
+
+connect = filespace.connect
+
+# Register an S3 data store
+connect.add_data_store("my-store", S3DataStoreConfig(
+    access_key="AKIA...",
+    secret_key="...",
+    bucket_name="my-bucket",
+    region="us-east-1",
+))
+
+# Link S3 objects as files in the filespace
+connect.link_file(
+    file_path="/proj1/dataset1/file1.csv",
+    data_store_name="my-store",
+    object_id="dataset1_file1.csv",
+)
+
+# For bulk linking, provide size and checksum to skip S3 HeadObject calls
+connect.link_file(
+    file_path="/proj1/dataset1/large.bin",
+    data_store_name="my-store",
+    object_id="dataset1_large.bin",
+    size=1048576,
+    checksum="abc123",
+)
+
+# Read linked files through the filesystem — just like any other file
+filespace.sync_all()  # Sync to see newly linked files
+with filespace.fs.open("/data/file.csv", "rb") as f:
+    content = f.read()
+
+# List linked files (paginated)
+result = connect.list_external_files("my-store", limit=50)
+for path in result.file_paths:
+    print(path)
+
+# Unlink when no longer needed
+connect.unlink_file("/data/file.csv")
+
+# Remove data store
+connect.remove_data_store("my-store")
+```
+
+## Workspace Operations
+
+### Discovering Filespaces
+
+```python
+workspace = daemon.authenticate(credentials)
+
+# List all filespaces the authenticated user can access
+filespaces = workspace.list_filespaces()
+for fs in filespaces:
+    print(f"{fs.name}: {fs.id}")
+
+# Link to a specific filespace
+filespace = workspace.link_filespace(name=filespaces[0].name)
+```
+
+### Context Managers
+
+Use context managers for automatic lifecycle management:
+
+```python
+import lucidlink
+
+with lucidlink.create_daemon() as daemon:
+    credentials = lucidlink.ServiceAccountCredentials(
+        token="sa_live:your_token_here"
+    )
+    workspace = daemon.authenticate(credentials)
+
+    # Filespace context manager — auto sync + unlink on exit
+    with workspace.link_filespace(name="my-filespace") as filespace:
+        filespace.fs.write_file("/output.txt", b"data")
+    # filespace.sync_all() + filespace.unlink() called automatically
+# daemon.stop() called automatically
+```
+
+## Configuration
+
+### Syncing Changes
+
+By default, `filespace.unlink()` automatically calls `sync_all()` before disconnecting
+(controlled by the `sync_mode` parameter on `link_filespace()`). This ensures all write
+operations are committed to the hub.
+
+If you need to verify changes are visible to other clients *before* unlinking, call
+`sync_all()` explicitly:
+
+```python
+filespace.fs.write_file("/data.txt", b"important data")
+filespace.sync_all()  # Explicitly sync — changes are now visible to other clients
+# ... continue working with the filespace
+```
+
+To disable automatic syncing on unlink, use `SyncMode.SYNC_NONE`:
+
+```python
+from lucidlink import SyncMode
+
+filespace = workspace.link_filespace(name="data", sync_mode=SyncMode.SYNC_NONE)
+# ... write operations ...
+filespace.sync_all()  # Caller is responsible for syncing
+filespace.unlink()    # Will NOT auto-sync
+```
+
+### Storage Modes
+
+#### Sandboxed Mode (Default)
+
+Uses a temporary directory that's automatically cleaned up:
+
+```python
+daemon = lucidlink.create_daemon()
+```
+
+#### Physical Mode
+
+Uses a persistent `.lucid` folder:
+
+```python
+# With cleanup on exit
+daemon = lucidlink.create_daemon(sandboxed=False)
+
+# Keep files after exit
+daemon = lucidlink.create_daemon(
+    sandboxed=False,
+    persist_files=True
+)
+
+# Custom storage location
+daemon = lucidlink.create_daemon(
+    sandboxed=False,
+    persist_files=True,
+    root_path="D:/lucid_data"
+)
+```
+
+### Error Handling
+
+The SDK provides a hierarchy of exceptions for different failure modes:
+
+```python
+from lucidlink.exceptions import (
+    LucidLinkError,        # Base class for all SDK errors
+    DaemonError,           # Daemon start/stop failures
+    AuthenticationError,   # Invalid credentials, expired tokens
+    FilespaceError,        # Filespace link/unlink, filesystem errors
+    ConfigurationError,    # Invalid parameters or configuration
+)
+
+try:
+    daemon = lucidlink.create_daemon()
+    daemon.start()
+    credentials = lucidlink.ServiceAccountCredentials(token="sa_live:your_token_here")
+    workspace = daemon.authenticate(credentials)
+    filespace = workspace.link_filespace(name="my-filespace")
+except AuthenticationError as e:
+    print(f"Auth failed: {e}")
+except FilespaceError as e:
+    print(f"Filespace error: {e}")
+except LucidLinkError as e:
+    print(f"SDK error: {e}")
+```

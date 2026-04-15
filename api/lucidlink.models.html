@@ -1,0 +1,429 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>lucidlink.models module &mdash; LucidLink Python SDK  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=f68bcc3c" />
+
+  
+    <link rel="shortcut icon" href="../_static/logo.svg"/>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="lucidlink.storage module" href="lucidlink.storage.html" />
+    <link rel="prev" title="lucidlink.fsspec module" href="lucidlink.fsspec.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #1a1a1a" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            LucidLink Python SDK
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quick Start</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api-reference.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../api-reference.html#lucidlink.create_daemon"><code class="docutils literal notranslate"><span class="pre">create_daemon()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="lucidlink.connect.html">lucidlink.connect module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lucidlink.connect_models.html">lucidlink.connect_models module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lucidlink.connect_validation.html">lucidlink.connect_validation module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lucidlink.credentials.html">lucidlink.credentials module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lucidlink.daemon.html">lucidlink.daemon module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lucidlink.exceptions.html">lucidlink.exceptions module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lucidlink.filespace.html">lucidlink.filespace module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lucidlink.filesystem.html">lucidlink.filesystem module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lucidlink.fsspec.html">lucidlink.fsspec module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">lucidlink.models module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#lucidlink.models.DaemonStatus"><code class="docutils literal notranslate"><span class="pre">DaemonStatus</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#lucidlink.models.DaemonStatus.is_authenticated"><code class="docutils literal notranslate"><span class="pre">DaemonStatus.is_authenticated</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lucidlink.models.DaemonStatus.is_linked"><code class="docutils literal notranslate"><span class="pre">DaemonStatus.is_linked</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lucidlink.models.DaemonStatus.is_running"><code class="docutils literal notranslate"><span class="pre">DaemonStatus.is_running</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lucidlink.models.DaemonStatus.root_path"><code class="docutils literal notranslate"><span class="pre">DaemonStatus.root_path</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#lucidlink.models.DirEntry"><code class="docutils literal notranslate"><span class="pre">DirEntry</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#lucidlink.models.DirEntry.ctime"><code class="docutils literal notranslate"><span class="pre">DirEntry.ctime</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lucidlink.models.DirEntry.file_id"><code class="docutils literal notranslate"><span class="pre">DirEntry.file_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lucidlink.models.DirEntry.file_id_external"><code class="docutils literal notranslate"><span class="pre">DirEntry.file_id_external</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lucidlink.models.DirEntry.is_dir"><code class="docutils literal notranslate"><span class="pre">DirEntry.is_dir()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lucidlink.models.DirEntry.is_file"><code class="docutils literal notranslate"><span class="pre">DirEntry.is_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lucidlink.models.DirEntry.is_link"><code class="docutils literal notranslate"><span class="pre">DirEntry.is_link()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lucidlink.models.DirEntry.mtime"><code class="docutils literal notranslate"><span class="pre">DirEntry.mtime</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lucidlink.models.DirEntry.name"><code class="docutils literal notranslate"><span class="pre">DirEntry.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lucidlink.models.DirEntry.size"><code class="docutils literal notranslate"><span class="pre">DirEntry.size</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lucidlink.models.DirEntry.type"><code class="docutils literal notranslate"><span class="pre">DirEntry.type</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#lucidlink.models.FilespaceInfo"><code class="docutils literal notranslate"><span class="pre">FilespaceInfo</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#lucidlink.models.FilespaceInfo.created"><code class="docutils literal notranslate"><span class="pre">FilespaceInfo.created</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lucidlink.models.FilespaceInfo.id"><code class="docutils literal notranslate"><span class="pre">FilespaceInfo.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lucidlink.models.FilespaceInfo.name"><code class="docutils literal notranslate"><span class="pre">FilespaceInfo.name</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#lucidlink.models.FilespaceSize"><code class="docutils literal notranslate"><span class="pre">FilespaceSize</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#lucidlink.models.FilespaceSize.data"><code class="docutils literal notranslate"><span class="pre">FilespaceSize.data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lucidlink.models.FilespaceSize.entries"><code class="docutils literal notranslate"><span class="pre">FilespaceSize.entries</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lucidlink.models.FilespaceSize.external_files_count"><code class="docutils literal notranslate"><span class="pre">FilespaceSize.external_files_count</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lucidlink.models.FilespaceSize.external_files_size"><code class="docutils literal notranslate"><span class="pre">FilespaceSize.external_files_size</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lucidlink.models.FilespaceSize.storage"><code class="docutils literal notranslate"><span class="pre">FilespaceSize.storage</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#lucidlink.models.FilespaceStatistics"><code class="docutils literal notranslate"><span class="pre">FilespaceStatistics</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#lucidlink.models.FilespaceStatistics.data_size"><code class="docutils literal notranslate"><span class="pre">FilespaceStatistics.data_size</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lucidlink.models.FilespaceStatistics.directory_count"><code class="docutils literal notranslate"><span class="pre">FilespaceStatistics.directory_count</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lucidlink.models.FilespaceStatistics.entries_size"><code class="docutils literal notranslate"><span class="pre">FilespaceStatistics.entries_size</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lucidlink.models.FilespaceStatistics.external_files_count"><code class="docutils literal notranslate"><span class="pre">FilespaceStatistics.external_files_count</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lucidlink.models.FilespaceStatistics.external_files_size"><code class="docutils literal notranslate"><span class="pre">FilespaceStatistics.external_files_size</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lucidlink.models.FilespaceStatistics.file_count"><code class="docutils literal notranslate"><span class="pre">FilespaceStatistics.file_count</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lucidlink.models.FilespaceStatistics.storage_size"><code class="docutils literal notranslate"><span class="pre">FilespaceStatistics.storage_size</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lucidlink.models.FilespaceStatistics.symlink_count"><code class="docutils literal notranslate"><span class="pre">FilespaceStatistics.symlink_count</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="lucidlink.storage.html">lucidlink.storage module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lucidlink.stream.html">lucidlink.stream module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lucidlink.url_parser.html">lucidlink.url_parser module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lucidlink.workspace.html">lucidlink.workspace module</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #1a1a1a" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">LucidLink Python SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../api-reference.html">API Reference</a></li>
+      <li class="breadcrumb-item active">lucidlink.models module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/api/lucidlink.models.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-lucidlink.models">
+<span id="lucidlink-models-module"></span><h1>lucidlink.models module<a class="headerlink" href="#module-lucidlink.models" title="Link to this heading"></a></h1>
+<p>LucidLink Python Library - Type Definitions</p>
+<p>Dataclasses and type definitions for LucidLink Python API.
+Provides strongly-typed Python objects for filesystem entries and metadata.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="lucidlink.models.DaemonStatus">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">lucidlink.models.</span></span><span class="sig-name descname"><span class="pre">DaemonStatus</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">is_running</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_authenticated</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_linked</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">root_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lucidlink/models.html#DaemonStatus"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lucidlink.models.DaemonStatus" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Daemon status information.</p>
+<p>Returned by Daemon.get_status().</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>is_running</strong> (<em>bool</em>) – Whether the daemon is currently running</p></li>
+<li><p><strong>is_authenticated</strong> (<em>bool</em>) – Whether the daemon has authenticated to a workspace</p></li>
+<li><p><strong>is_linked</strong> (<em>bool</em>) – Whether the daemon is linked to a filespace</p></li>
+<li><p><strong>root_path</strong> (<em>str</em>) – Root path for daemon operational files</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lucidlink.models.DaemonStatus.is_authenticated">
+<span class="sig-name descname"><span class="pre">is_authenticated</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></span><a class="headerlink" href="#lucidlink.models.DaemonStatus.is_authenticated" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lucidlink.models.DaemonStatus.is_linked">
+<span class="sig-name descname"><span class="pre">is_linked</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></span><a class="headerlink" href="#lucidlink.models.DaemonStatus.is_linked" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lucidlink.models.DaemonStatus.is_running">
+<span class="sig-name descname"><span class="pre">is_running</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></span><a class="headerlink" href="#lucidlink.models.DaemonStatus.is_running" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lucidlink.models.DaemonStatus.root_path">
+<span class="sig-name descname"><span class="pre">root_path</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#lucidlink.models.DaemonStatus.root_path" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="lucidlink.models.DirEntry">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">lucidlink.models.</span></span><span class="sig-name descname"><span class="pre">DirEntry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_id_external</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ctime</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mtime</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lucidlink/models.html#DirEntry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lucidlink.models.DirEntry" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Represents a file or directory entry in the filesystem.</p>
+<p>Returned by Filesystem.read_dir() and Filesystem.get_entry().</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – Name of the file/directory (without path)</p></li>
+<li><p><strong>size</strong> (<em>int</em>) – Size in bytes (0 for directories)</p></li>
+<li><p><strong>type</strong> (<em>str</em>) – Entry type string (“file”, “dir”, “link”, “unknown”)</p></li>
+<li><p><strong>file_id</strong> (<em>str</em>) – Unique file identifier</p></li>
+<li><p><strong>ctime</strong> (<em>int</em>) – Creation time (Unix timestamp)</p></li>
+<li><p><strong>mtime</strong> (<em>int</em>) – Last modification time (Unix timestamp)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lucidlink.models.DirEntry.ctime">
+<span class="sig-name descname"><span class="pre">ctime</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#lucidlink.models.DirEntry.ctime" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lucidlink.models.DirEntry.file_id">
+<span class="sig-name descname"><span class="pre">file_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#lucidlink.models.DirEntry.file_id" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lucidlink.models.DirEntry.file_id_external">
+<span class="sig-name descname"><span class="pre">file_id_external</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#lucidlink.models.DirEntry.file_id_external" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lucidlink.models.DirEntry.is_dir">
+<span class="sig-name descname"><span class="pre">is_dir</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/lucidlink/models.html#DirEntry.is_dir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lucidlink.models.DirEntry.is_dir" title="Link to this definition"></a></dt>
+<dd><p>Check if this entry is a directory.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lucidlink.models.DirEntry.is_file">
+<span class="sig-name descname"><span class="pre">is_file</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/lucidlink/models.html#DirEntry.is_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lucidlink.models.DirEntry.is_file" title="Link to this definition"></a></dt>
+<dd><p>Check if this entry is a regular file.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lucidlink.models.DirEntry.is_link">
+<span class="sig-name descname"><span class="pre">is_link</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/lucidlink/models.html#DirEntry.is_link"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lucidlink.models.DirEntry.is_link" title="Link to this definition"></a></dt>
+<dd><p>Check if this entry is a symbolic link.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lucidlink.models.DirEntry.mtime">
+<span class="sig-name descname"><span class="pre">mtime</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#lucidlink.models.DirEntry.mtime" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lucidlink.models.DirEntry.name">
+<span class="sig-name descname"><span class="pre">name</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#lucidlink.models.DirEntry.name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lucidlink.models.DirEntry.size">
+<span class="sig-name descname"><span class="pre">size</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#lucidlink.models.DirEntry.size" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lucidlink.models.DirEntry.type">
+<span class="sig-name descname"><span class="pre">type</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#lucidlink.models.DirEntry.type" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="lucidlink.models.FilespaceInfo">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">lucidlink.models.</span></span><span class="sig-name descname"><span class="pre">FilespaceInfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">created</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lucidlink/models.html#FilespaceInfo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lucidlink.models.FilespaceInfo" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Summary information for a filespace in a workspace listing.</p>
+<p>Returned by Workspace.list_filespaces().</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> (<em>str</em>) – Unique filespace identifier</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – Human-readable filespace name</p></li>
+<li><p><strong>created</strong> (<em>str</em>) – Creation timestamp (ISO 8601)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lucidlink.models.FilespaceInfo.created">
+<span class="sig-name descname"><span class="pre">created</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#lucidlink.models.FilespaceInfo.created" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lucidlink.models.FilespaceInfo.id">
+<span class="sig-name descname"><span class="pre">id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#lucidlink.models.FilespaceInfo.id" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lucidlink.models.FilespaceInfo.name">
+<span class="sig-name descname"><span class="pre">name</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#lucidlink.models.FilespaceInfo.name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="lucidlink.models.FilespaceSize">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">lucidlink.models.</span></span><span class="sig-name descname"><span class="pre">FilespaceSize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">entries</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">storage</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">external_files_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">external_files_count</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lucidlink/models.html#FilespaceSize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lucidlink.models.FilespaceSize" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Filespace size information.</p>
+<p>Returned by Filesystem.get_size().</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>entries</strong> (<em>int</em>) – Size of metadata entries in bytes</p></li>
+<li><p><strong>data</strong> (<em>int</em>) – Size of file data in bytes</p></li>
+<li><p><strong>storage</strong> (<em>int</em>) – Total storage used in bytes</p></li>
+<li><p><strong>external_files_size</strong> (<em>int</em>) – Size of external (Connect) files in bytes</p></li>
+<li><p><strong>external_files_count</strong> (<em>int</em>) – Number of external (Connect) files</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lucidlink.models.FilespaceSize.data">
+<span class="sig-name descname"><span class="pre">data</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#lucidlink.models.FilespaceSize.data" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lucidlink.models.FilespaceSize.entries">
+<span class="sig-name descname"><span class="pre">entries</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#lucidlink.models.FilespaceSize.entries" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lucidlink.models.FilespaceSize.external_files_count">
+<span class="sig-name descname"><span class="pre">external_files_count</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#lucidlink.models.FilespaceSize.external_files_count" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lucidlink.models.FilespaceSize.external_files_size">
+<span class="sig-name descname"><span class="pre">external_files_size</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#lucidlink.models.FilespaceSize.external_files_size" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lucidlink.models.FilespaceSize.storage">
+<span class="sig-name descname"><span class="pre">storage</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#lucidlink.models.FilespaceSize.storage" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="lucidlink.models.FilespaceStatistics">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">lucidlink.models.</span></span><span class="sig-name descname"><span class="pre">FilespaceStatistics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_count</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">directory_count</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">symlink_count</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entries_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">storage_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">external_files_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">external_files_count</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lucidlink/models.html#FilespaceStatistics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lucidlink.models.FilespaceStatistics" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Filespace statistics.</p>
+<p>Returned by Filesystem.get_statistics().</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_count</strong> (<em>int</em>) – Number of files in the filespace</p></li>
+<li><p><strong>directory_count</strong> (<em>int</em>) – Number of directories in the filespace</p></li>
+<li><p><strong>symlink_count</strong> (<em>int</em>) – Number of symbolic links in the filespace</p></li>
+<li><p><strong>entries_size</strong> (<em>int</em>) – Size of metadata entries in bytes</p></li>
+<li><p><strong>data_size</strong> (<em>int</em>) – Size of file data in bytes</p></li>
+<li><p><strong>storage_size</strong> (<em>int</em>) – Total storage used in bytes</p></li>
+<li><p><strong>external_files_size</strong> (<em>int</em>) – Size of external (Connect) files in bytes</p></li>
+<li><p><strong>external_files_count</strong> (<em>int</em>) – Number of external (Connect) files</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lucidlink.models.FilespaceStatistics.data_size">
+<span class="sig-name descname"><span class="pre">data_size</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#lucidlink.models.FilespaceStatistics.data_size" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lucidlink.models.FilespaceStatistics.directory_count">
+<span class="sig-name descname"><span class="pre">directory_count</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#lucidlink.models.FilespaceStatistics.directory_count" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lucidlink.models.FilespaceStatistics.entries_size">
+<span class="sig-name descname"><span class="pre">entries_size</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#lucidlink.models.FilespaceStatistics.entries_size" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lucidlink.models.FilespaceStatistics.external_files_count">
+<span class="sig-name descname"><span class="pre">external_files_count</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#lucidlink.models.FilespaceStatistics.external_files_count" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lucidlink.models.FilespaceStatistics.external_files_size">
+<span class="sig-name descname"><span class="pre">external_files_size</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#lucidlink.models.FilespaceStatistics.external_files_size" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lucidlink.models.FilespaceStatistics.file_count">
+<span class="sig-name descname"><span class="pre">file_count</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#lucidlink.models.FilespaceStatistics.file_count" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lucidlink.models.FilespaceStatistics.storage_size">
+<span class="sig-name descname"><span class="pre">storage_size</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#lucidlink.models.FilespaceStatistics.storage_size" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lucidlink.models.FilespaceStatistics.symlink_count">
+<span class="sig-name descname"><span class="pre">symlink_count</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#lucidlink.models.FilespaceStatistics.symlink_count" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="lucidlink.fsspec.html" class="btn btn-neutral float-left" title="lucidlink.fsspec module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="lucidlink.storage.html" class="btn btn-neutral float-right" title="lucidlink.storage module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, LucidLink.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

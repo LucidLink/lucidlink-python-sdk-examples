@@ -1,0 +1,785 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>lucidlink.daemon &mdash; LucidLink Python SDK  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=f68bcc3c" />
+
+  
+    <link rel="shortcut icon" href="../../_static/logo.svg"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #1a1a1a" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            LucidLink Python SDK
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quick Start</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../quickstart.html#installation">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../quickstart.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quickstart.html#install">Install</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../quickstart.html#basic-usage">Basic Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../quickstart.html#file-operations">File Operations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../quickstart.html#streaming-file-access">Streaming File Access</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quickstart.html#fsspec-integration">fsspec Integration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quickstart.html#filesystem-operations">Filesystem Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quickstart.html#file-locking">File Locking</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../quickstart.html#lucidlink-connect">LucidLink Connect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../quickstart.html#workspace-operations">Workspace Operations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../quickstart.html#discovering-filespaces">Discovering Filespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quickstart.html#context-managers">Context Managers</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../quickstart.html#configuration">Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../quickstart.html#syncing-changes">Syncing Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quickstart.html#storage-modes">Storage Modes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../quickstart.html#sandboxed-mode-default">Sandboxed Mode (Default)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../quickstart.html#physical-mode">Physical Mode</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../quickstart.html#error-handling">Error Handling</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../api-reference.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../api-reference.html#lucidlink.create_daemon"><code class="docutils literal notranslate"><span class="pre">create_daemon()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/lucidlink.connect.html">connect</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../api/lucidlink.connect.html#lucidlink.connect.ConnectManager"><code class="docutils literal notranslate"><span class="pre">ConnectManager</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.connect.html#lucidlink.connect.ConnectManager.add_data_store"><code class="docutils literal notranslate"><span class="pre">ConnectManager.add_data_store()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.connect.html#lucidlink.connect.ConnectManager.are_data_stores_available"><code class="docutils literal notranslate"><span class="pre">ConnectManager.are_data_stores_available()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.connect.html#lucidlink.connect.ConnectManager.count_external_files"><code class="docutils literal notranslate"><span class="pre">ConnectManager.count_external_files()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.connect.html#lucidlink.connect.ConnectManager.get_data_store"><code class="docutils literal notranslate"><span class="pre">ConnectManager.get_data_store()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.connect.html#lucidlink.connect.ConnectManager.link_file"><code class="docutils literal notranslate"><span class="pre">ConnectManager.link_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.connect.html#lucidlink.connect.ConnectManager.list_data_stores"><code class="docutils literal notranslate"><span class="pre">ConnectManager.list_data_stores()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.connect.html#lucidlink.connect.ConnectManager.list_external_files"><code class="docutils literal notranslate"><span class="pre">ConnectManager.list_external_files()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.connect.html#lucidlink.connect.ConnectManager.rekey_data_store"><code class="docutils literal notranslate"><span class="pre">ConnectManager.rekey_data_store()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.connect.html#lucidlink.connect.ConnectManager.remove_data_store"><code class="docutils literal notranslate"><span class="pre">ConnectManager.remove_data_store()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.connect.html#lucidlink.connect.ConnectManager.unlink_file"><code class="docutils literal notranslate"><span class="pre">ConnectManager.unlink_file()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/lucidlink.connect_models.html">connect_models</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../api/lucidlink.connect_models.html#lucidlink.connect_models.DataStoreCredentials"><code class="docutils literal notranslate"><span class="pre">DataStoreCredentials</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/lucidlink.connect_models.html#lucidlink.connect_models.DataStoreInfo"><code class="docutils literal notranslate"><span class="pre">DataStoreInfo</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.connect_models.html#lucidlink.connect_models.DataStoreInfo.access_key"><code class="docutils literal notranslate"><span class="pre">DataStoreInfo.access_key</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.connect_models.html#lucidlink.connect_models.DataStoreInfo.bucket_name"><code class="docutils literal notranslate"><span class="pre">DataStoreInfo.bucket_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.connect_models.html#lucidlink.connect_models.DataStoreInfo.endpoint"><code class="docutils literal notranslate"><span class="pre">DataStoreInfo.endpoint</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.connect_models.html#lucidlink.connect_models.DataStoreInfo.from_dict"><code class="docutils literal notranslate"><span class="pre">DataStoreInfo.from_dict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.connect_models.html#lucidlink.connect_models.DataStoreInfo.key_id"><code class="docutils literal notranslate"><span class="pre">DataStoreInfo.key_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.connect_models.html#lucidlink.connect_models.DataStoreInfo.kind"><code class="docutils literal notranslate"><span class="pre">DataStoreInfo.kind</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.connect_models.html#lucidlink.connect_models.DataStoreInfo.name"><code class="docutils literal notranslate"><span class="pre">DataStoreInfo.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.connect_models.html#lucidlink.connect_models.DataStoreInfo.region"><code class="docutils literal notranslate"><span class="pre">DataStoreInfo.region</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.connect_models.html#lucidlink.connect_models.DataStoreInfo.rekey_state"><code class="docutils literal notranslate"><span class="pre">DataStoreInfo.rekey_state</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.connect_models.html#lucidlink.connect_models.DataStoreInfo.secret_key"><code class="docutils literal notranslate"><span class="pre">DataStoreInfo.secret_key</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.connect_models.html#lucidlink.connect_models.DataStoreInfo.url_expiration_minutes"><code class="docutils literal notranslate"><span class="pre">DataStoreInfo.url_expiration_minutes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.connect_models.html#lucidlink.connect_models.DataStoreInfo.use_virtual_addressing"><code class="docutils literal notranslate"><span class="pre">DataStoreInfo.use_virtual_addressing</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/lucidlink.connect_models.html#lucidlink.connect_models.DataStoreKind"><code class="docutils literal notranslate"><span class="pre">DataStoreKind</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.connect_models.html#lucidlink.connect_models.DataStoreKind.S3"><code class="docutils literal notranslate"><span class="pre">DataStoreKind.S3</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/lucidlink.connect_models.html#lucidlink.connect_models.DataStoreRekeyState"><code class="docutils literal notranslate"><span class="pre">DataStoreRekeyState</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.connect_models.html#lucidlink.connect_models.DataStoreRekeyState.IN_PROGRESS"><code class="docutils literal notranslate"><span class="pre">DataStoreRekeyState.IN_PROGRESS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.connect_models.html#lucidlink.connect_models.DataStoreRekeyState.NO_REKEY"><code class="docutils literal notranslate"><span class="pre">DataStoreRekeyState.NO_REKEY</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/lucidlink.connect_models.html#lucidlink.connect_models.LinkedFilesResult"><code class="docutils literal notranslate"><span class="pre">LinkedFilesResult</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.connect_models.html#lucidlink.connect_models.LinkedFilesResult.cursor"><code class="docutils literal notranslate"><span class="pre">LinkedFilesResult.cursor</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.connect_models.html#lucidlink.connect_models.LinkedFilesResult.file_ids"><code class="docutils literal notranslate"><span class="pre">LinkedFilesResult.file_ids</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.connect_models.html#lucidlink.connect_models.LinkedFilesResult.file_paths"><code class="docutils literal notranslate"><span class="pre">LinkedFilesResult.file_paths</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.connect_models.html#lucidlink.connect_models.LinkedFilesResult.has_more"><code class="docutils literal notranslate"><span class="pre">LinkedFilesResult.has_more</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/lucidlink.connect_models.html#lucidlink.connect_models.S3Credentials"><code class="docutils literal notranslate"><span class="pre">S3Credentials</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.connect_models.html#lucidlink.connect_models.S3Credentials.access_key"><code class="docutils literal notranslate"><span class="pre">S3Credentials.access_key</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.connect_models.html#lucidlink.connect_models.S3Credentials.kind"><code class="docutils literal notranslate"><span class="pre">S3Credentials.kind</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.connect_models.html#lucidlink.connect_models.S3Credentials.secret_key"><code class="docutils literal notranslate"><span class="pre">S3Credentials.secret_key</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/lucidlink.connect_models.html#lucidlink.connect_models.S3DataStoreConfig"><code class="docutils literal notranslate"><span class="pre">S3DataStoreConfig</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.connect_models.html#lucidlink.connect_models.S3DataStoreConfig.access_key"><code class="docutils literal notranslate"><span class="pre">S3DataStoreConfig.access_key</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.connect_models.html#lucidlink.connect_models.S3DataStoreConfig.bucket_name"><code class="docutils literal notranslate"><span class="pre">S3DataStoreConfig.bucket_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.connect_models.html#lucidlink.connect_models.S3DataStoreConfig.endpoint"><code class="docutils literal notranslate"><span class="pre">S3DataStoreConfig.endpoint</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.connect_models.html#lucidlink.connect_models.S3DataStoreConfig.region"><code class="docutils literal notranslate"><span class="pre">S3DataStoreConfig.region</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.connect_models.html#lucidlink.connect_models.S3DataStoreConfig.secret_key"><code class="docutils literal notranslate"><span class="pre">S3DataStoreConfig.secret_key</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.connect_models.html#lucidlink.connect_models.S3DataStoreConfig.url_expiration_minutes"><code class="docutils literal notranslate"><span class="pre">S3DataStoreConfig.url_expiration_minutes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.connect_models.html#lucidlink.connect_models.S3DataStoreConfig.use_virtual_addressing"><code class="docutils literal notranslate"><span class="pre">S3DataStoreConfig.use_virtual_addressing</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/lucidlink.credentials.html">credentials</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../api/lucidlink.credentials.html#lucidlink.credentials.ServiceAccountCredentials"><code class="docutils literal notranslate"><span class="pre">ServiceAccountCredentials</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/lucidlink.daemon.html">daemon</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../api/lucidlink.daemon.html#lucidlink.daemon.Daemon"><code class="docutils literal notranslate"><span class="pre">Daemon</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.daemon.html#lucidlink.daemon.Daemon.authenticate"><code class="docutils literal notranslate"><span class="pre">Daemon.authenticate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.daemon.html#lucidlink.daemon.Daemon.is_running"><code class="docutils literal notranslate"><span class="pre">Daemon.is_running()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.daemon.html#lucidlink.daemon.Daemon.start"><code class="docutils literal notranslate"><span class="pre">Daemon.start()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.daemon.html#lucidlink.daemon.Daemon.stop"><code class="docutils literal notranslate"><span class="pre">Daemon.stop()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/lucidlink.exceptions.html">exceptions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../api/lucidlink.exceptions.html#lucidlink.exceptions.AuthenticationError"><code class="docutils literal notranslate"><span class="pre">AuthenticationError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/lucidlink.exceptions.html#lucidlink.exceptions.ConfigurationError"><code class="docutils literal notranslate"><span class="pre">ConfigurationError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/lucidlink.exceptions.html#lucidlink.exceptions.DaemonError"><code class="docutils literal notranslate"><span class="pre">DaemonError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/lucidlink.exceptions.html#lucidlink.exceptions.FilespaceError"><code class="docutils literal notranslate"><span class="pre">FilespaceError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/lucidlink.exceptions.html#lucidlink.exceptions.LucidLinkError"><code class="docutils literal notranslate"><span class="pre">LucidLinkError</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/lucidlink.filespace.html">filespace</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../api/lucidlink.filespace.html#lucidlink.filespace.Filespace"><code class="docutils literal notranslate"><span class="pre">Filespace</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.filespace.html#lucidlink.filespace.Filespace.connect"><code class="docutils literal notranslate"><span class="pre">Filespace.connect</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.filespace.html#lucidlink.filespace.Filespace.fs"><code class="docutils literal notranslate"><span class="pre">Filespace.fs</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.filespace.html#lucidlink.filespace.Filespace.full_name"><code class="docutils literal notranslate"><span class="pre">Filespace.full_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.filespace.html#lucidlink.filespace.Filespace.id"><code class="docutils literal notranslate"><span class="pre">Filespace.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.filespace.html#lucidlink.filespace.Filespace.name"><code class="docutils literal notranslate"><span class="pre">Filespace.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.filespace.html#lucidlink.filespace.Filespace.sync_all"><code class="docutils literal notranslate"><span class="pre">Filespace.sync_all()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.filespace.html#lucidlink.filespace.Filespace.unlink"><code class="docutils literal notranslate"><span class="pre">Filespace.unlink()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.filespace.html#lucidlink.filespace.Filespace.workspace_id"><code class="docutils literal notranslate"><span class="pre">Filespace.workspace_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.filespace.html#lucidlink.filespace.Filespace.workspace_name"><code class="docutils literal notranslate"><span class="pre">Filespace.workspace_name</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/lucidlink.filesystem.html">filesystem</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../api/lucidlink.filesystem.html#lucidlink.filesystem.FileHandle"><code class="docutils literal notranslate"><span class="pre">FileHandle</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.filesystem.html#lucidlink.filesystem.FileHandle.close"><code class="docutils literal notranslate"><span class="pre">FileHandle.close()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.filesystem.html#lucidlink.filesystem.FileHandle.closed"><code class="docutils literal notranslate"><span class="pre">FileHandle.closed</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.filesystem.html#lucidlink.filesystem.FileHandle.mode"><code class="docutils literal notranslate"><span class="pre">FileHandle.mode</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.filesystem.html#lucidlink.filesystem.FileHandle.path"><code class="docutils literal notranslate"><span class="pre">FileHandle.path</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.filesystem.html#lucidlink.filesystem.FileHandle.read"><code class="docutils literal notranslate"><span class="pre">FileHandle.read()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.filesystem.html#lucidlink.filesystem.FileHandle.write"><code class="docutils literal notranslate"><span class="pre">FileHandle.write()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/lucidlink.filesystem.html#lucidlink.filesystem.Filesystem"><code class="docutils literal notranslate"><span class="pre">Filesystem</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.create"><code class="docutils literal notranslate"><span class="pre">Filesystem.create()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.create_dir"><code class="docutils literal notranslate"><span class="pre">Filesystem.create_dir()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.delete"><code class="docutils literal notranslate"><span class="pre">Filesystem.delete()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.delete_dir"><code class="docutils literal notranslate"><span class="pre">Filesystem.delete_dir()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.dir_exists"><code class="docutils literal notranslate"><span class="pre">Filesystem.dir_exists()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.file_exists"><code class="docutils literal notranslate"><span class="pre">Filesystem.file_exists()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.get_entry"><code class="docutils literal notranslate"><span class="pre">Filesystem.get_entry()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.get_size"><code class="docutils literal notranslate"><span class="pre">Filesystem.get_size()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.get_statistics"><code class="docutils literal notranslate"><span class="pre">Filesystem.get_statistics()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.list_dir"><code class="docutils literal notranslate"><span class="pre">Filesystem.list_dir()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.lock_byte_range"><code class="docutils literal notranslate"><span class="pre">Filesystem.lock_byte_range()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.move"><code class="docutils literal notranslate"><span class="pre">Filesystem.move()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.open"><code class="docutils literal notranslate"><span class="pre">Filesystem.open()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.open_legacy"><code class="docutils literal notranslate"><span class="pre">Filesystem.open_legacy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.read_dir"><code class="docutils literal notranslate"><span class="pre">Filesystem.read_dir()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.read_file"><code class="docutils literal notranslate"><span class="pre">Filesystem.read_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.truncate"><code class="docutils literal notranslate"><span class="pre">Filesystem.truncate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.unlock_all_byte_ranges"><code class="docutils literal notranslate"><span class="pre">Filesystem.unlock_all_byte_ranges()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.unlock_byte_range"><code class="docutils literal notranslate"><span class="pre">Filesystem.unlock_byte_range()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.write_file"><code class="docutils literal notranslate"><span class="pre">Filesystem.write_file()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/lucidlink.fsspec.html">fsspec</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../api/lucidlink.fsspec.html#lucidlink.fsspec.AbstractFileSystem"><code class="docutils literal notranslate"><span class="pre">AbstractFileSystem</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/lucidlink.fsspec.html#lucidlink.fsspec.LucidLinkFileSystem"><code class="docutils literal notranslate"><span class="pre">LucidLinkFileSystem</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.fsspec.html#lucidlink.fsspec.LucidLinkFileSystem.cat"><code class="docutils literal notranslate"><span class="pre">LucidLinkFileSystem.cat()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.fsspec.html#lucidlink.fsspec.LucidLinkFileSystem.cat_file"><code class="docutils literal notranslate"><span class="pre">LucidLinkFileSystem.cat_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.fsspec.html#lucidlink.fsspec.LucidLinkFileSystem.close"><code class="docutils literal notranslate"><span class="pre">LucidLinkFileSystem.close()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.fsspec.html#lucidlink.fsspec.LucidLinkFileSystem.exists"><code class="docutils literal notranslate"><span class="pre">LucidLinkFileSystem.exists()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.fsspec.html#lucidlink.fsspec.LucidLinkFileSystem.get"><code class="docutils literal notranslate"><span class="pre">LucidLinkFileSystem.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.fsspec.html#lucidlink.fsspec.LucidLinkFileSystem.info"><code class="docutils literal notranslate"><span class="pre">LucidLinkFileSystem.info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.fsspec.html#lucidlink.fsspec.LucidLinkFileSystem.isdir"><code class="docutils literal notranslate"><span class="pre">LucidLinkFileSystem.isdir()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.fsspec.html#lucidlink.fsspec.LucidLinkFileSystem.isfile"><code class="docutils literal notranslate"><span class="pre">LucidLinkFileSystem.isfile()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.fsspec.html#lucidlink.fsspec.LucidLinkFileSystem.ls"><code class="docutils literal notranslate"><span class="pre">LucidLinkFileSystem.ls()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.fsspec.html#lucidlink.fsspec.LucidLinkFileSystem.makedirs"><code class="docutils literal notranslate"><span class="pre">LucidLinkFileSystem.makedirs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.fsspec.html#lucidlink.fsspec.LucidLinkFileSystem.mkdir"><code class="docutils literal notranslate"><span class="pre">LucidLinkFileSystem.mkdir()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.fsspec.html#lucidlink.fsspec.LucidLinkFileSystem.mv"><code class="docutils literal notranslate"><span class="pre">LucidLinkFileSystem.mv()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.fsspec.html#lucidlink.fsspec.LucidLinkFileSystem.options"><code class="docutils literal notranslate"><span class="pre">LucidLinkFileSystem.options</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.fsspec.html#lucidlink.fsspec.LucidLinkFileSystem.protocol"><code class="docutils literal notranslate"><span class="pre">LucidLinkFileSystem.protocol</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.fsspec.html#lucidlink.fsspec.LucidLinkFileSystem.put"><code class="docutils literal notranslate"><span class="pre">LucidLinkFileSystem.put()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.fsspec.html#lucidlink.fsspec.LucidLinkFileSystem.rename"><code class="docutils literal notranslate"><span class="pre">LucidLinkFileSystem.rename()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.fsspec.html#lucidlink.fsspec.LucidLinkFileSystem.rm"><code class="docutils literal notranslate"><span class="pre">LucidLinkFileSystem.rm()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.fsspec.html#lucidlink.fsspec.LucidLinkFileSystem.rmdir"><code class="docutils literal notranslate"><span class="pre">LucidLinkFileSystem.rmdir()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.fsspec.html#lucidlink.fsspec.LucidLinkFileSystem.sync_all"><code class="docutils literal notranslate"><span class="pre">LucidLinkFileSystem.sync_all()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/lucidlink.storage.html">storage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../api/lucidlink.storage.html#important-directory-structure">IMPORTANT: Directory Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/lucidlink.storage.html#lucidlink.storage.StorageConfig"><code class="docutils literal notranslate"><span class="pre">StorageConfig</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.storage.html#lucidlink.storage.StorageConfig.get_root_path"><code class="docutils literal notranslate"><span class="pre">StorageConfig.get_root_path()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.storage.html#lucidlink.storage.StorageConfig.should_cleanup"><code class="docutils literal notranslate"><span class="pre">StorageConfig.should_cleanup()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/lucidlink.storage.html#lucidlink.storage.StorageMode"><code class="docutils literal notranslate"><span class="pre">StorageMode</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.storage.html#lucidlink.storage.StorageMode.PHYSICAL"><code class="docutils literal notranslate"><span class="pre">StorageMode.PHYSICAL</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.storage.html#lucidlink.storage.StorageMode.SANDBOXED"><code class="docutils literal notranslate"><span class="pre">StorageMode.SANDBOXED</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/lucidlink.stream.html">stream</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../api/lucidlink.stream.html#lucidlink.stream.LucidFileStream"><code class="docutils literal notranslate"><span class="pre">LucidFileStream</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.stream.html#lucidlink.stream.LucidFileStream.close"><code class="docutils literal notranslate"><span class="pre">LucidFileStream.close()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.stream.html#lucidlink.stream.LucidFileStream.closed"><code class="docutils literal notranslate"><span class="pre">LucidFileStream.closed</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.stream.html#lucidlink.stream.LucidFileStream.fileno"><code class="docutils literal notranslate"><span class="pre">LucidFileStream.fileno()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.stream.html#lucidlink.stream.LucidFileStream.isatty"><code class="docutils literal notranslate"><span class="pre">LucidFileStream.isatty()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.stream.html#lucidlink.stream.LucidFileStream.mode"><code class="docutils literal notranslate"><span class="pre">LucidFileStream.mode</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.stream.html#lucidlink.stream.LucidFileStream.name"><code class="docutils literal notranslate"><span class="pre">LucidFileStream.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.stream.html#lucidlink.stream.LucidFileStream.read"><code class="docutils literal notranslate"><span class="pre">LucidFileStream.read()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.stream.html#lucidlink.stream.LucidFileStream.readable"><code class="docutils literal notranslate"><span class="pre">LucidFileStream.readable()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.stream.html#lucidlink.stream.LucidFileStream.readinto"><code class="docutils literal notranslate"><span class="pre">LucidFileStream.readinto()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.stream.html#lucidlink.stream.LucidFileStream.seek"><code class="docutils literal notranslate"><span class="pre">LucidFileStream.seek()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.stream.html#lucidlink.stream.LucidFileStream.seekable"><code class="docutils literal notranslate"><span class="pre">LucidFileStream.seekable()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.stream.html#lucidlink.stream.LucidFileStream.tell"><code class="docutils literal notranslate"><span class="pre">LucidFileStream.tell()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.stream.html#lucidlink.stream.LucidFileStream.truncate"><code class="docutils literal notranslate"><span class="pre">LucidFileStream.truncate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.stream.html#lucidlink.stream.LucidFileStream.writable"><code class="docutils literal notranslate"><span class="pre">LucidFileStream.writable()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.stream.html#lucidlink.stream.LucidFileStream.write"><code class="docutils literal notranslate"><span class="pre">LucidFileStream.write()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/lucidlink.stream.html#lucidlink.stream.open_buffered"><code class="docutils literal notranslate"><span class="pre">open_buffered()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/lucidlink.stream.html#lucidlink.stream.open_text"><code class="docutils literal notranslate"><span class="pre">open_text()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/lucidlink.url_parser.html">url_parser</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../api/lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl"><code class="docutils literal notranslate"><span class="pre">ParsedUrl</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.cache_key"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.cache_key</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.filespace"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.filespace</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.path"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.path</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.to_url"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.to_url()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.with_path"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.with_path()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.url_parser.html#lucidlink.url_parser.ParsedUrl.workspace"><code class="docutils literal notranslate"><span class="pre">ParsedUrl.workspace</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/lucidlink.url_parser.html#lucidlink.url_parser.UrlParser"><code class="docutils literal notranslate"><span class="pre">UrlParser</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.url_parser.html#lucidlink.url_parser.UrlParser.build_full_path"><code class="docutils literal notranslate"><span class="pre">UrlParser.build_full_path()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.url_parser.html#lucidlink.url_parser.UrlParser.parse"><code class="docutils literal notranslate"><span class="pre">UrlParser.parse()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.url_parser.html#lucidlink.url_parser.UrlParser.validate_same_filespace"><code class="docutils literal notranslate"><span class="pre">UrlParser.validate_same_filespace()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/lucidlink.workspace.html">workspace</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../api/lucidlink.workspace.html#lucidlink.workspace.Workspace"><code class="docutils literal notranslate"><span class="pre">Workspace</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.workspace.html#lucidlink.workspace.Workspace.id"><code class="docutils literal notranslate"><span class="pre">Workspace.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.workspace.html#lucidlink.workspace.Workspace.link_filespace"><code class="docutils literal notranslate"><span class="pre">Workspace.link_filespace()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.workspace.html#lucidlink.workspace.Workspace.list_filespaces"><code class="docutils literal notranslate"><span class="pre">Workspace.list_filespaces()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.workspace.html#lucidlink.workspace.Workspace.name"><code class="docutils literal notranslate"><span class="pre">Workspace.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/lucidlink.workspace.html#lucidlink.workspace.Workspace.stop"><code class="docutils literal notranslate"><span class="pre">Workspace.stop()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #1a1a1a" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">LucidLink Python SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+          <li class="breadcrumb-item"><a href="../lucidlink.html">lucidlink</a></li>
+      <li class="breadcrumb-item active">lucidlink.daemon</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for lucidlink.daemon</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">LucidLink Python Library - Daemon Management</span>
+
+<span class="sd">High-level Pythonic wrapper for the LucidLink daemon.</span>
+<span class="sd">Provides context manager support for daemon lifecycle management.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">threading</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">weakref</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">.credentials</span><span class="w"> </span><span class="kn">import</span> <span class="n">ServiceAccountCredentials</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">DaemonError</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.filespace_models</span><span class="w"> </span><span class="kn">import</span> <span class="n">DaemonStatus</span><span class="p">,</span> <span class="n">FilespaceInfo</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.storage</span><span class="w"> </span><span class="kn">import</span> <span class="n">StorageConfig</span><span class="p">,</span> <span class="n">StorageMode</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.workspace</span><span class="w"> </span><span class="kn">import</span> <span class="n">Workspace</span>
+
+<span class="c1"># Import the native C++ extension module (relative import within package)</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">lucidlink_native</span>
+<span class="k">except</span> <span class="ne">ImportError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span>
+        <span class="s2">&quot;Failed to import lucidlink_native module. &quot;</span>
+        <span class="s2">&quot;Make sure the C++ extension module is built and in your Python path.&quot;</span>
+    <span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
+
+
+<span class="c1"># Module-level singleton tracking</span>
+<span class="c1"># Only one daemon can be active per process due to C++ global state</span>
+<span class="n">_active_daemon</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">weakref</span><span class="o">.</span><span class="n">ref</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">_daemon_lock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Lock</span><span class="p">()</span>
+
+
+<div class="viewcode-block" id="Daemon">
+<a class="viewcode-back" href="../../api/lucidlink.daemon.html#lucidlink.daemon.Daemon">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Daemon</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    High-level Python wrapper for the LucidLink daemon.</span>
+
+<span class="sd">    The Daemon class manages the lifecycle of the LucidLink daemon process,</span>
+<span class="sd">    handles authentication, and provides access to workspaces and filespaces.</span>
+
+<span class="sd">    Usage with new context-based API:</span>
+<span class="sd">        from lucidlink import Daemon, ServiceAccountCredentials</span>
+
+<span class="sd">        # Create credentials</span>
+<span class="sd">        credentials = ServiceAccountCredentials(token=&quot;sa_live:your_key&quot;)</span>
+
+<span class="sd">        # Start daemon and authenticate</span>
+<span class="sd">        daemon = Daemon(config)</span>
+<span class="sd">        daemon.start()</span>
+<span class="sd">        workspace = daemon.authenticate(credentials)</span>
+
+<span class="sd">        # List and link to filespace</span>
+<span class="sd">        filespaces = workspace.list_filespaces()</span>
+<span class="sd">        filespace = workspace.link_filespace(name=&quot;production-data&quot;)</span>
+
+<span class="sd">        # Use filesystem</span>
+<span class="sd">        entries = filespace.fs.read_dir(&quot;/&quot;)</span>
+
+<span class="sd">        # Cleanup</span>
+<span class="sd">        daemon.stop()</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">storage</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">StorageConfig</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize the daemon with configuration and storage settings.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            config: Optional configuration dictionary. Common keys:</span>
+<span class="sd">                - &quot;fs.cache.location&quot;: Cache directory path (overridden by storage)</span>
+<span class="sd">                - &quot;fs.cache.size&quot;: Cache size in MB (as string)</span>
+<span class="sd">                - &quot;network.timeout&quot;: Network operation timeout</span>
+<span class="sd">                If None, uses default configuration.</span>
+
+<span class="sd">            storage: Storage configuration for daemon files.</span>
+<span class="sd">                If None, defaults to SANDBOXED mode (temp directory, always cleaned up).</span>
+<span class="sd">                See StorageConfig for details on PHYSICAL and SANDBOXED modes.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ConfigurationError: If configuration is invalid</span>
+<span class="sd">            DaemonError: If daemon initialization fails</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">            # Default (sandboxed mode)</span>
+<span class="sd">            daemon = Daemon()</span>
+
+<span class="sd">            # Physical mode with cleanup</span>
+<span class="sd">            from lucidlink.storage import StorageConfig, StorageMode</span>
+<span class="sd">            daemon = Daemon(storage=StorageConfig(mode=StorageMode.PHYSICAL))</span>
+
+<span class="sd">            # Physical mode with persistence</span>
+<span class="sd">            daemon = Daemon(storage=StorageConfig(</span>
+<span class="sd">                mode=StorageMode.PHYSICAL,</span>
+<span class="sd">                persist_on_exit=True</span>
+<span class="sd">            ))</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Default to sandboxed mode for safety</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_storage</span> <span class="o">=</span> <span class="n">storage</span> <span class="ow">or</span> <span class="n">StorageConfig</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="n">StorageMode</span><span class="o">.</span><span class="n">SANDBOXED</span><span class="p">)</span>
+
+        <span class="c1"># Build internal config from storage settings</span>
+        <span class="n">internal_config</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span> <span class="k">if</span> <span class="n">config</span> <span class="k">else</span> <span class="p">{}</span>
+        <span class="n">root</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_storage</span><span class="o">.</span><span class="n">get_root_path</span><span class="p">()</span>
+
+        <span class="c1"># Set paths based on storage configuration</span>
+        <span class="c1"># Pass .lucid directory path with native separators (backslashes on Windows)</span>
+        <span class="c1"># The daemon will extract .lucid and create per-filespace UUID subdirectories</span>
+        <span class="n">root_str</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+        <span class="n">internal_config</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;rootPath&quot;</span><span class="p">,</span> <span class="n">root_str</span><span class="p">)</span>
+        <span class="n">internal_config</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;configPath&quot;</span><span class="p">,</span> <span class="n">root_str</span><span class="p">)</span>
+        <span class="c1"># Note: DO NOT set fs.cache.location - let daemon construct it automatically</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_native</span> <span class="o">=</span> <span class="n">lucidlink_native</span><span class="o">.</span><span class="n">Daemon</span><span class="p">(</span><span class="n">internal_config</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">DaemonError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to initialize daemon: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_started</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_active_workspace</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_stop_active_workspace</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Stop and clear the active workspace (syncs + unlinks filespace).&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_active_workspace</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_active_workspace</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="k">pass</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_active_workspace</span> <span class="o">=</span> <span class="kc">None</span>
+
+<div class="viewcode-block" id="Daemon.start">
+<a class="viewcode-back" href="../../api/lucidlink.daemon.html#lucidlink.daemon.Daemon.start">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Start the daemon services.</span>
+
+<span class="sd">        Must be called before authentication or filespace linking.</span>
+<span class="sd">        Safe to call multiple times - subsequent calls are no-ops.</span>
+
+<span class="sd">        Note: Only one daemon can be active per process due to C++ global state.</span>
+<span class="sd">        Attempting to start a second daemon while one is already running will</span>
+<span class="sd">        raise DaemonError.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            DaemonError: If daemon start fails or another daemon is already active</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">global</span> <span class="n">_active_daemon</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_started</span><span class="p">:</span>
+            <span class="k">return</span>  <span class="c1"># Already started</span>
+
+        <span class="k">with</span> <span class="n">_daemon_lock</span><span class="p">:</span>
+            <span class="c1"># Check if another daemon is already active</span>
+            <span class="k">if</span> <span class="n">_active_daemon</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">existing</span> <span class="o">=</span> <span class="n">_active_daemon</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">existing</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">existing</span><span class="o">.</span><span class="n">_started</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">DaemonError</span><span class="p">(</span>
+                        <span class="s2">&quot;Another daemon is already active. &quot;</span>
+                        <span class="s2">&quot;Only one daemon can run per process due to C++ global state. &quot;</span>
+                        <span class="s2">&quot;Call stop() on the existing daemon first.&quot;</span>
+                    <span class="p">)</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_native</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_started</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="n">_active_daemon</span> <span class="o">=</span> <span class="n">weakref</span><span class="o">.</span><span class="n">ref</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">DaemonError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to start daemon: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span></div>
+
+
+<div class="viewcode-block" id="Daemon.stop">
+<a class="viewcode-back" href="../../api/lucidlink.daemon.html#lucidlink.daemon.Daemon.stop">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Stop the daemon and cleanup resources.</span>
+
+<span class="sd">        Automatically unlinks any linked filespaces before stopping.</span>
+<span class="sd">        Cleans up operational files based on storage configuration:</span>
+<span class="sd">        - SANDBOXED mode: Always cleans up temp directory</span>
+<span class="sd">        - PHYSICAL mode: Cleans up if persist_on_exit=False</span>
+
+<span class="sd">        Safe to call multiple times - subsequent calls are no-ops.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            DaemonError: If daemon stop fails</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">global</span> <span class="n">_active_daemon</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_started</span><span class="p">:</span>
+            <span class="k">return</span>  <span class="c1"># Already stopped</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_stop_active_workspace</span><span class="p">()</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_native</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_started</span> <span class="o">=</span> <span class="kc">False</span>
+
+            <span class="c1"># Clear the singleton reference</span>
+            <span class="k">with</span> <span class="n">_daemon_lock</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">_active_daemon</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">existing</span> <span class="o">=</span> <span class="n">_active_daemon</span><span class="p">()</span>
+                    <span class="k">if</span> <span class="n">existing</span> <span class="ow">is</span> <span class="bp">self</span><span class="p">:</span>
+                        <span class="n">_active_daemon</span> <span class="o">=</span> <span class="kc">None</span>
+
+            <span class="c1"># Clean up physical mode files if not persisting</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_storage</span><span class="o">.</span><span class="n">should_cleanup</span><span class="p">():</span>
+                <span class="n">root</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_storage</span><span class="o">.</span><span class="n">get_root_path</span><span class="p">()</span>
+                <span class="c1"># root is the .lucid directory itself</span>
+                <span class="k">if</span> <span class="n">root</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">ignore_errors</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                        <span class="c1"># Ignore cleanup errors - daemon is already stopped</span>
+                        <span class="k">pass</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">DaemonError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to stop daemon: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span></div>
+
+
+<div class="viewcode-block" id="Daemon.is_running">
+<a class="viewcode-back" href="../../api/lucidlink.daemon.html#lucidlink.daemon.Daemon.is_running">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_running</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Check if the daemon is currently running.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            True if daemon is started, False otherwise</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_started</span></div>
+
+
+<div class="viewcode-block" id="Daemon.authenticate">
+<a class="viewcode-back" href="../../api/lucidlink.daemon.html#lucidlink.daemon.Daemon.authenticate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">authenticate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">credentials</span><span class="p">:</span> <span class="n">ServiceAccountCredentials</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Workspace</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Authenticate to LucidLink using service account credentials.</span>
+
+<span class="sd">        Must call start() before authenticate().</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            credentials: ServiceAccountCredentials object containing the service account token</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Workspace object providing access to filespace operations</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            DaemonError: If daemon is not started</span>
+<span class="sd">            AuthenticationError: If authentication fails</span>
+<span class="sd">            ValueError: If credentials are invalid</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            &gt;&gt;&gt; from lucidlink import Daemon, ServiceAccountCredentials</span>
+<span class="sd">            &gt;&gt;&gt; credentials = ServiceAccountCredentials(token=&quot;sa_live:your_key&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; daemon = Daemon()</span>
+<span class="sd">            &gt;&gt;&gt; daemon.start()</span>
+<span class="sd">            &gt;&gt;&gt; workspace = daemon.authenticate(credentials)</span>
+<span class="sd">            &gt;&gt;&gt; print(workspace.name)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_started</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">DaemonError</span><span class="p">(</span><span class="s2">&quot;Daemon must be started before authentication&quot;</span><span class="p">)</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_stop_active_workspace</span><span class="p">()</span>
+
+            <span class="c1"># Call native authenticate method - returns dict with workspace context</span>
+            <span class="n">workspace_context</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_native</span><span class="o">.</span><span class="n">authenticate</span><span class="p">(</span><span class="n">credentials</span><span class="o">.</span><span class="n">token</span><span class="p">)</span>
+
+            <span class="c1"># Create Workspace object from context</span>
+            <span class="n">workspace</span> <span class="o">=</span> <span class="n">Workspace</span><span class="p">(</span>
+                <span class="n">native_daemon</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_native</span><span class="p">,</span>
+                <span class="n">workspace_id</span><span class="o">=</span><span class="n">workspace_context</span><span class="p">[</span><span class="s2">&quot;workspace_id&quot;</span><span class="p">],</span>
+                <span class="n">workspace_name</span><span class="o">=</span><span class="n">workspace_context</span><span class="p">[</span><span class="s2">&quot;workspace_name&quot;</span><span class="p">]</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_active_workspace</span> <span class="o">=</span> <span class="n">workspace</span>
+
+            <span class="k">return</span> <span class="n">workspace</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">DaemonError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Authentication failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span></div>
+
+
+    <span class="c1"># Helper methods called by Workspace class</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">list_filespaces</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">workspace_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">FilespaceInfo</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        List all filespaces in a workspace.</span>
+
+<span class="sd">        This is called internally by Workspace.list_filespaces().</span>
+<span class="sd">        Users should call workspace.list_filespaces() instead.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            workspace_id: Workspace ID</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List of FilespaceInfo objects</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            DaemonError: If request fails</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_started</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">DaemonError</span><span class="p">(</span><span class="s2">&quot;Daemon must be started&quot;</span><span class="p">)</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[</span>
+                <span class="n">FilespaceInfo</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span> <span class="n">created</span><span class="o">=</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;created&quot;</span><span class="p">])</span>
+                <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_native</span><span class="o">.</span><span class="n">list_filespaces</span><span class="p">(</span><span class="n">workspace_id</span><span class="p">)</span>
+            <span class="p">]</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">DaemonError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to list filespaces: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">link_filespace</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">workspace_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">filespace_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">filespace_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">root_path</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Link to a filespace (by name or ID).</span>
+
+<span class="sd">        This is called internally by Workspace.link_filespace().</span>
+<span class="sd">        Users should call workspace.link_filespace() instead.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            workspace_id: Workspace ID</span>
+<span class="sd">            filespace_name: Filespace name (empty if using ID)</span>
+<span class="sd">            filespace_id: Filespace ID (empty if using name)</span>
+<span class="sd">            root_path: Mount point path</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Native filesystem wrapper</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            DaemonError: If linking fails</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_started</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">DaemonError</span><span class="p">(</span><span class="s2">&quot;Daemon must be started&quot;</span><span class="p">)</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_native</span><span class="o">.</span><span class="n">link_filespace</span><span class="p">(</span>
+                <span class="n">workspace_id</span><span class="o">=</span><span class="n">workspace_id</span><span class="p">,</span>
+                <span class="n">filespace_name</span><span class="o">=</span><span class="n">filespace_name</span><span class="p">,</span>
+                <span class="n">filespace_id</span><span class="o">=</span><span class="n">filespace_id</span><span class="p">,</span>
+                <span class="n">root_path</span><span class="o">=</span><span class="n">root_path</span>
+            <span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">DaemonError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to link filespace: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">unlink_filespace</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Unlink from the currently linked filespace.</span>
+
+<span class="sd">        This is called internally by Filespace.unlink().</span>
+<span class="sd">        Users should call filespace.unlink() instead.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            DaemonError: If unlinking fails</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_native</span><span class="o">.</span><span class="n">unlink_filespace</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">DaemonError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to unlink filespace: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_status</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DaemonStatus</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get daemon status information.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            DaemonStatus with is_running, is_authenticated, is_linked, root_path</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            DaemonError: If getting status fails</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">native_status</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_native</span><span class="o">.</span><span class="n">get_status</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">DaemonStatus</span><span class="p">(</span>
+                <span class="n">is_running</span><span class="o">=</span><span class="n">native_status</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;running&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;true&quot;</span><span class="p">,</span>
+                <span class="n">is_authenticated</span><span class="o">=</span><span class="n">native_status</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;authenticated&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;true&quot;</span><span class="p">,</span>
+                <span class="n">is_linked</span><span class="o">=</span><span class="n">native_status</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;linked&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;true&quot;</span><span class="p">,</span>
+                <span class="n">root_path</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_storage</span><span class="o">.</span><span class="n">get_root_path</span><span class="p">()),</span>
+            <span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">DaemonError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to get daemon status: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Daemon&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Enter context manager - starts the daemon.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Self for use in &#39;with&#39; statement</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_val</span><span class="p">,</span> <span class="n">exc_tb</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Exit context manager - stops the daemon.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            exc_type: Exception type (if exception occurred)</span>
+<span class="sd">            exc_val: Exception value (if exception occurred)</span>
+<span class="sd">            exc_tb: Exception traceback (if exception occurred)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;String representation of the Daemon object.&quot;&quot;&quot;</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;running&quot;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_started</span> <span class="k">else</span> <span class="s2">&quot;stopped&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Daemon(</span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="s2">)&quot;</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, LucidLink.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
