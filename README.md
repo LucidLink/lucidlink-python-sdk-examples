@@ -34,5 +34,7 @@ The `examples/` directory contains step-by-step tutorials.
 ## Links
 
 - [LucidLink Python SDK on PyPI](https://pypi.org/project/lucidlink/)
-- [SDK Documentation](https://lucidlink.github.io/lucidlink-python-sdk-examples/)
-- [Support](https://support.lucidlink.com/)
+- [LucidLink Python SDK Documentation](https://lucidlink.github.io/lucidlink-python-sdk-examples/)
+- [LucidLink Python SDK KB](https://support.lucidlink.com/hc/en-us/articles/45081119094029-Python-SDK-beta)
+- [LucidLink Developer Platform KB](https://support.lucidlink.com/hc/en-us/articles/44957651982989-LucidLink-Developer-Platform)
+- [LucidLink Support](https://support.lucidlink.com/)
