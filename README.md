@@ -18,7 +18,7 @@ Set your credentials as environment variables:
 ```bash
 export LUCIDLINK_SA_TOKEN="sa_live:your_key"
 export LUCIDLINK_FILESPACE="my-filespace"
-export LUCIDLINK_WORKSPACE="my-workspace"  # required by fsspec examples
+export LUCIDLINK_WORKSPACE="my-workspace"
 ```
 
 ## Running Examples
