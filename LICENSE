@@ -1,12 +1,11 @@
-Copyright (c) 2026 LucidLink Corp. All rights reserved.
+LucidLink Developer Examples License Notice
+---------------------------------------------
+Copyright © 2026 LucidLink Corp. All rights reserved.
 
-No permission is granted to use, copy, modify, merge, publish, distribute,
-sublicense, or sell copies of this software or its associated documentation
-files (the "Software").
+These example scripts and code samples (the “Examples”) are proprietary software owned by LucidLink Corp. and are made available as part of LucidLink’s commercial offering. The Examples are provided solely to illustrate how to use the LucidLink SDK under the same Applicable Terms.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
-LUCIDLINK CORP BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
-IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
-CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+Subject to and conditioned on your continuing compliance with (a) the LucidLink Terms and Conditions available at https://www.lucidlink.com/terms, or (b) if you or your organization have entered into a separate written agreement with LucidLink governing your use of LucidLink services, such separate written agreement (in each case, the “Applicable Terms”), LucidLink grants you a limited, non‑exclusive, non‑transferable, revocable license to use these Examples solely to develop and test applications and integrations that access or use LucidLink services for your internal business purposes.
+
+Except as expressly permitted in the Applicable Terms, you may not copy, modify, distribute, sublicense, reverse engineer, or otherwise use the Examples or any portion thereof. No rights are granted by implication, estoppel, or otherwise.
+
+These Examples are not licensed under an open‑source license.
