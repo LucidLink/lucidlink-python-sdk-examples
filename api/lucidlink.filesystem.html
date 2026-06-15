@@ -87,11 +87,13 @@
 <li class="toctree-l4"><a class="reference internal" href="lucidlink.connect.html#lucidlink.connect.ConnectManager.count_external_files"><code class="docutils literal notranslate"><span class="pre">ConnectManager.count_external_files()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="lucidlink.connect.html#lucidlink.connect.ConnectManager.get_data_store"><code class="docutils literal notranslate"><span class="pre">ConnectManager.get_data_store()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="lucidlink.connect.html#lucidlink.connect.ConnectManager.link_file"><code class="docutils literal notranslate"><span class="pre">ConnectManager.link_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.connect.html#lucidlink.connect.ConnectManager.link_http_file"><code class="docutils literal notranslate"><span class="pre">ConnectManager.link_http_file()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="lucidlink.connect.html#lucidlink.connect.ConnectManager.list_data_stores"><code class="docutils literal notranslate"><span class="pre">ConnectManager.list_data_stores()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="lucidlink.connect.html#lucidlink.connect.ConnectManager.list_external_files"><code class="docutils literal notranslate"><span class="pre">ConnectManager.list_external_files()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="lucidlink.connect.html#lucidlink.connect.ConnectManager.rekey_data_store"><code class="docutils literal notranslate"><span class="pre">ConnectManager.rekey_data_store()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="lucidlink.connect.html#lucidlink.connect.ConnectManager.remove_data_store"><code class="docutils literal notranslate"><span class="pre">ConnectManager.remove_data_store()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="lucidlink.connect.html#lucidlink.connect.ConnectManager.unlink_file"><code class="docutils literal notranslate"><span class="pre">ConnectManager.unlink_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.connect.html#lucidlink.connect.ConnectManager.update_http_file_url"><code class="docutils literal notranslate"><span class="pre">ConnectManager.update_http_file_url()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -197,6 +199,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#lucidlink.filesystem.Filesystem"><code class="docutils literal notranslate"><span class="pre">Filesystem</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#lucidlink.filesystem.Filesystem.create"><code class="docutils literal notranslate"><span class="pre">Filesystem.create()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#lucidlink.filesystem.Filesystem.create_dir"><code class="docutils literal notranslate"><span class="pre">Filesystem.create_dir()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lucidlink.filesystem.Filesystem.create_symlink"><code class="docutils literal notranslate"><span class="pre">Filesystem.create_symlink()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#lucidlink.filesystem.Filesystem.delete"><code class="docutils literal notranslate"><span class="pre">Filesystem.delete()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#lucidlink.filesystem.Filesystem.delete_dir"><code class="docutils literal notranslate"><span class="pre">Filesystem.delete_dir()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#lucidlink.filesystem.Filesystem.dir_exists"><code class="docutils literal notranslate"><span class="pre">Filesystem.dir_exists()</span></code></a></li>
@@ -211,6 +214,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#lucidlink.filesystem.Filesystem.open_legacy"><code class="docutils literal notranslate"><span class="pre">Filesystem.open_legacy()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#lucidlink.filesystem.Filesystem.read_dir"><code class="docutils literal notranslate"><span class="pre">Filesystem.read_dir()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#lucidlink.filesystem.Filesystem.read_file"><code class="docutils literal notranslate"><span class="pre">Filesystem.read_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lucidlink.filesystem.Filesystem.read_symlink"><code class="docutils literal notranslate"><span class="pre">Filesystem.read_symlink()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#lucidlink.filesystem.Filesystem.truncate"><code class="docutils literal notranslate"><span class="pre">Filesystem.truncate()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#lucidlink.filesystem.Filesystem.unlock_all_byte_ranges"><code class="docutils literal notranslate"><span class="pre">Filesystem.unlock_all_byte_ranges()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#lucidlink.filesystem.Filesystem.unlock_byte_range"><code class="docutils literal notranslate"><span class="pre">Filesystem.unlock_byte_range()</span></code></a></li>
@@ -220,7 +224,6 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="lucidlink.fsspec.html">fsspec</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="lucidlink.fsspec.html#lucidlink.fsspec.AbstractFileSystem"><code class="docutils literal notranslate"><span class="pre">AbstractFileSystem</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="lucidlink.fsspec.html#lucidlink.fsspec.LucidLinkFileSystem"><code class="docutils literal notranslate"><span class="pre">LucidLinkFileSystem</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="lucidlink.fsspec.html#lucidlink.fsspec.LucidLinkFileSystem.cat"><code class="docutils literal notranslate"><span class="pre">LucidLinkFileSystem.cat()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="lucidlink.fsspec.html#lucidlink.fsspec.LucidLinkFileSystem.cat_file"><code class="docutils literal notranslate"><span class="pre">LucidLinkFileSystem.cat_file()</span></code></a></li>
@@ -501,6 +504,26 @@ Obtained via the filespace.fs property after linking.</p>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>FileExistsError</strong> – If directory already exists</p></li>
+<li><p><strong>PermissionError</strong> – If no create permission</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lucidlink.filesystem.Filesystem.create_symlink">
+<span class="sig-name descname"><span class="pre">create_symlink</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">link_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/lucidlink/filesystem.html#Filesystem.create_symlink"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lucidlink.filesystem.Filesystem.create_symlink" title="Link to this definition"></a></dt>
+<dd><p>Create a symbolic link.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>target_path</strong> – Path the symlink points to</p></li>
+<li><p><strong>link_path</strong> – Path of the symlink to create</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>FileExistsError</strong> – If link_path already exists</p></li>
 <li><p><strong>PermissionError</strong> – If no create permission</p></li>
 </ul>
 </dd>
@@ -842,6 +865,26 @@ use open() instead, which returns a more capable io.RawIOBase stream.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>FileNotFoundError</strong> – If file doesn’t exist</p></li>
 <li><p><strong>PermissionError</strong> – If no read permission</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lucidlink.filesystem.Filesystem.read_symlink">
+<span class="sig-name descname"><span class="pre">read_symlink</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">link_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/lucidlink/filesystem.html#Filesystem.read_symlink"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lucidlink.filesystem.Filesystem.read_symlink" title="Link to this definition"></a></dt>
+<dd><p>Read the target of a symbolic link.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>link_path</strong> – Path of the symlink</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Target path the symlink points to</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>FileNotFoundError</strong> – If link_path does not exist</p></li>
+<li><p><strong>OSError</strong> – If link_path is not a symlink</p></li>
 </ul>
 </dd>
 </dl>

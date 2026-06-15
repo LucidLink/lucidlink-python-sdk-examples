@@ -87,11 +87,13 @@
 <li class="toctree-l4"><a class="reference internal" href="api/lucidlink.connect.html#lucidlink.connect.ConnectManager.count_external_files"><code class="docutils literal notranslate"><span class="pre">ConnectManager.count_external_files()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/lucidlink.connect.html#lucidlink.connect.ConnectManager.get_data_store"><code class="docutils literal notranslate"><span class="pre">ConnectManager.get_data_store()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/lucidlink.connect.html#lucidlink.connect.ConnectManager.link_file"><code class="docutils literal notranslate"><span class="pre">ConnectManager.link_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/lucidlink.connect.html#lucidlink.connect.ConnectManager.link_http_file"><code class="docutils literal notranslate"><span class="pre">ConnectManager.link_http_file()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/lucidlink.connect.html#lucidlink.connect.ConnectManager.list_data_stores"><code class="docutils literal notranslate"><span class="pre">ConnectManager.list_data_stores()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/lucidlink.connect.html#lucidlink.connect.ConnectManager.list_external_files"><code class="docutils literal notranslate"><span class="pre">ConnectManager.list_external_files()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/lucidlink.connect.html#lucidlink.connect.ConnectManager.rekey_data_store"><code class="docutils literal notranslate"><span class="pre">ConnectManager.rekey_data_store()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/lucidlink.connect.html#lucidlink.connect.ConnectManager.remove_data_store"><code class="docutils literal notranslate"><span class="pre">ConnectManager.remove_data_store()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/lucidlink.connect.html#lucidlink.connect.ConnectManager.unlink_file"><code class="docutils literal notranslate"><span class="pre">ConnectManager.unlink_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/lucidlink.connect.html#lucidlink.connect.ConnectManager.update_http_file_url"><code class="docutils literal notranslate"><span class="pre">ConnectManager.update_http_file_url()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -197,6 +199,7 @@
 <li class="toctree-l3"><a class="reference internal" href="api/lucidlink.filesystem.html#lucidlink.filesystem.Filesystem"><code class="docutils literal notranslate"><span class="pre">Filesystem</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="api/lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.create"><code class="docutils literal notranslate"><span class="pre">Filesystem.create()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.create_dir"><code class="docutils literal notranslate"><span class="pre">Filesystem.create_dir()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.create_symlink"><code class="docutils literal notranslate"><span class="pre">Filesystem.create_symlink()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.delete"><code class="docutils literal notranslate"><span class="pre">Filesystem.delete()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.delete_dir"><code class="docutils literal notranslate"><span class="pre">Filesystem.delete_dir()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.dir_exists"><code class="docutils literal notranslate"><span class="pre">Filesystem.dir_exists()</span></code></a></li>
@@ -211,6 +214,7 @@
 <li class="toctree-l4"><a class="reference internal" href="api/lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.open_legacy"><code class="docutils literal notranslate"><span class="pre">Filesystem.open_legacy()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.read_dir"><code class="docutils literal notranslate"><span class="pre">Filesystem.read_dir()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.read_file"><code class="docutils literal notranslate"><span class="pre">Filesystem.read_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.read_symlink"><code class="docutils literal notranslate"><span class="pre">Filesystem.read_symlink()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.truncate"><code class="docutils literal notranslate"><span class="pre">Filesystem.truncate()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.unlock_all_byte_ranges"><code class="docutils literal notranslate"><span class="pre">Filesystem.unlock_all_byte_ranges()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.unlock_byte_range"><code class="docutils literal notranslate"><span class="pre">Filesystem.unlock_byte_range()</span></code></a></li>
@@ -220,7 +224,6 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="api/lucidlink.fsspec.html">fsspec</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/lucidlink.fsspec.html#lucidlink.fsspec.AbstractFileSystem"><code class="docutils literal notranslate"><span class="pre">AbstractFileSystem</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/lucidlink.fsspec.html#lucidlink.fsspec.LucidLinkFileSystem"><code class="docutils literal notranslate"><span class="pre">LucidLinkFileSystem</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="api/lucidlink.fsspec.html#lucidlink.fsspec.LucidLinkFileSystem.cat"><code class="docutils literal notranslate"><span class="pre">LucidLinkFileSystem.cat()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/lucidlink.fsspec.html#lucidlink.fsspec.LucidLinkFileSystem.cat_file"><code class="docutils literal notranslate"><span class="pre">LucidLinkFileSystem.cat_file()</span></code></a></li>
@@ -562,8 +565,8 @@
 </section>
 <section id="file-locking">
 <h3>File Locking<a class="headerlink" href="#file-locking" title="Link to this heading"></a></h3>
-<p>Use the <code class="docutils literal notranslate"><span class="pre">lock_type</span></code> parameter on <code class="docutils literal notranslate"><span class="pre">open()</span></code> to coordinate file access across clients.
-Locks are managed by LucidHub and enforced across all connected clients.</p>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">lock_type</span></code> parameter on <code class="docutils literal notranslate"><span class="pre">open()</span></code> to coordinate file access across clients. Locks are managed by LucidHub and
+enforced across all connected clients.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Shared lock — allows concurrent readers</span>
 <span class="k">with</span> <span class="n">filespace</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;/data.csv&quot;</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">,</span> <span class="n">lock_type</span><span class="o">=</span><span class="s2">&quot;shared&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
@@ -579,17 +582,31 @@ Locks are managed by LucidHub and enforced across all connected clients.</p>
 </section>
 <section id="lucidlink-connect">
 <h2>LucidLink Connect<a class="headerlink" href="#lucidlink-connect" title="Link to this heading"></a></h2>
-<p>Attach existing S3 objects to a filespace as read-only files at arbitrary paths:</p>
+<p>Attach existing S3 objects to a filespace as read-only files at arbitrary paths. Requires a Connect-enabled filespace
+(V10+).</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">lucidlink</span><span class="w"> </span><span class="kn">import</span> <span class="n">S3DataStoreConfig</span>
 
 <span class="n">connect</span> <span class="o">=</span> <span class="n">filespace</span><span class="o">.</span><span class="n">connect</span>
 
-<span class="c1"># Register an S3 data store</span>
+<span class="c1"># Register an S3 data store (AWS defaults — HTTPS, virtual-hosted style)</span>
 <span class="n">connect</span><span class="o">.</span><span class="n">add_data_store</span><span class="p">(</span><span class="s2">&quot;my-store&quot;</span><span class="p">,</span> <span class="n">S3DataStoreConfig</span><span class="p">(</span>
     <span class="n">access_key</span><span class="o">=</span><span class="s2">&quot;AKIA...&quot;</span><span class="p">,</span>
     <span class="n">secret_key</span><span class="o">=</span><span class="s2">&quot;...&quot;</span><span class="p">,</span>
     <span class="n">bucket_name</span><span class="o">=</span><span class="s2">&quot;my-bucket&quot;</span><span class="p">,</span>
     <span class="n">region</span><span class="o">=</span><span class="s2">&quot;us-east-1&quot;</span><span class="p">,</span>
+<span class="p">))</span>
+
+<span class="c1"># S3-compatible endpoint (e.g., GCP Cloud Storage interop) — pass a full URL</span>
+<span class="c1"># with scheme in `endpoint` and use path-style addressing. `url_expiration_minutes`</span>
+<span class="c1"># controls presigned URL lifetime (4320–10080 minutes; default 10080 = 7 days).</span>
+<span class="n">connect</span><span class="o">.</span><span class="n">add_data_store</span><span class="p">(</span><span class="s2">&quot;gcs&quot;</span><span class="p">,</span> <span class="n">S3DataStoreConfig</span><span class="p">(</span>
+    <span class="n">access_key</span><span class="o">=</span><span class="s2">&quot;GOOG...&quot;</span><span class="p">,</span>
+    <span class="n">secret_key</span><span class="o">=</span><span class="s2">&quot;...&quot;</span><span class="p">,</span>
+    <span class="n">bucket_name</span><span class="o">=</span><span class="s2">&quot;datasets&quot;</span><span class="p">,</span>
+    <span class="n">region</span><span class="o">=</span><span class="s2">&quot;us-central1&quot;</span><span class="p">,</span>
+    <span class="n">endpoint</span><span class="o">=</span><span class="s2">&quot;https://storage.googleapis.com&quot;</span><span class="p">,</span>
+    <span class="n">use_virtual_addressing</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">url_expiration_minutes</span><span class="o">=</span><span class="mi">10080</span><span class="p">,</span>
 <span class="p">))</span>
 
 <span class="c1"># Link S3 objects as files in the filespace</span>
@@ -599,7 +616,7 @@ Locks are managed by LucidHub and enforced across all connected clients.</p>
     <span class="n">object_id</span><span class="o">=</span><span class="s2">&quot;dataset1_file1.csv&quot;</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="c1"># For bulk linking, provide size and checksum to skip S3 HeadObject calls</span>
+<span class="c1"># For bulk linking, provide size and checksum together to skip S3 HeadObject calls.</span>
 <span class="n">connect</span><span class="o">.</span><span class="n">link_file</span><span class="p">(</span>
     <span class="n">file_path</span><span class="o">=</span><span class="s2">&quot;/proj1/dataset1/large.bin&quot;</span><span class="p">,</span>
     <span class="n">data_store_name</span><span class="o">=</span><span class="s2">&quot;my-store&quot;</span><span class="p">,</span>
@@ -613,10 +630,12 @@ Locks are managed by LucidHub and enforced across all connected clients.</p>
 <span class="k">with</span> <span class="n">filespace</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;/data/file.csv&quot;</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">content</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
 
-<span class="c1"># List linked files (paginated)</span>
+<span class="c1"># List linked files (paginated; cursor is an opaque token)</span>
 <span class="n">result</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">list_external_files</span><span class="p">(</span><span class="s2">&quot;my-store&quot;</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">file_paths</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">has_more</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">connect</span><span class="o">.</span><span class="n">list_external_files</span><span class="p">(</span><span class="s2">&quot;my-store&quot;</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">cursor</span><span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">cursor</span><span class="p">)</span>
 
 <span class="c1"># Unlink when no longer needed</span>
 <span class="n">connect</span><span class="o">.</span><span class="n">unlink_file</span><span class="p">(</span><span class="s2">&quot;/data/file.csv&quot;</span><span class="p">)</span>
@@ -666,11 +685,9 @@ Locks are managed by LucidHub and enforced across all connected clients.</p>
 <h2>Configuration<a class="headerlink" href="#configuration" title="Link to this heading"></a></h2>
 <section id="syncing-changes">
 <h3>Syncing Changes<a class="headerlink" href="#syncing-changes" title="Link to this heading"></a></h3>
-<p>By default, <code class="docutils literal notranslate"><span class="pre">filespace.unlink()</span></code> automatically calls <code class="docutils literal notranslate"><span class="pre">sync_all()</span></code> before disconnecting
-(controlled by the <code class="docutils literal notranslate"><span class="pre">sync_mode</span></code> parameter on <code class="docutils literal notranslate"><span class="pre">link_filespace()</span></code>). This ensures all write
-operations are committed to the hub.</p>
-<p>If you need to verify changes are visible to other clients <em>before</em> unlinking, call
-<code class="docutils literal notranslate"><span class="pre">sync_all()</span></code> explicitly:</p>
+<p>By default, <code class="docutils literal notranslate"><span class="pre">filespace.unlink()</span></code> automatically calls <code class="docutils literal notranslate"><span class="pre">sync_all()</span></code> before disconnecting (controlled by the <code class="docutils literal notranslate"><span class="pre">sync_mode</span></code>
+parameter on <code class="docutils literal notranslate"><span class="pre">link_filespace()</span></code>). This ensures all write operations are committed to the hub.</p>
+<p>If you need to verify changes are visible to other clients <em>before</em> unlinking, call <code class="docutils literal notranslate"><span class="pre">sync_all()</span></code> explicitly:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">filespace</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">write_file</span><span class="p">(</span><span class="s2">&quot;/data.txt&quot;</span><span class="p">,</span> <span class="sa">b</span><span class="s2">&quot;important data&quot;</span><span class="p">)</span>
 <span class="n">filespace</span><span class="o">.</span><span class="n">sync_all</span><span class="p">()</span>  <span class="c1"># Explicitly sync — changes are now visible to other clients</span>
 <span class="c1"># ... continue working with the filespace</span>

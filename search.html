@@ -87,11 +87,13 @@
 <li class="toctree-l4"><a class="reference internal" href="api/lucidlink.connect.html#lucidlink.connect.ConnectManager.count_external_files"><code class="docutils literal notranslate"><span class="pre">ConnectManager.count_external_files()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/lucidlink.connect.html#lucidlink.connect.ConnectManager.get_data_store"><code class="docutils literal notranslate"><span class="pre">ConnectManager.get_data_store()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/lucidlink.connect.html#lucidlink.connect.ConnectManager.link_file"><code class="docutils literal notranslate"><span class="pre">ConnectManager.link_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/lucidlink.connect.html#lucidlink.connect.ConnectManager.link_http_file"><code class="docutils literal notranslate"><span class="pre">ConnectManager.link_http_file()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/lucidlink.connect.html#lucidlink.connect.ConnectManager.list_data_stores"><code class="docutils literal notranslate"><span class="pre">ConnectManager.list_data_stores()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/lucidlink.connect.html#lucidlink.connect.ConnectManager.list_external_files"><code class="docutils literal notranslate"><span class="pre">ConnectManager.list_external_files()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/lucidlink.connect.html#lucidlink.connect.ConnectManager.rekey_data_store"><code class="docutils literal notranslate"><span class="pre">ConnectManager.rekey_data_store()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/lucidlink.connect.html#lucidlink.connect.ConnectManager.remove_data_store"><code class="docutils literal notranslate"><span class="pre">ConnectManager.remove_data_store()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/lucidlink.connect.html#lucidlink.connect.ConnectManager.unlink_file"><code class="docutils literal notranslate"><span class="pre">ConnectManager.unlink_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/lucidlink.connect.html#lucidlink.connect.ConnectManager.update_http_file_url"><code class="docutils literal notranslate"><span class="pre">ConnectManager.update_http_file_url()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -197,6 +199,7 @@
 <li class="toctree-l3"><a class="reference internal" href="api/lucidlink.filesystem.html#lucidlink.filesystem.Filesystem"><code class="docutils literal notranslate"><span class="pre">Filesystem</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="api/lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.create"><code class="docutils literal notranslate"><span class="pre">Filesystem.create()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.create_dir"><code class="docutils literal notranslate"><span class="pre">Filesystem.create_dir()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.create_symlink"><code class="docutils literal notranslate"><span class="pre">Filesystem.create_symlink()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.delete"><code class="docutils literal notranslate"><span class="pre">Filesystem.delete()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.delete_dir"><code class="docutils literal notranslate"><span class="pre">Filesystem.delete_dir()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.dir_exists"><code class="docutils literal notranslate"><span class="pre">Filesystem.dir_exists()</span></code></a></li>
@@ -211,6 +214,7 @@
 <li class="toctree-l4"><a class="reference internal" href="api/lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.open_legacy"><code class="docutils literal notranslate"><span class="pre">Filesystem.open_legacy()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.read_dir"><code class="docutils literal notranslate"><span class="pre">Filesystem.read_dir()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.read_file"><code class="docutils literal notranslate"><span class="pre">Filesystem.read_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.read_symlink"><code class="docutils literal notranslate"><span class="pre">Filesystem.read_symlink()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.truncate"><code class="docutils literal notranslate"><span class="pre">Filesystem.truncate()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.unlock_all_byte_ranges"><code class="docutils literal notranslate"><span class="pre">Filesystem.unlock_all_byte_ranges()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.unlock_byte_range"><code class="docutils literal notranslate"><span class="pre">Filesystem.unlock_byte_range()</span></code></a></li>
@@ -220,7 +224,6 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="api/lucidlink.fsspec.html">fsspec</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/lucidlink.fsspec.html#lucidlink.fsspec.AbstractFileSystem"><code class="docutils literal notranslate"><span class="pre">AbstractFileSystem</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/lucidlink.fsspec.html#lucidlink.fsspec.LucidLinkFileSystem"><code class="docutils literal notranslate"><span class="pre">LucidLinkFileSystem</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="api/lucidlink.fsspec.html#lucidlink.fsspec.LucidLinkFileSystem.cat"><code class="docutils literal notranslate"><span class="pre">LucidLinkFileSystem.cat()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/lucidlink.fsspec.html#lucidlink.fsspec.LucidLinkFileSystem.cat_file"><code class="docutils literal notranslate"><span class="pre">LucidLinkFileSystem.cat_file()</span></code></a></li>

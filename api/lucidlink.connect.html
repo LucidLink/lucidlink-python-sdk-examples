@@ -87,11 +87,13 @@
 <li class="toctree-l4"><a class="reference internal" href="#lucidlink.connect.ConnectManager.count_external_files"><code class="docutils literal notranslate"><span class="pre">ConnectManager.count_external_files()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#lucidlink.connect.ConnectManager.get_data_store"><code class="docutils literal notranslate"><span class="pre">ConnectManager.get_data_store()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#lucidlink.connect.ConnectManager.link_file"><code class="docutils literal notranslate"><span class="pre">ConnectManager.link_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lucidlink.connect.ConnectManager.link_http_file"><code class="docutils literal notranslate"><span class="pre">ConnectManager.link_http_file()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#lucidlink.connect.ConnectManager.list_data_stores"><code class="docutils literal notranslate"><span class="pre">ConnectManager.list_data_stores()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#lucidlink.connect.ConnectManager.list_external_files"><code class="docutils literal notranslate"><span class="pre">ConnectManager.list_external_files()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#lucidlink.connect.ConnectManager.rekey_data_store"><code class="docutils literal notranslate"><span class="pre">ConnectManager.rekey_data_store()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#lucidlink.connect.ConnectManager.remove_data_store"><code class="docutils literal notranslate"><span class="pre">ConnectManager.remove_data_store()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#lucidlink.connect.ConnectManager.unlink_file"><code class="docutils literal notranslate"><span class="pre">ConnectManager.unlink_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lucidlink.connect.ConnectManager.update_http_file_url"><code class="docutils literal notranslate"><span class="pre">ConnectManager.update_http_file_url()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -197,6 +199,7 @@
 <li class="toctree-l3"><a class="reference internal" href="lucidlink.filesystem.html#lucidlink.filesystem.Filesystem"><code class="docutils literal notranslate"><span class="pre">Filesystem</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.create"><code class="docutils literal notranslate"><span class="pre">Filesystem.create()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.create_dir"><code class="docutils literal notranslate"><span class="pre">Filesystem.create_dir()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.create_symlink"><code class="docutils literal notranslate"><span class="pre">Filesystem.create_symlink()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.delete"><code class="docutils literal notranslate"><span class="pre">Filesystem.delete()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.delete_dir"><code class="docutils literal notranslate"><span class="pre">Filesystem.delete_dir()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.dir_exists"><code class="docutils literal notranslate"><span class="pre">Filesystem.dir_exists()</span></code></a></li>
@@ -211,6 +214,7 @@
 <li class="toctree-l4"><a class="reference internal" href="lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.open_legacy"><code class="docutils literal notranslate"><span class="pre">Filesystem.open_legacy()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.read_dir"><code class="docutils literal notranslate"><span class="pre">Filesystem.read_dir()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.read_file"><code class="docutils literal notranslate"><span class="pre">Filesystem.read_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.read_symlink"><code class="docutils literal notranslate"><span class="pre">Filesystem.read_symlink()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.truncate"><code class="docutils literal notranslate"><span class="pre">Filesystem.truncate()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.unlock_all_byte_ranges"><code class="docutils literal notranslate"><span class="pre">Filesystem.unlock_all_byte_ranges()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="lucidlink.filesystem.html#lucidlink.filesystem.Filesystem.unlock_byte_range"><code class="docutils literal notranslate"><span class="pre">Filesystem.unlock_byte_range()</span></code></a></li>
@@ -220,7 +224,6 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="lucidlink.fsspec.html">fsspec</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="lucidlink.fsspec.html#lucidlink.fsspec.AbstractFileSystem"><code class="docutils literal notranslate"><span class="pre">AbstractFileSystem</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="lucidlink.fsspec.html#lucidlink.fsspec.LucidLinkFileSystem"><code class="docutils literal notranslate"><span class="pre">LucidLinkFileSystem</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="lucidlink.fsspec.html#lucidlink.fsspec.LucidLinkFileSystem.cat"><code class="docutils literal notranslate"><span class="pre">LucidLinkFileSystem.cat()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="lucidlink.fsspec.html#lucidlink.fsspec.LucidLinkFileSystem.cat_file"><code class="docutils literal notranslate"><span class="pre">LucidLinkFileSystem.cat_file()</span></code></a></li>
@@ -383,6 +386,8 @@
 <p>LucidLink Connect - external file management.</p>
 <p>Provides the ability to attach existing S3 datasets to a LucidLink filespace
 as read-only external files (1:1 file-to-S3-object mapping).</p>
+<p>Also supports linking publicly accessible HTTP URLs directly as external files,
+without the need for an S3 data store.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="lucidlink.connect.ConnectManager">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">lucidlink.connect.</span></span><span class="sig-name descname"><span class="pre">ConnectManager</span></span><a class="reference internal" href="../_modules/lucidlink/connect.html#ConnectManager"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lucidlink.connect.ConnectManager" title="Link to this definition"></a></dt>
@@ -494,6 +499,30 @@ size, skips the S3 HeadObject call.</p></li>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="lucidlink.connect.ConnectManager.link_http_file">
+<span class="sig-name descname"><span class="pre">link_http_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/lucidlink/connect.html#ConnectManager.link_http_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lucidlink.connect.ConnectManager.link_http_file" title="Link to this definition"></a></dt>
+<dd><p>Link an HTTP URL as an external file in the filespace.</p>
+<p>Creates a read-only file entry that maps to content at the given URL.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_path</strong> – Path in the filespace for the new file</p></li>
+<li><p><strong>url</strong> – HTTP URL of the file content</p></li>
+<li><p><strong>size</strong> – Optional file size in bytes. When provided, skips the access
+check and size validation (useful for bulk operations where
+size is known in advance).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>ValueError</strong> – If size is negative</p></li>
+<li><p><strong>RuntimeError</strong> – If the URL is inaccessible, expired, or the link fails</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="lucidlink.connect.ConnectManager.list_data_stores">
 <span class="sig-name descname"><span class="pre">list_data_stores</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="lucidlink.connect_models.html#lucidlink.connect_models.DataStoreInfo" title="lucidlink.connect_models.DataStoreInfo"><span class="pre">DataStoreInfo</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/lucidlink/connect.html#ConnectManager.list_data_stores"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lucidlink.connect.ConnectManager.list_data_stores" title="Link to this definition"></a></dt>
 <dd><p>List all registered data stores.</p>
@@ -571,6 +600,29 @@ size, skips the S3 HeadObject call.</p></li>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>RuntimeError</strong> – If file not found or unlink fails</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lucidlink.connect.ConnectManager.update_http_file_url">
+<span class="sig-name descname"><span class="pre">update_http_file_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/lucidlink/connect.html#ConnectManager.update_http_file_url"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lucidlink.connect.ConnectManager.update_http_file_url" title="Link to this definition"></a></dt>
+<dd><p>Update the URL of an existing HTTP link file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_path</strong> – Path of the HTTP link file in the filespace</p></li>
+<li><p><strong>new_url</strong> – New HTTP URL for the file content</p></li>
+<li><p><strong>size</strong> – Optional file size in bytes. When provided, skips the access
+check and size validation (useful for bulk operations where
+size is known in advance).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>ValueError</strong> – If size is negative</p></li>
+<li><p><strong>RuntimeError</strong> – If the file is not found or is not an HTTP link file</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>

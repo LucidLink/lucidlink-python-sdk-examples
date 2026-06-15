@@ -188,8 +188,8 @@ print(f"Modified: {info.mtime}")
 
 ### File Locking
 
-Use the `lock_type` parameter on `open()` to coordinate file access across clients.
-Locks are managed by LucidHub and enforced across all connected clients.
+Use the `lock_type` parameter on `open()` to coordinate file access across clients. Locks are managed by LucidHub and
+enforced across all connected clients.
 
 ```python
 # Shared lock — allows concurrent readers
@@ -205,19 +205,33 @@ with filespace.fs.open("/db.sqlite", "r+b", lock_type="exclusive") as f:
 
 ## LucidLink Connect
 
-Attach existing S3 objects to a filespace as read-only files at arbitrary paths:
+Attach existing S3 objects to a filespace as read-only files at arbitrary paths. Requires a Connect-enabled filespace
+(V10+).
 
 ```python
 from lucidlink import S3DataStoreConfig
 
 connect = filespace.connect
 
-# Register an S3 data store
+# Register an S3 data store (AWS defaults — HTTPS, virtual-hosted style)
 connect.add_data_store("my-store", S3DataStoreConfig(
     access_key="AKIA...",
     secret_key="...",
     bucket_name="my-bucket",
     region="us-east-1",
+))
+
+# S3-compatible endpoint (e.g., GCP Cloud Storage interop) — pass a full URL
+# with scheme in `endpoint` and use path-style addressing. `url_expiration_minutes`
+# controls presigned URL lifetime (4320–10080 minutes; default 10080 = 7 days).
+connect.add_data_store("gcs", S3DataStoreConfig(
+    access_key="GOOG...",
+    secret_key="...",
+    bucket_name="datasets",
+    region="us-central1",
+    endpoint="https://storage.googleapis.com",
+    use_virtual_addressing=False,
+    url_expiration_minutes=10080,
 ))
 
 # Link S3 objects as files in the filespace
@@ -227,7 +241,7 @@ connect.link_file(
     object_id="dataset1_file1.csv",
 )
 
-# For bulk linking, provide size and checksum to skip S3 HeadObject calls
+# For bulk linking, provide size and checksum together to skip S3 HeadObject calls.
 connect.link_file(
     file_path="/proj1/dataset1/large.bin",
     data_store_name="my-store",
@@ -241,10 +255,12 @@ filespace.sync_all()  # Sync to see newly linked files
 with filespace.fs.open("/data/file.csv", "rb") as f:
     content = f.read()
 
-# List linked files (paginated)
+# List linked files (paginated; cursor is an opaque token)
 result = connect.list_external_files("my-store", limit=50)
 for path in result.file_paths:
     print(path)
+if result.has_more:
+    result = connect.list_external_files("my-store", limit=50, cursor=result.cursor)
 
 # Unlink when no longer needed
 connect.unlink_file("/data/file.csv")
@@ -293,12 +309,10 @@ with lucidlink.create_daemon() as daemon:
 
 ### Syncing Changes
 
-By default, `filespace.unlink()` automatically calls `sync_all()` before disconnecting
-(controlled by the `sync_mode` parameter on `link_filespace()`). This ensures all write
-operations are committed to the hub.
+By default, `filespace.unlink()` automatically calls `sync_all()` before disconnecting (controlled by the `sync_mode`
+parameter on `link_filespace()`). This ensures all write operations are committed to the hub.
 
-If you need to verify changes are visible to other clients *before* unlinking, call
-`sync_all()` explicitly:
+If you need to verify changes are visible to other clients _before_ unlinking, call `sync_all()` explicitly:
 
 ```python
 filespace.fs.write_file("/data.txt", b"important data")
