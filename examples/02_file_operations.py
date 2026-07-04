@@ -20,22 +20,6 @@ import lucidlink
 DEMO_DIR = "/examples_demo"
 
 
-def setup():
-    """Create daemon, authenticate, and link to filespace."""
-    token = os.environ["LUCIDLINK_SA_TOKEN"]
-    filespace_name = os.environ["LUCIDLINK_FILESPACE"]
-
-    daemon = lucidlink.create_daemon()
-    daemon.start()
-
-    credentials = lucidlink.ServiceAccountCredentials(token=token)
-    workspace = daemon.authenticate(credentials)
-    filespace = workspace.link_filespace(name=filespace_name)
-    filespace.fs.create_dir(DEMO_DIR)
-
-    return daemon, filespace
-
-
 def directory_operations(fs):
     """Create, list, check, and delete directories."""
     print("=== Directory Operations ===")
@@ -137,18 +121,31 @@ def cleanup(fs):
 
 
 def main():
-    daemon, filespace = setup()
-    fs = filespace.fs
+    token = os.environ["LUCIDLINK_SA_TOKEN"]
+    filespace_name = os.environ["LUCIDLINK_FILESPACE"]
 
-    try:
-        directory_operations(fs)
-        file_read_write(fs)
-        file_metadata(fs)
-        move_and_truncate(fs)
-        cleanup(fs)
-    finally:
-        filespace.unlink()
-        daemon.stop()
+    credentials = lucidlink.ServiceAccountCredentials(token=token)
+
+    with lucidlink.Client() as client:
+        client.login(credentials)
+
+        workspace_info = client.list_workspaces()[0]
+        workspace = client.get_workspace(workspace_info.id)
+
+        filespaces = workspace.list_filespaces()
+        filespace_id = next((fs.id for fs in filespaces if fs.name == filespace_name), None)
+        if filespace_id is None:
+            raise SystemExit(f"Filespace {filespace_name!r} not found")
+
+        with workspace.link_filespace(id=filespace_id) as filespace:
+            fs = filespace.fs
+            fs.create_dir(DEMO_DIR)
+
+            directory_operations(fs)
+            file_read_write(fs)
+            file_metadata(fs)
+            move_and_truncate(fs)
+            cleanup(fs)
 
 
 if __name__ == "__main__":

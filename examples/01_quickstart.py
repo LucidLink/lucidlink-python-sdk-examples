@@ -1,7 +1,7 @@
 """
 LucidLink Python SDK — Quickstart
 
-Minimal end-to-end example: create a daemon, authenticate,
+Minimal end-to-end example: create a client, authenticate,
 link to a filespace, read/write files, and clean up.
 
 Prerequisites:
@@ -15,28 +15,6 @@ Usage:
 
 import os
 import lucidlink
-
-
-def setup():
-    """Create daemon, authenticate, and link to filespace."""
-    token = os.environ["LUCIDLINK_SA_TOKEN"]
-    filespace_name = os.environ["LUCIDLINK_FILESPACE"]
-
-    daemon = lucidlink.create_daemon()
-    daemon.start()
-
-    credentials = lucidlink.ServiceAccountCredentials(token=token)
-    workspace = daemon.authenticate(credentials)
-
-    print(f"[1/4] Authenticated to workspace: {workspace.name}")
-
-    filespaces = workspace.list_filespaces()
-    print(f"[2/4] Available filespaces: {', '.join(fs.name for fs in filespaces)}")
-
-    filespace = workspace.link_filespace(name=filespace_name)
-    print(f"[3/4] Linked to filespace: {filespace_name}")
-
-    return daemon, filespace
 
 
 def run(fs):
@@ -61,13 +39,28 @@ def run(fs):
 
 
 def main():
-    daemon, filespace = setup()
+    token = os.environ["LUCIDLINK_SA_TOKEN"]
+    filespace_name = os.environ["LUCIDLINK_FILESPACE"]
 
-    try:
-        run(filespace.fs)
-    finally:
-        filespace.unlink()
-        daemon.stop()
+    credentials = lucidlink.ServiceAccountCredentials(token=token)
+
+    with lucidlink.Client() as client:
+        client.login(credentials)
+
+        workspace_info = client.list_workspaces()[0]
+        workspace = client.get_workspace(workspace_info.id)
+        print(f"[1/4] Authenticated to workspace: {workspace.name}")
+
+        filespaces = workspace.list_filespaces()
+        print(f"[2/4] Available filespaces: {', '.join(fs.name for fs in filespaces)}")
+
+        filespace_id = next((fs.id for fs in filespaces if fs.name == filespace_name), None)
+        if filespace_id is None:
+            raise SystemExit(f"Filespace {filespace_name!r} not found")
+
+        with workspace.link_filespace(id=filespace_id) as filespace:
+            print(f"[3/4] Linked to filespace: {filespace_name}")
+            run(filespace.fs)
 
 
 if __name__ == "__main__":

@@ -22,20 +22,6 @@ import os
 import lucidlink
 
 
-def setup():
-    token = os.environ["LUCIDLINK_SA_TOKEN"]
-    filespace_name = os.environ["LUCIDLINK_FILESPACE"]
-
-    daemon = lucidlink.create_daemon()
-    daemon.start()
-
-    credentials = lucidlink.ServiceAccountCredentials(token=token)
-    workspace = daemon.authenticate(credentials)
-    filespace = workspace.link_filespace(name=filespace_name)
-
-    return daemon, filespace
-
-
 def manage_data_stores(filespace):
     """Add, list, and inspect S3 data stores."""
     print("=== Data Store Management ===")
@@ -118,15 +104,26 @@ def cleanup(filespace, store_name):
 
 
 def main():
-    daemon, filespace = setup()
+    token = os.environ["LUCIDLINK_SA_TOKEN"]
+    filespace_name = os.environ["LUCIDLINK_FILESPACE"]
 
-    try:
-        store_name = manage_data_stores(filespace)
-        link_external_files(filespace, store_name)
-        cleanup(filespace, store_name)
-    finally:
-        filespace.unlink()
-        daemon.stop()
+    credentials = lucidlink.ServiceAccountCredentials(token=token)
+
+    with lucidlink.Client() as client:
+        client.login(credentials)
+
+        workspace_info = client.list_workspaces()[0]
+        workspace = client.get_workspace(workspace_info.id)
+
+        filespaces = workspace.list_filespaces()
+        filespace_id = next((fs.id for fs in filespaces if fs.name == filespace_name), None)
+        if filespace_id is None:
+            raise SystemExit(f"Filespace {filespace_name!r} not found")
+
+        with workspace.link_filespace(id=filespace_id) as filespace:
+            store_name = manage_data_stores(filespace)
+            link_external_files(filespace, store_name)
+            cleanup(filespace, store_name)
 
 
 if __name__ == "__main__":

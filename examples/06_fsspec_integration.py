@@ -3,8 +3,8 @@ LucidLink Python SDK — Pandas Integration
 
 Demonstrates two ways to use Pandas with LucidLink:
 
-1. Direct API — create a daemon, authenticate, link, and pass file handles
-2. fsspec storage_options — just URLs and storage_options, no daemon management
+1. Direct API — create a client, authenticate, link, and pass file handles
+2. fsspec storage_options — just URLs and storage_options, no client management
 
 Prerequisites:
     pip install lucidlink[fsspec] pandas pyarrow
@@ -16,6 +16,7 @@ Usage:
     python 06_fsspec_integration.py
 """
 
+import io
 import os
 
 import fsspec
@@ -59,64 +60,73 @@ def sample_events():
 # ---------------------------------------------------------------------------
 
 def direct_api_examples():
-    """Use the SDK directly: create daemon, authenticate, link, open files."""
+    """Use the SDK directly: create client, authenticate, link, open files."""
     print("\n========== Direct API ==========\n")
 
     token = os.environ["LUCIDLINK_SA_TOKEN"]
     filespace_name = os.environ["LUCIDLINK_FILESPACE"]
 
-    daemon = lucidlink.create_daemon()
-    daemon.start()
-
     credentials = lucidlink.ServiceAccountCredentials(token=token)
-    workspace = daemon.authenticate(credentials)
 
-    with workspace.link_filespace(name=filespace_name) as filespace:
-        fs = filespace.fs
-        fs.create_dir(DEMO_DIR)
+    with lucidlink.Client() as client:
+        client.login(credentials)
 
-        # CSV
-        print("=== CSV ===")
-        df = sample_people()
-        with fs.open(f"{DEMO_DIR}/people.csv", "wb") as f:
-            df.to_csv(f, index=False)
-        with fs.open(f"{DEMO_DIR}/people.csv", "rb") as f:
-            print(pd.read_csv(f))
+        workspace_info = client.list_workspaces()[0]
+        workspace = client.get_workspace(workspace_info.id)
 
-        # Parquet
-        print("\n=== Parquet ===")
-        df = sample_timeseries()
-        with fs.open(f"{DEMO_DIR}/timeseries.parquet", "wb") as f:
-            df.to_parquet(f, engine="pyarrow", compression="snappy")
-        with fs.open(f"{DEMO_DIR}/timeseries.parquet", "rb") as f:
-            df_read = pd.read_parquet(f, engine="pyarrow")
-        print(f"{len(df_read)} rows, columns={list(df_read.columns)}")
+        filespaces = workspace.list_filespaces()
+        filespace_id = next((fs.id for fs in filespaces if fs.name == filespace_name), None)
+        if filespace_id is None:
+            raise SystemExit(f"Filespace {filespace_name!r} not found")
 
-        # JSON Lines
-        print("\n=== JSON Lines ===")
-        df = sample_events()
-        with fs.open(f"{DEMO_DIR}/events.jsonl", "w") as f:
-            df.to_json(f, orient="records", lines=True)
-        with fs.open(f"{DEMO_DIR}/events.jsonl", "r") as f:
-            print(pd.read_json(f, orient="records", lines=True))
+        with workspace.link_filespace(id=filespace_id) as filespace:
+            fs = filespace.fs
+            fs.create_dir(DEMO_DIR)
 
-        # Chunked CSV
-        print("\n=== Chunked CSV ===")
-        df = pd.DataFrame({"id": range(10000), "value": [i * 0.1 for i in range(10000)]})
-        with fs.open(f"{DEMO_DIR}/large.csv", "wb") as f:
-            df.to_csv(f, index=False)
-        total_rows, total_sum = 0, 0.0
-        with fs.open(f"{DEMO_DIR}/large.csv", "rb") as f:
-            for chunk in pd.read_csv(f, chunksize=2000):
-                total_rows += len(chunk)
-                total_sum += chunk["value"].sum()
-        print(f"Processed {total_rows} rows in chunks, sum={total_sum:.1f}")
+            # CSV
+            print("=== CSV ===")
+            df = sample_people()
+            with fs.open(f"{DEMO_DIR}/people.csv", "wb") as f:
+                df.to_csv(f, index=False)
+            with fs.open(f"{DEMO_DIR}/people.csv", "rb") as f:
+                print(pd.read_csv(f))
 
-        # Cleanup
-        fs.delete_dir(DEMO_DIR, recursive=True)
-        print("\nCleaned up")
+            # Parquet — serialize via an in-memory buffer
+            # pyarrow inspects a file handle's `.name` and would treat it as a
+            # local filesystem path, so we hand it bytes instead of the LucidLink handle
+            print("\n=== Parquet ===")
+            df = sample_timeseries()
+            buf = io.BytesIO()
+            df.to_parquet(buf, engine="pyarrow", compression="snappy")
+            with fs.open(f"{DEMO_DIR}/timeseries.parquet", "wb") as f:
+                f.write(buf.getvalue())
+            with fs.open(f"{DEMO_DIR}/timeseries.parquet", "rb") as f:
+                df_read = pd.read_parquet(io.BytesIO(f.read()), engine="pyarrow")
+            print(f"{len(df_read)} rows, columns={list(df_read.columns)}")
 
-    daemon.stop()
+            # JSON Lines
+            print("\n=== JSON Lines ===")
+            df = sample_events()
+            with fs.open(f"{DEMO_DIR}/events.jsonl", "w") as f:
+                df.to_json(f, orient="records", lines=True)
+            with fs.open(f"{DEMO_DIR}/events.jsonl", "r") as f:
+                print(pd.read_json(f, orient="records", lines=True))
+
+            # Chunked CSV
+            print("\n=== Chunked CSV ===")
+            df = pd.DataFrame({"id": range(10000), "value": [i * 0.1 for i in range(10000)]})
+            with fs.open(f"{DEMO_DIR}/large.csv", "wb") as f:
+                df.to_csv(f, index=False)
+            total_rows, total_sum = 0, 0.0
+            with fs.open(f"{DEMO_DIR}/large.csv", "rb") as f:
+                for chunk in pd.read_csv(f, chunksize=2000):
+                    total_rows += len(chunk)
+                    total_sum += chunk["value"].sum()
+            print(f"Processed {total_rows} rows in chunks, sum={total_sum:.1f}")
+
+            # Cleanup
+            fs.delete_dir(DEMO_DIR, recursive=True)
+            print("\nCleaned up")
 
 
 # ---------------------------------------------------------------------------
