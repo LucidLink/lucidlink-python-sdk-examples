@@ -2,14 +2,19 @@
 
 ```{eval-rst}
 .. automodule:: lucidlink
-.. autofunction:: lucidlink.create_daemon
+
+.. autoclass:: lucidlink.Client
+   :members:
+
+.. autoclass:: lucidlink.ClientConfig
+   :members:
 ```
 
 ```{toctree}
+api/lucidlink.client
 api/lucidlink.connect
 api/lucidlink.connect_models
 api/lucidlink.credentials
-api/lucidlink.daemon
 api/lucidlink.exceptions
 api/lucidlink.filespace
 api/lucidlink.filesystem
@@ -19,4 +24,19 @@ api/lucidlink.filesystem_models
 api/lucidlink.storage
 api/lucidlink.stream
 api/lucidlink.workspace
+api/lucidlink.workspace_models
+```
+
+## Deprecated
+
+The `Daemon` facade and the `create_daemon()` factory are kept for backward
+compatibility; new code should use {class}`lucidlink.Client`.
+
+```{eval-rst}
+.. autofunction:: lucidlink.create_daemon
+```
+
+```{toctree}
+api/lucidlink.daemon
+api/lucidlink.daemon_models
 ```

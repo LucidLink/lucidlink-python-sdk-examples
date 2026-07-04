@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Quick Start &mdash; LucidLink Python SDK  documentation</title>
+  <title>Quick Start &mdash; LucidLink Python SDK 0.12.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="_static/custom.css?v=53c318c6" />
@@ -15,7 +15,7 @@
     <link rel="shortcut icon" href="_static/logo.svg"/>
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/documentation_options.js?v=61ccb1f1"></script>
       <script src="_static/doctools.js?v=fd6eb6e6"></script>
       <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/js/theme.js"></script>
@@ -79,7 +79,33 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="api-reference.html">API Reference</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="api-reference.html#lucidlink.create_daemon"><code class="docutils literal notranslate"><span class="pre">create_daemon()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-reference.html#lucidlink.Client"><code class="docutils literal notranslate"><span class="pre">Client</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api-reference.html#lucidlink.Client.close"><code class="docutils literal notranslate"><span class="pre">Client.close()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api-reference.html#lucidlink.Client.get_workspace"><code class="docutils literal notranslate"><span class="pre">Client.get_workspace()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api-reference.html#lucidlink.Client.is_logged_in"><code class="docutils literal notranslate"><span class="pre">Client.is_logged_in</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api-reference.html#lucidlink.Client.list_workspaces"><code class="docutils literal notranslate"><span class="pre">Client.list_workspaces()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api-reference.html#lucidlink.Client.login"><code class="docutils literal notranslate"><span class="pre">Client.login()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api-reference.html#lucidlink.ClientConfig"><code class="docutils literal notranslate"><span class="pre">ClientConfig</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api-reference.html#lucidlink.ClientConfig.fs_cache_size_mb"><code class="docutils literal notranslate"><span class="pre">ClientConfig.fs_cache_size_mb</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/lucidlink.client.html">client</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/lucidlink.client.html#lucidlink.client.Client"><code class="docutils literal notranslate"><span class="pre">Client</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/lucidlink.client.html#lucidlink.client.Client.close"><code class="docutils literal notranslate"><span class="pre">Client.close()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/lucidlink.client.html#lucidlink.client.Client.get_workspace"><code class="docutils literal notranslate"><span class="pre">Client.get_workspace()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/lucidlink.client.html#lucidlink.client.Client.is_logged_in"><code class="docutils literal notranslate"><span class="pre">Client.is_logged_in</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/lucidlink.client.html#lucidlink.client.Client.list_workspaces"><code class="docutils literal notranslate"><span class="pre">Client.list_workspaces()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/lucidlink.client.html#lucidlink.client.Client.login"><code class="docutils literal notranslate"><span class="pre">Client.login()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/lucidlink.client.html#lucidlink.client.ClientConfig"><code class="docutils literal notranslate"><span class="pre">ClientConfig</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/lucidlink.client.html#lucidlink.client.ClientConfig.fs_cache_size_mb"><code class="docutils literal notranslate"><span class="pre">ClientConfig.fs_cache_size_mb</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="api/lucidlink.connect.html">connect</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="api/lucidlink.connect.html#lucidlink.connect.ConnectManager"><code class="docutils literal notranslate"><span class="pre">ConnectManager</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="api/lucidlink.connect.html#lucidlink.connect.ConnectManager.add_data_store"><code class="docutils literal notranslate"><span class="pre">ConnectManager.add_data_store()</span></code></a></li>
@@ -153,20 +179,12 @@
 <li class="toctree-l3"><a class="reference internal" href="api/lucidlink.credentials.html#lucidlink.credentials.ServiceAccountCredentials"><code class="docutils literal notranslate"><span class="pre">ServiceAccountCredentials</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="api/lucidlink.daemon.html">daemon</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/lucidlink.daemon.html#lucidlink.daemon.Daemon"><code class="docutils literal notranslate"><span class="pre">Daemon</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="api/lucidlink.daemon.html#lucidlink.daemon.Daemon.authenticate"><code class="docutils literal notranslate"><span class="pre">Daemon.authenticate()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api/lucidlink.daemon.html#lucidlink.daemon.Daemon.is_running"><code class="docutils literal notranslate"><span class="pre">Daemon.is_running()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api/lucidlink.daemon.html#lucidlink.daemon.Daemon.start"><code class="docutils literal notranslate"><span class="pre">Daemon.start()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api/lucidlink.daemon.html#lucidlink.daemon.Daemon.stop"><code class="docutils literal notranslate"><span class="pre">Daemon.stop()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
 <li class="toctree-l2"><a class="reference internal" href="api/lucidlink.exceptions.html">exceptions</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="api/lucidlink.exceptions.html#lucidlink.exceptions.AuthenticationError"><code class="docutils literal notranslate"><span class="pre">AuthenticationError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/lucidlink.exceptions.html#lucidlink.exceptions.ClientError"><code class="docutils literal notranslate"><span class="pre">ClientError</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/lucidlink.exceptions.html#lucidlink.exceptions.ConfigurationError"><code class="docutils literal notranslate"><span class="pre">ConfigurationError</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/lucidlink.exceptions.html#lucidlink.exceptions.DaemonError"><code class="docutils literal notranslate"><span class="pre">DaemonError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/lucidlink.exceptions.html#lucidlink.exceptions.FilespaceAlreadyLinkedError"><code class="docutils literal notranslate"><span class="pre">FilespaceAlreadyLinkedError</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/lucidlink.exceptions.html#lucidlink.exceptions.FilespaceError"><code class="docutils literal notranslate"><span class="pre">FilespaceError</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/lucidlink.exceptions.html#lucidlink.exceptions.LucidLinkError"><code class="docutils literal notranslate"><span class="pre">LucidLinkError</span></code></a></li>
 </ul>
@@ -177,6 +195,7 @@
 <li class="toctree-l4"><a class="reference internal" href="api/lucidlink.filespace.html#lucidlink.filespace.Filespace.fs"><code class="docutils literal notranslate"><span class="pre">Filespace.fs</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/lucidlink.filespace.html#lucidlink.filespace.Filespace.full_name"><code class="docutils literal notranslate"><span class="pre">Filespace.full_name</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/lucidlink.filespace.html#lucidlink.filespace.Filespace.id"><code class="docutils literal notranslate"><span class="pre">Filespace.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/lucidlink.filespace.html#lucidlink.filespace.Filespace.is_linked"><code class="docutils literal notranslate"><span class="pre">Filespace.is_linked</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/lucidlink.filespace.html#lucidlink.filespace.Filespace.name"><code class="docutils literal notranslate"><span class="pre">Filespace.name</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/lucidlink.filespace.html#lucidlink.filespace.Filespace.sync_all"><code class="docutils literal notranslate"><span class="pre">Filespace.sync_all()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/lucidlink.filespace.html#lucidlink.filespace.Filespace.unlink"><code class="docutils literal notranslate"><span class="pre">Filespace.unlink()</span></code></a></li>
@@ -224,6 +243,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="api/lucidlink.fsspec.html">fsspec</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/lucidlink.fsspec.html#lucidlink.fsspec.AbstractFileSystem"><code class="docutils literal notranslate"><span class="pre">AbstractFileSystem</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/lucidlink.fsspec.html#lucidlink.fsspec.LucidLinkFileSystem"><code class="docutils literal notranslate"><span class="pre">LucidLinkFileSystem</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="api/lucidlink.fsspec.html#lucidlink.fsspec.LucidLinkFileSystem.cat"><code class="docutils literal notranslate"><span class="pre">LucidLinkFileSystem.cat()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/lucidlink.fsspec.html#lucidlink.fsspec.LucidLinkFileSystem.cat_file"><code class="docutils literal notranslate"><span class="pre">LucidLinkFileSystem.cat_file()</span></code></a></li>
@@ -249,13 +269,6 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="api/lucidlink.filespace_models.html">filespace_models</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/lucidlink.filespace_models.html#lucidlink.filespace_models.DaemonStatus"><code class="docutils literal notranslate"><span class="pre">DaemonStatus</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="api/lucidlink.filespace_models.html#lucidlink.filespace_models.DaemonStatus.is_authenticated"><code class="docutils literal notranslate"><span class="pre">DaemonStatus.is_authenticated</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api/lucidlink.filespace_models.html#lucidlink.filespace_models.DaemonStatus.is_linked"><code class="docutils literal notranslate"><span class="pre">DaemonStatus.is_linked</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api/lucidlink.filespace_models.html#lucidlink.filespace_models.DaemonStatus.is_running"><code class="docutils literal notranslate"><span class="pre">DaemonStatus.is_running</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api/lucidlink.filespace_models.html#lucidlink.filespace_models.DaemonStatus.root_path"><code class="docutils literal notranslate"><span class="pre">DaemonStatus.root_path</span></code></a></li>
-</ul>
-</li>
 <li class="toctree-l3"><a class="reference internal" href="api/lucidlink.filespace_models.html#lucidlink.filespace_models.FilespaceInfo"><code class="docutils literal notranslate"><span class="pre">FilespaceInfo</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="api/lucidlink.filespace_models.html#lucidlink.filespace_models.FilespaceInfo.created"><code class="docutils literal notranslate"><span class="pre">FilespaceInfo.created</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/lucidlink.filespace_models.html#lucidlink.filespace_models.FilespaceInfo.id"><code class="docutils literal notranslate"><span class="pre">FilespaceInfo.id</span></code></a></li>
@@ -345,9 +358,31 @@
 <li class="toctree-l3"><a class="reference internal" href="api/lucidlink.workspace.html#lucidlink.workspace.Workspace"><code class="docutils literal notranslate"><span class="pre">Workspace</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="api/lucidlink.workspace.html#lucidlink.workspace.Workspace.id"><code class="docutils literal notranslate"><span class="pre">Workspace.id</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/lucidlink.workspace.html#lucidlink.workspace.Workspace.link_filespace"><code class="docutils literal notranslate"><span class="pre">Workspace.link_filespace()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/lucidlink.workspace.html#lucidlink.workspace.Workspace.linked_filespaces"><code class="docutils literal notranslate"><span class="pre">Workspace.linked_filespaces</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/lucidlink.workspace.html#lucidlink.workspace.Workspace.list_filespaces"><code class="docutils literal notranslate"><span class="pre">Workspace.list_filespaces()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/lucidlink.workspace.html#lucidlink.workspace.Workspace.name"><code class="docutils literal notranslate"><span class="pre">Workspace.name</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/lucidlink.workspace.html#lucidlink.workspace.Workspace.stop"><code class="docutils literal notranslate"><span class="pre">Workspace.stop()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/lucidlink.workspace.html#lucidlink.workspace.Workspace.unlink_filespace"><code class="docutils literal notranslate"><span class="pre">Workspace.unlink_filespace()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/lucidlink.workspace_models.html">workspace_models</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/lucidlink.workspace_models.html#lucidlink.workspace_models.WorkspaceInfo"><code class="docutils literal notranslate"><span class="pre">WorkspaceInfo</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/lucidlink.workspace_models.html#lucidlink.workspace_models.WorkspaceInfo.id"><code class="docutils literal notranslate"><span class="pre">WorkspaceInfo.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/lucidlink.workspace_models.html#lucidlink.workspace_models.WorkspaceInfo.name"><code class="docutils literal notranslate"><span class="pre">WorkspaceInfo.name</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api-reference.html#deprecated">Deprecated</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api-reference.html#lucidlink.create_daemon"><code class="docutils literal notranslate"><span class="pre">create_daemon()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/lucidlink.daemon.html">daemon</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/lucidlink.daemon.html#lucidlink.daemon.Daemon"><code class="docutils literal notranslate"><span class="pre">Daemon</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/lucidlink.daemon_models.html">daemon_models</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/lucidlink.daemon_models.html#lucidlink.daemon_models.DaemonStatus"><code class="docutils literal notranslate"><span class="pre">DaemonStatus</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -404,36 +439,37 @@
 <h2>Basic Usage<a class="headerlink" href="#basic-usage" title="Link to this heading"></a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">lucidlink</span>
 
-<span class="c1"># Create and start daemon</span>
-<span class="n">daemon</span> <span class="o">=</span> <span class="n">lucidlink</span><span class="o">.</span><span class="n">create_daemon</span><span class="p">()</span>
-<span class="n">daemon</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="c1"># Create a Client (sandboxed temp storage by default)</span>
+<span class="k">with</span> <span class="n">lucidlink</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+    <span class="c1"># Authenticate with service account</span>
+    <span class="n">credentials</span> <span class="o">=</span> <span class="n">lucidlink</span><span class="o">.</span><span class="n">ServiceAccountCredentials</span><span class="p">(</span>
+        <span class="n">token</span><span class="o">=</span><span class="s2">&quot;sa_live:your_token_here&quot;</span>
+    <span class="p">)</span>
+    <span class="n">client</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">credentials</span><span class="p">)</span>
 
-<span class="c1"># Authenticate with service account</span>
-<span class="n">credentials</span> <span class="o">=</span> <span class="n">lucidlink</span><span class="o">.</span><span class="n">ServiceAccountCredentials</span><span class="p">(</span>
-    <span class="n">token</span><span class="o">=</span><span class="s2">&quot;sa_live:your_token_here&quot;</span>
-<span class="p">)</span>
-<span class="n">workspace</span> <span class="o">=</span> <span class="n">daemon</span><span class="o">.</span><span class="n">authenticate</span><span class="p">(</span><span class="n">credentials</span><span class="p">)</span>
+    <span class="c1"># Service-account tokens are workspace-scoped, so list_workspaces()</span>
+    <span class="c1"># returns exactly one entry today.</span>
+    <span class="n">workspace</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_workspace</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">list_workspaces</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
 
-<span class="c1"># Link to a filespace</span>
-<span class="n">filespace</span> <span class="o">=</span> <span class="n">workspace</span><span class="o">.</span><span class="n">link_filespace</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;production-data&quot;</span><span class="p">)</span>
+    <span class="c1"># Link to a filespace</span>
+    <span class="n">filespace</span> <span class="o">=</span> <span class="n">workspace</span><span class="o">.</span><span class="n">link_filespace</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;production-data&quot;</span><span class="p">)</span>
 
-<span class="c1"># Read directory</span>
-<span class="n">entries</span> <span class="o">=</span> <span class="n">filespace</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">read_dir</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">entries</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">entry</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">entry</span><span class="o">.</span><span class="n">size</span><span class="si">}</span><span class="s2"> bytes&quot;</span><span class="p">)</span>
+    <span class="c1"># Read directory</span>
+    <span class="n">entries</span> <span class="o">=</span> <span class="n">filespace</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">read_dir</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">entries</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">entry</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">entry</span><span class="o">.</span><span class="n">size</span><span class="si">}</span><span class="s2"> bytes&quot;</span><span class="p">)</span>
 
-<span class="c1"># Write a file</span>
-<span class="k">with</span> <span class="n">filespace</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;/example.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;Hello from LucidLink!&quot;</span><span class="p">)</span>
+    <span class="c1"># Write a file</span>
+    <span class="k">with</span> <span class="n">filespace</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;/example.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;Hello from LucidLink!&quot;</span><span class="p">)</span>
 
-<span class="c1"># Read a file</span>
-<span class="k">with</span> <span class="n">filespace</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;/example.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="n">content</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+    <span class="c1"># Read a file</span>
+    <span class="k">with</span> <span class="n">filespace</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;/example.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
 
-<span class="c1"># Cleanup — unlink() automatically syncs pending changes to the hub</span>
-<span class="n">filespace</span><span class="o">.</span><span class="n">unlink</span><span class="p">()</span>
-<span class="n">daemon</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+<span class="c1"># client.close() runs on __exit__ — unlinks filespaces and syncs pending</span>
+<span class="c1"># changes to LucidLink services.</span>
 </pre></div>
 </div>
 </section>
@@ -565,8 +601,8 @@
 </section>
 <section id="file-locking">
 <h3>File Locking<a class="headerlink" href="#file-locking" title="Link to this heading"></a></h3>
-<p>Use the <code class="docutils literal notranslate"><span class="pre">lock_type</span></code> parameter on <code class="docutils literal notranslate"><span class="pre">open()</span></code> to coordinate file access across clients. Locks are managed by LucidHub and
-enforced across all connected clients.</p>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">lock_type</span></code> parameter on <code class="docutils literal notranslate"><span class="pre">open()</span></code> to coordinate file access across clients. Locks are coordinated through
+LucidLink services and enforced across all connected clients.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Shared lock — allows concurrent readers</span>
 <span class="k">with</span> <span class="n">filespace</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;/data.csv&quot;</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">,</span> <span class="n">lock_type</span><span class="o">=</span><span class="s2">&quot;shared&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
@@ -649,7 +685,8 @@ enforced across all connected clients.</p>
 <h2>Workspace Operations<a class="headerlink" href="#workspace-operations" title="Link to this heading"></a></h2>
 <section id="discovering-filespaces">
 <h3>Discovering Filespaces<a class="headerlink" href="#discovering-filespaces" title="Link to this heading"></a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">workspace</span> <span class="o">=</span> <span class="n">daemon</span><span class="o">.</span><span class="n">authenticate</span><span class="p">(</span><span class="n">credentials</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">client</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">credentials</span><span class="p">)</span>
+<span class="n">workspace</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_workspace</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">list_workspaces</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
 
 <span class="c1"># List all filespaces the authenticated user can access</span>
 <span class="n">filespaces</span> <span class="o">=</span> <span class="n">workspace</span><span class="o">.</span><span class="n">list_filespaces</span><span class="p">()</span>
@@ -666,17 +703,18 @@ enforced across all connected clients.</p>
 <p>Use context managers for automatic lifecycle management:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">lucidlink</span>
 
-<span class="k">with</span> <span class="n">lucidlink</span><span class="o">.</span><span class="n">create_daemon</span><span class="p">()</span> <span class="k">as</span> <span class="n">daemon</span><span class="p">:</span>
+<span class="k">with</span> <span class="n">lucidlink</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
     <span class="n">credentials</span> <span class="o">=</span> <span class="n">lucidlink</span><span class="o">.</span><span class="n">ServiceAccountCredentials</span><span class="p">(</span>
         <span class="n">token</span><span class="o">=</span><span class="s2">&quot;sa_live:your_token_here&quot;</span>
     <span class="p">)</span>
-    <span class="n">workspace</span> <span class="o">=</span> <span class="n">daemon</span><span class="o">.</span><span class="n">authenticate</span><span class="p">(</span><span class="n">credentials</span><span class="p">)</span>
+    <span class="n">client</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">credentials</span><span class="p">)</span>
+    <span class="n">workspace</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_workspace</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">list_workspaces</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
 
     <span class="c1"># Filespace context manager — auto sync + unlink on exit</span>
     <span class="k">with</span> <span class="n">workspace</span><span class="o">.</span><span class="n">link_filespace</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;my-filespace&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">filespace</span><span class="p">:</span>
         <span class="n">filespace</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">write_file</span><span class="p">(</span><span class="s2">&quot;/output.txt&quot;</span><span class="p">,</span> <span class="sa">b</span><span class="s2">&quot;data&quot;</span><span class="p">)</span>
     <span class="c1"># filespace.sync_all() + filespace.unlink() called automatically</span>
-<span class="c1"># daemon.stop() called automatically</span>
+<span class="c1"># client.close() called automatically — unlinks filespaces and stops the runtime</span>
 </pre></div>
 </div>
 </section>
@@ -686,7 +724,7 @@ enforced across all connected clients.</p>
 <section id="syncing-changes">
 <h3>Syncing Changes<a class="headerlink" href="#syncing-changes" title="Link to this heading"></a></h3>
 <p>By default, <code class="docutils literal notranslate"><span class="pre">filespace.unlink()</span></code> automatically calls <code class="docutils literal notranslate"><span class="pre">sync_all()</span></code> before disconnecting (controlled by the <code class="docutils literal notranslate"><span class="pre">sync_mode</span></code>
-parameter on <code class="docutils literal notranslate"><span class="pre">link_filespace()</span></code>). This ensures all write operations are committed to the hub.</p>
+parameter on <code class="docutils literal notranslate"><span class="pre">link_filespace()</span></code>). This ensures all write operations are committed to LucidLink services.</p>
 <p>If you need to verify changes are visible to other clients <em>before</em> unlinking, call <code class="docutils literal notranslate"><span class="pre">sync_all()</span></code> explicitly:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">filespace</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">write_file</span><span class="p">(</span><span class="s2">&quot;/data.txt&quot;</span><span class="p">,</span> <span class="sa">b</span><span class="s2">&quot;important data&quot;</span><span class="p">)</span>
 <span class="n">filespace</span><span class="o">.</span><span class="n">sync_all</span><span class="p">()</span>  <span class="c1"># Explicitly sync — changes are now visible to other clients</span>
@@ -708,28 +746,30 @@ parameter on <code class="docutils literal notranslate"><span class="pre">link_f
 <section id="sandboxed-mode-default">
 <h4>Sandboxed Mode (Default)<a class="headerlink" href="#sandboxed-mode-default" title="Link to this heading"></a></h4>
 <p>Uses a temporary directory that’s automatically cleaned up:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">daemon</span> <span class="o">=</span> <span class="n">lucidlink</span><span class="o">.</span><span class="n">create_daemon</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">client</span> <span class="o">=</span> <span class="n">lucidlink</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span>  <span class="c1"># sandboxed by default</span>
 </pre></div>
 </div>
 </section>
 <section id="physical-mode">
 <h4>Physical Mode<a class="headerlink" href="#physical-mode" title="Link to this heading"></a></h4>
 <p>Uses a persistent <code class="docutils literal notranslate"><span class="pre">.lucid</span></code> folder:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># With cleanup on exit</span>
-<span class="n">daemon</span> <span class="o">=</span> <span class="n">lucidlink</span><span class="o">.</span><span class="n">create_daemon</span><span class="p">(</span><span class="n">sandboxed</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">lucidlink</span><span class="w"> </span><span class="kn">import</span> <span class="n">Client</span><span class="p">,</span> <span class="n">StorageConfig</span><span class="p">,</span> <span class="n">StorageMode</span>
 
-<span class="c1"># Keep files after exit</span>
-<span class="n">daemon</span> <span class="o">=</span> <span class="n">lucidlink</span><span class="o">.</span><span class="n">create_daemon</span><span class="p">(</span>
-    <span class="n">sandboxed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-    <span class="n">persist_files</span><span class="o">=</span><span class="kc">True</span>
-<span class="p">)</span>
+<span class="c1"># With cleanup on close</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="n">storage</span><span class="o">=</span><span class="n">StorageConfig</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="n">StorageMode</span><span class="o">.</span><span class="n">PHYSICAL</span><span class="p">))</span>
+
+<span class="c1"># Keep files after close</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="n">storage</span><span class="o">=</span><span class="n">StorageConfig</span><span class="p">(</span>
+    <span class="n">mode</span><span class="o">=</span><span class="n">StorageMode</span><span class="o">.</span><span class="n">PHYSICAL</span><span class="p">,</span>
+    <span class="n">persist_on_exit</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">))</span>
 
 <span class="c1"># Custom storage location</span>
-<span class="n">daemon</span> <span class="o">=</span> <span class="n">lucidlink</span><span class="o">.</span><span class="n">create_daemon</span><span class="p">(</span>
-    <span class="n">sandboxed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-    <span class="n">persist_files</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">root_path</span><span class="o">=</span><span class="s2">&quot;D:/lucid_data&quot;</span>
-<span class="p">)</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="n">storage</span><span class="o">=</span><span class="n">StorageConfig</span><span class="p">(</span>
+    <span class="n">mode</span><span class="o">=</span><span class="n">StorageMode</span><span class="o">.</span><span class="n">PHYSICAL</span><span class="p">,</span>
+    <span class="n">persist_on_exit</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">root_path</span><span class="o">=</span><span class="s2">&quot;D:/lucid_data&quot;</span><span class="p">,</span>
+<span class="p">))</span>
 </pre></div>
 </div>
 </section>
@@ -746,11 +786,11 @@ parameter on <code class="docutils literal notranslate"><span class="pre">link_f
 <span class="p">)</span>
 
 <span class="k">try</span><span class="p">:</span>
-    <span class="n">daemon</span> <span class="o">=</span> <span class="n">lucidlink</span><span class="o">.</span><span class="n">create_daemon</span><span class="p">()</span>
-    <span class="n">daemon</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-    <span class="n">credentials</span> <span class="o">=</span> <span class="n">lucidlink</span><span class="o">.</span><span class="n">ServiceAccountCredentials</span><span class="p">(</span><span class="n">token</span><span class="o">=</span><span class="s2">&quot;sa_live:your_token_here&quot;</span><span class="p">)</span>
-    <span class="n">workspace</span> <span class="o">=</span> <span class="n">daemon</span><span class="o">.</span><span class="n">authenticate</span><span class="p">(</span><span class="n">credentials</span><span class="p">)</span>
-    <span class="n">filespace</span> <span class="o">=</span> <span class="n">workspace</span><span class="o">.</span><span class="n">link_filespace</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;my-filespace&quot;</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">lucidlink</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+        <span class="n">credentials</span> <span class="o">=</span> <span class="n">lucidlink</span><span class="o">.</span><span class="n">ServiceAccountCredentials</span><span class="p">(</span><span class="n">token</span><span class="o">=</span><span class="s2">&quot;sa_live:your_token_here&quot;</span><span class="p">)</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">credentials</span><span class="p">)</span>
+        <span class="n">workspace</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_workspace</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">list_workspaces</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+        <span class="n">filespace</span> <span class="o">=</span> <span class="n">workspace</span><span class="o">.</span><span class="n">link_filespace</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;my-filespace&quot;</span><span class="p">)</span>
 <span class="k">except</span> <span class="n">AuthenticationError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Auth failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="k">except</span> <span class="n">FilespaceError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>

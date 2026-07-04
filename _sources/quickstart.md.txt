@@ -21,36 +21,37 @@ pip install lucidlink
 ```python
 import lucidlink
 
-# Create and start daemon
-daemon = lucidlink.create_daemon()
-daemon.start()
+# Create a Client (sandboxed temp storage by default)
+with lucidlink.Client() as client:
+    # Authenticate with service account
+    credentials = lucidlink.ServiceAccountCredentials(
+        token="sa_live:your_token_here"
+    )
+    client.login(credentials)
 
-# Authenticate with service account
-credentials = lucidlink.ServiceAccountCredentials(
-    token="sa_live:your_token_here"
-)
-workspace = daemon.authenticate(credentials)
+    # Service-account tokens are workspace-scoped, so list_workspaces()
+    # returns exactly one entry today.
+    workspace = client.get_workspace(client.list_workspaces()[0].id)
 
-# Link to a filespace
-filespace = workspace.link_filespace(name="production-data")
+    # Link to a filespace
+    filespace = workspace.link_filespace(name="production-data")
 
-# Read directory
-entries = filespace.fs.read_dir("/")
-for entry in entries:
-    print(f"{entry.name}: {entry.size} bytes")
+    # Read directory
+    entries = filespace.fs.read_dir("/")
+    for entry in entries:
+        print(f"{entry.name}: {entry.size} bytes")
 
-# Write a file
-with filespace.fs.open("/example.txt", "wb") as f:
-    f.write(b"Hello from LucidLink!")
+    # Write a file
+    with filespace.fs.open("/example.txt", "wb") as f:
+        f.write(b"Hello from LucidLink!")
 
-# Read a file
-with filespace.fs.open("/example.txt", "rb") as f:
-    content = f.read()
-    print(content)
+    # Read a file
+    with filespace.fs.open("/example.txt", "rb") as f:
+        content = f.read()
+        print(content)
 
-# Cleanup — unlink() automatically syncs pending changes to the hub
-filespace.unlink()
-daemon.stop()
+# client.close() runs on __exit__ — unlinks filespaces and syncs pending
+# changes to LucidLink services.
 ```
 
 ## File Operations
@@ -188,8 +189,8 @@ print(f"Modified: {info.mtime}")
 
 ### File Locking
 
-Use the `lock_type` parameter on `open()` to coordinate file access across clients. Locks are managed by LucidHub and
-enforced across all connected clients.
+Use the `lock_type` parameter on `open()` to coordinate file access across clients. Locks are coordinated through
+LucidLink services and enforced across all connected clients.
 
 ```python
 # Shared lock — allows concurrent readers
@@ -274,7 +275,8 @@ connect.remove_data_store("my-store")
 ### Discovering Filespaces
 
 ```python
-workspace = daemon.authenticate(credentials)
+client.login(credentials)
+workspace = client.get_workspace(client.list_workspaces()[0].id)
 
 # List all filespaces the authenticated user can access
 filespaces = workspace.list_filespaces()
@@ -292,17 +294,18 @@ Use context managers for automatic lifecycle management:
 ```python
 import lucidlink
 
-with lucidlink.create_daemon() as daemon:
+with lucidlink.Client() as client:
     credentials = lucidlink.ServiceAccountCredentials(
         token="sa_live:your_token_here"
     )
-    workspace = daemon.authenticate(credentials)
+    client.login(credentials)
+    workspace = client.get_workspace(client.list_workspaces()[0].id)
 
     # Filespace context manager — auto sync + unlink on exit
     with workspace.link_filespace(name="my-filespace") as filespace:
         filespace.fs.write_file("/output.txt", b"data")
     # filespace.sync_all() + filespace.unlink() called automatically
-# daemon.stop() called automatically
+# client.close() called automatically — unlinks filespaces and stops the runtime
 ```
 
 ## Configuration
@@ -310,7 +313,7 @@ with lucidlink.create_daemon() as daemon:
 ### Syncing Changes
 
 By default, `filespace.unlink()` automatically calls `sync_all()` before disconnecting (controlled by the `sync_mode`
-parameter on `link_filespace()`). This ensures all write operations are committed to the hub.
+parameter on `link_filespace()`). This ensures all write operations are committed to LucidLink services.
 
 If you need to verify changes are visible to other clients _before_ unlinking, call `sync_all()` explicitly:
 
@@ -338,7 +341,7 @@ filespace.unlink()    # Will NOT auto-sync
 Uses a temporary directory that's automatically cleaned up:
 
 ```python
-daemon = lucidlink.create_daemon()
+client = lucidlink.Client()  # sandboxed by default
 ```
 
 #### Physical Mode
@@ -346,21 +349,23 @@ daemon = lucidlink.create_daemon()
 Uses a persistent `.lucid` folder:
 
 ```python
-# With cleanup on exit
-daemon = lucidlink.create_daemon(sandboxed=False)
+from lucidlink import Client, StorageConfig, StorageMode
 
-# Keep files after exit
-daemon = lucidlink.create_daemon(
-    sandboxed=False,
-    persist_files=True
-)
+# With cleanup on close
+client = Client(storage=StorageConfig(mode=StorageMode.PHYSICAL))
+
+# Keep files after close
+client = Client(storage=StorageConfig(
+    mode=StorageMode.PHYSICAL,
+    persist_on_exit=True,
+))
 
 # Custom storage location
-daemon = lucidlink.create_daemon(
-    sandboxed=False,
-    persist_files=True,
-    root_path="D:/lucid_data"
-)
+client = Client(storage=StorageConfig(
+    mode=StorageMode.PHYSICAL,
+    persist_on_exit=True,
+    root_path="D:/lucid_data",
+))
 ```
 
 ### Error Handling
@@ -377,11 +382,11 @@ from lucidlink.exceptions import (
 )
 
 try:
-    daemon = lucidlink.create_daemon()
-    daemon.start()
-    credentials = lucidlink.ServiceAccountCredentials(token="sa_live:your_token_here")
-    workspace = daemon.authenticate(credentials)
-    filespace = workspace.link_filespace(name="my-filespace")
+    with lucidlink.Client() as client:
+        credentials = lucidlink.ServiceAccountCredentials(token="sa_live:your_token_here")
+        client.login(credentials)
+        workspace = client.get_workspace(client.list_workspaces()[0].id)
+        filespace = workspace.link_filespace(name="my-filespace")
 except AuthenticationError as e:
     print(f"Auth failed: {e}")
 except FilespaceError as e:

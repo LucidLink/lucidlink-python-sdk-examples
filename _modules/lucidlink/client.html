@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>lucidlink.filespace_models &mdash; LucidLink Python SDK 0.12.0 documentation</title>
+  <title>lucidlink.client &mdash; LucidLink Python SDK 0.12.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=53c318c6" />
@@ -404,7 +404,7 @@
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
           <li class="breadcrumb-item"><a href="../lucidlink.html">lucidlink</a></li>
-      <li class="breadcrumb-item active">lucidlink.filespace_models</li>
+      <li class="breadcrumb-item active">lucidlink.client</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -413,52 +413,276 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <h1>Source code for lucidlink.filespace_models</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">LucidLink Python Library - Filespace Type Definitions</span>
+  <h1>Source code for lucidlink.client</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;LucidLink Python Library - Client.</span>
 
-<span class="sd">Types for filespace identity and configuration.</span>
+<span class="sd">Top-level entry point for the LucidLink SDK. Each ``Client`` is fully</span>
+<span class="sd">independent, so multiple clients can coexist in one process and operate on</span>
+<span class="sd">different workspaces concurrently.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
+<span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">Enum</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
 
-<span class="c1"># Backwards-compat re-export — DaemonStatus moved to daemon_models.</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">.daemon_models</span><span class="w"> </span><span class="kn">import</span> <span class="n">DaemonStatus</span>  <span class="c1"># noqa: F401</span>
-
-
-<div class="viewcode-block" id="SyncMode">
-<a class="viewcode-back" href="../../api/lucidlink.filespace_models.html#lucidlink.filespace_models.SyncMode">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">SyncMode</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Controls whether changes are automatically synchronized to LucidLink services on close.&quot;&quot;&quot;</span>
-
-    <span class="n">SYNC_NONE</span> <span class="o">=</span> <span class="s2">&quot;none&quot;</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Do not sync automatically — caller must call ``sync_all()`` explicitly.&quot;&quot;&quot;</span>
-
-    <span class="n">SYNC_ALL</span> <span class="o">=</span> <span class="s2">&quot;all&quot;</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;(default) Automatically call ``sync_all()`` before unlinking filespaces.&quot;&quot;&quot;</span></div>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">lucidlink_native</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.credentials</span><span class="w"> </span><span class="kn">import</span> <span class="n">ServiceAccountCredentials</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticationError</span><span class="p">,</span> <span class="n">ClientError</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.storage</span><span class="w"> </span><span class="kn">import</span> <span class="n">StorageConfig</span><span class="p">,</span> <span class="n">StorageMode</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.workspace</span><span class="w"> </span><span class="kn">import</span> <span class="n">Workspace</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.workspace_models</span><span class="w"> </span><span class="kn">import</span> <span class="n">WorkspaceInfo</span>
 
 
+<div class="viewcode-block" id="ClientConfig">
+<a class="viewcode-back" href="../../api/lucidlink.client.html#lucidlink.ClientConfig">[docs]</a>
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ClientConfig</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Typed configuration for :class:`Client`.</span>
 
-<div class="viewcode-block" id="FilespaceInfo">
-<a class="viewcode-back" href="../../api/lucidlink.filespace_models.html#lucidlink.filespace_models.FilespaceInfo">[docs]</a>
-<span class="nd">@dataclass</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">FilespaceInfo</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Summary information for a filespace in a workspace listing.</span>
+<span class="sd">    All fields are optional; ``None`` means &quot;use the built-in default&quot;.</span>
 
-<span class="sd">    Returned by ``Workspace.list_filespaces()``.</span>
+<span class="sd">    Example::</span>
+
+<span class="sd">        client = Client(config=ClientConfig(</span>
+<span class="sd">            fs_cache_size_mb=2048,</span>
+<span class="sd">        ))</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Unique filespace identifier.&quot;&quot;&quot;</span>
+    <span class="n">fs_cache_size_mb</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Per-filespace disk cache size in megabytes. Default: 1024 MB.&quot;&quot;&quot;</span>
 
-    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Human-readable filespace name.&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_to_native_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Translate to the native daemon&#39;s flat string dict.&quot;&quot;&quot;</span>
+        <span class="n">out</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">fs_cache_size_mb</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">out</span><span class="p">[</span><span class="s2">&quot;fs.cache.size&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fs_cache_size_mb</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">out</span></div>
 
-    <span class="n">created</span><span class="p">:</span> <span class="nb">str</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Creation timestamp (ISO 8601).&quot;&quot;&quot;</span></div>
 
 
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">_InternalClientConfig</span><span class="p">(</span><span class="n">ClientConfig</span><span class="p">):</span>
+    <span class="n">webservice_url</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_to_native_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_to_native_dict</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">webservice_url</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">out</span><span class="p">[</span><span class="s2">&quot;webservice.url&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">webservice_url</span>
+        <span class="k">return</span> <span class="n">out</span>
+
+
+<div class="viewcode-block" id="Client">
+<a class="viewcode-back" href="../../api/lucidlink.client.html#lucidlink.Client">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Client</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;LucidLink SDK client.</span>
+
+<span class="sd">    Manages the connection to LucidLink for one service-account credential.</span>
+<span class="sd">    Each ``Client`` instance is fully independent; multiple clients can run</span>
+<span class="sd">    side-by-side in the same process and operate on different workspaces</span>
+<span class="sd">    concurrently.</span>
+
+<span class="sd">    Lifecycle::</span>
+
+<span class="sd">        client = Client()</span>
+<span class="sd">        client.login(credentials)</span>
+<span class="sd">        workspace = client.get_workspace(workspace_id)</span>
+<span class="sd">        # ... use workspace ...</span>
+<span class="sd">        client.close()</span>
+
+<span class="sd">    Or as a context manager::</span>
+
+<span class="sd">        with Client() as client:</span>
+<span class="sd">            client.login(credentials)</span>
+<span class="sd">            workspace = client.get_workspace(workspace_id)</span>
+<span class="sd">            # ... use workspace ...</span>
+
+<span class="sd">    Multi-client (concurrent multi-account)::</span>
+
+<span class="sd">        client_a = Client(storage=StorageConfig(mode=StorageMode.SANDBOXED))</span>
+<span class="sd">        client_b = Client(storage=StorageConfig(mode=StorageMode.SANDBOXED))</span>
+<span class="sd">        client_a.login(creds_a)</span>
+<span class="sd">        client_b.login(creds_b)</span>
+<span class="sd">        # both fully independent, with separate storage</span>
+
+<span class="sd">    .. note::</span>
+<span class="sd">        When running multiple concurrent clients, give each one a distinct</span>
+<span class="sd">        ``Storage`` so their per-filespace state lives under separate roots.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">storage</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">StorageConfig</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ClientConfig</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Construct a client. No I/O is performed until ``login()`` is called.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            storage: Storage configuration. Defaults to ``SANDBOXED`` (temp</span>
+<span class="sd">                directory, cleaned up on close). For concurrent clients,</span>
+<span class="sd">                supply a distinct ``StorageConfig`` per client.</span>
+<span class="sd">            config: Typed client configuration. See :class:`ClientConfig`.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ClientError: If the client cannot be initialized.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_storage</span> <span class="o">=</span> <span class="n">storage</span> <span class="ow">or</span> <span class="n">StorageConfig</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="n">StorageMode</span><span class="o">.</span><span class="n">SANDBOXED</span><span class="p">)</span>
+
+        <span class="n">internal_config</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">_to_native_dict</span><span class="p">()</span> <span class="k">if</span> <span class="n">config</span> <span class="k">else</span> <span class="p">{}</span>
+        <span class="n">root_str</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_storage</span><span class="o">.</span><span class="n">get_root_path</span><span class="p">())</span>
+        <span class="n">internal_config</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;rootPath&quot;</span><span class="p">,</span> <span class="n">root_str</span><span class="p">)</span>
+        <span class="n">internal_config</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;configPath&quot;</span><span class="p">,</span> <span class="n">root_str</span><span class="p">)</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_native</span> <span class="o">=</span> <span class="n">lucidlink_native</span><span class="o">.</span><span class="n">Daemon</span><span class="p">(</span><span class="n">internal_config</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ClientError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to initialize client: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_started</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_token</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_workspace_info</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">WorkspaceInfo</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_workspace</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Workspace</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_logged_in</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Whether ``login()`` has been called successfully and not yet ``close()``-d.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_workspace_info</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+
+<div class="viewcode-block" id="Client.login">
+<a class="viewcode-back" href="../../api/lucidlink.client.html#lucidlink.Client.login">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">login</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">credentials</span><span class="p">:</span> <span class="n">ServiceAccountCredentials</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Authenticate to LucidLink with a service account token.</span>
+
+<span class="sd">        The token determines which workspace this client operates on.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            credentials: Service account credentials.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            AuthenticationError: If already logged in with different</span>
+<span class="sd">                credentials, or if authentication fails.</span>
+<span class="sd">            ClientError: If the client cannot be started.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_logged_in</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">credentials</span><span class="o">.</span><span class="n">token</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">_token</span><span class="p">:</span>
+                <span class="k">return</span>
+            <span class="k">raise</span> <span class="n">AuthenticationError</span><span class="p">(</span>
+                <span class="s2">&quot;Client is already logged in. Call close() before logging &quot;</span>
+                <span class="s2">&quot;in with different credentials, or use a new Client.&quot;</span>
+            <span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_started</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_native</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_started</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">ClientError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to start client runtime: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">workspace_context</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_native</span><span class="o">.</span><span class="n">authenticate</span><span class="p">(</span><span class="n">credentials</span><span class="o">.</span><span class="n">token</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">AuthenticationError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Authentication failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_token</span> <span class="o">=</span> <span class="n">credentials</span><span class="o">.</span><span class="n">token</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_workspace_info</span> <span class="o">=</span> <span class="n">WorkspaceInfo</span><span class="p">(</span>
+            <span class="nb">id</span><span class="o">=</span><span class="n">workspace_context</span><span class="p">[</span><span class="s2">&quot;workspace_id&quot;</span><span class="p">],</span>
+            <span class="n">name</span><span class="o">=</span><span class="n">workspace_context</span><span class="p">[</span><span class="s2">&quot;workspace_name&quot;</span><span class="p">],</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_workspace</span> <span class="o">=</span> <span class="n">Workspace</span><span class="p">(</span>
+            <span class="n">native_daemon</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_native</span><span class="p">,</span>
+            <span class="n">workspace_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_workspace_info</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+            <span class="n">workspace_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_workspace_info</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Client.list_workspaces">
+<a class="viewcode-back" href="../../api/lucidlink.client.html#lucidlink.Client.list_workspaces">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">list_workspaces</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">WorkspaceInfo</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;List workspaces this client&#39;s credentials grant access to.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A list of :class:`WorkspaceInfo` descriptors, one per accessible</span>
+<span class="sd">            workspace. Pass an id to :meth:`get_workspace` to obtain an</span>
+<span class="sd">            operable :class:`Workspace` handle.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            AuthenticationError: If the client is not logged in.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_require_logged_in</span><span class="p">()</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_workspace_info</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="Client.get_workspace">
+<a class="viewcode-back" href="../../api/lucidlink.client.html#lucidlink.Client.get_workspace">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_workspace</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Workspace</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the workspace with the given id.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            id: The workspace id (from ``list_workspaces()``).</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The live :class:`Workspace` for filespace operations.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            AuthenticationError: If the client is not logged in.</span>
+<span class="sd">            ValueError: If ``id`` does not match any accessible workspace.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_require_logged_in</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">id</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_workspace_info</span><span class="o">.</span><span class="n">id</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Unknown workspace id: </span><span class="si">{</span><span class="nb">id</span><span class="si">!r}</span><span class="s2">. &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;Available: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_workspace_info</span><span class="o">.</span><span class="n">id</span><span class="si">!r}</span><span class="s2">.&quot;</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_workspace</span></div>
+
+
+<div class="viewcode-block" id="Client.close">
+<a class="viewcode-back" href="../../api/lucidlink.client.html#lucidlink.Client.close">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Tear down the client: unlink all filespaces and release resources.</span>
+
+<span class="sd">        Safe to call multiple times. After ``close()``, the client must not</span>
+<span class="sd">        be reused — create a new ``Client`` for further work.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_workspace</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_workspace</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="k">pass</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_workspace</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_started</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_native</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="k">pass</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_started</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_token</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_workspace_info</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_storage</span><span class="o">.</span><span class="n">should_cleanup</span><span class="p">():</span>
+            <span class="n">root</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_storage</span><span class="o">.</span><span class="n">get_root_path</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">root</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+                <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">ignore_errors</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Client&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_val</span><span class="p">,</span> <span class="n">exc_tb</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_workspace_info</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Client(workspace=&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_workspace_info</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39;)&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;Client(logged_out)&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_require_logged_in</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_logged_in</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">AuthenticationError</span><span class="p">(</span>
+                <span class="s2">&quot;Client is not logged in. Call login() first.&quot;</span>
+            <span class="p">)</span></div>
 
 </pre></div>
 

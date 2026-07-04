@@ -2,6 +2,8 @@
 
 Welcome to the LucidLink Python SDK (Patent Pending) documentation.
 
+**SDK version:** {sub-ref}`release`
+
 ```{toctree}
 :maxdepth: 2
 :caption: Contents:

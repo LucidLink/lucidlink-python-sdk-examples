@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>lucidlink.filespace_models &mdash; LucidLink Python SDK 0.12.0 documentation</title>
+  <title>lucidlink.workspace_models &mdash; LucidLink Python SDK 0.12.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=53c318c6" />
@@ -404,7 +404,7 @@
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
           <li class="breadcrumb-item"><a href="../lucidlink.html">lucidlink</a></li>
-      <li class="breadcrumb-item active">lucidlink.filespace_models</li>
+      <li class="breadcrumb-item active">lucidlink.workspace_models</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -413,52 +413,31 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <h1>Source code for lucidlink.filespace_models</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">LucidLink Python Library - Filespace Type Definitions</span>
+  <h1>Source code for lucidlink.workspace_models</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;LucidLink Python Library - Workspace Type Definitions.</span>
 
-<span class="sd">Types for filespace identity and configuration.</span>
+<span class="sd">Types describing workspaces visible to the authenticated credentials.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">Enum</span>
-
-<span class="c1"># Backwards-compat re-export — DaemonStatus moved to daemon_models.</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">.daemon_models</span><span class="w"> </span><span class="kn">import</span> <span class="n">DaemonStatus</span>  <span class="c1"># noqa: F401</span>
 
 
-<div class="viewcode-block" id="SyncMode">
-<a class="viewcode-back" href="../../api/lucidlink.filespace_models.html#lucidlink.filespace_models.SyncMode">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">SyncMode</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Controls whether changes are automatically synchronized to LucidLink services on close.&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="WorkspaceInfo">
+<a class="viewcode-back" href="../../api/lucidlink.workspace_models.html#lucidlink.workspace_models.WorkspaceInfo">[docs]</a>
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">WorkspaceInfo</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Summary information for a workspace.</span>
 
-    <span class="n">SYNC_NONE</span> <span class="o">=</span> <span class="s2">&quot;none&quot;</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Do not sync automatically — caller must call ``sync_all()`` explicitly.&quot;&quot;&quot;</span>
-
-    <span class="n">SYNC_ALL</span> <span class="o">=</span> <span class="s2">&quot;all&quot;</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;(default) Automatically call ``sync_all()`` before unlinking filespaces.&quot;&quot;&quot;</span></div>
-
-
-
-<div class="viewcode-block" id="FilespaceInfo">
-<a class="viewcode-back" href="../../api/lucidlink.filespace_models.html#lucidlink.filespace_models.FilespaceInfo">[docs]</a>
-<span class="nd">@dataclass</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">FilespaceInfo</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Summary information for a filespace in a workspace listing.</span>
-
-<span class="sd">    Returned by ``Workspace.list_filespaces()``.</span>
+<span class="sd">    Returned by ``Client.list_workspaces()``. Today&#39;s service-account tokens</span>
+<span class="sd">    are workspace-scoped, so ``list_workspaces()`` always returns exactly one</span>
+<span class="sd">    item; the type stays a list for forward compatibility.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Unique filespace identifier.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Unique workspace identifier.&quot;&quot;&quot;</span>
 
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Human-readable filespace name.&quot;&quot;&quot;</span>
-
-    <span class="n">created</span><span class="p">:</span> <span class="nb">str</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Creation timestamp (ISO 8601).&quot;&quot;&quot;</span></div>
-
-
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Human-readable workspace name.&quot;&quot;&quot;</span></div>
 
 </pre></div>
 
